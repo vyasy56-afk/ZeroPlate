@@ -4,59 +4,55 @@
 
 {% block content %}
 <div class="space-y-12">
-    <!-- Hero Section: Obsidian & Radiant Emerald -->
-    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-b from-[#0b1329] via-[#070c18] to-[#040711] border border-emerald-500/20 p-8 sm:p-12 lg:p-16 shadow-[0_20px_60px_-15px_rgba(16,185,129,0.15)]">
-        <!-- Ambient Radial Glows -->
-        <div class="absolute -top-32 -left-32 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
+    <!-- Hero Section: Obsidian & Radiant Aurora Mesh -->
+    <div class="hyper-glass p-8 sm:p-12 lg:p-16 rounded-[3rem] border border-white/15 relative overflow-hidden shadow-[0_25px_70px_-15px_rgba(0,0,0,0.7)]">
         <div class="relative z-10 max-w-4xl space-y-6">
-            <div class="inline-flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-neon"></span>
+            <div class="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full text-xs font-bold bg-[#00f5a0]/15 text-[#00f5a0] border border-[#00f5a0]/30 shadow-[0_0_15px_rgba(0,245,160,0.3)]">
+                <span class="w-2 h-2 rounded-full bg-[#00f5a0] animate-pulse"></span>
                 <span>Graphic Era (Deemed to be University) · BCA (AI & DS) Major Project</span>
             </div>
             
-            <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-white font-heading leading-[1.1]">
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white font-heading leading-[1.05]">
                 Stop Food Waste <br>
-                <span class="gradient-text-emerald">Before Cooking Begins.</span>
+                <span class="text-gradient-aurora">Before Cooking Begins.</span>
             </h1>
 
             <p class="text-base sm:text-lg text-slate-300 max-w-2xl font-normal leading-relaxed">
-                ZeroPlate replaces intuition-based overproduction with tree-based machine learning regression. If surplus persists, it auto-escalates through a 3-tier recovery pipeline: <span class="text-amber-300 font-semibold">Student Marketplace</span> &rarr; <span class="text-blue-300 font-semibold">Verified NGO</span> &rarr; <span class="text-emerald-300 font-semibold">Bio-Compost</span>.
+                ZeroPlate replaces intuition-based overproduction with tree-based machine learning regression. If surplus persists, it auto-escalates through a 3-tier recovery pipeline: <span class="text-amber-300 font-semibold">Student Marketplace</span> &rarr; <span class="text-blue-300 font-semibold">Verified NGO</span> &rarr; <span class="text-[#00f5a0] font-semibold">Bio-Compost</span>.
             </p>
 
-            <!-- Key Quick Stats Strip -->
-            <div class="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl">
-                <div class="bg-white/[0.04] backdrop-blur-md p-3.5 rounded-2xl border border-white/10">
-                    <span class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold block">Champion Model</span>
+            <!-- Key Quick Stats Strip (Curved Glass Pills) -->
+            <div class="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3.5 max-w-3xl">
+                <div class="bg-white/[0.03] backdrop-blur-md p-4 rounded-3xl border border-white/10 hover:border-[#00f5a0]/40 transition">
+                    <span class="text-[9px] text-slate-400 uppercase tracking-widest font-mono font-bold block">Champion Model</span>
                     <span class="text-xl font-black text-white font-mono mt-0.5 block">GBR (12.53)</span>
-                    <span class="text-[10px] text-emerald-400 font-bold">69.0% Error Drop</span>
+                    <span class="text-[10px] text-[#00f5a0] font-bold font-mono">69.0% Error Drop</span>
                 </div>
-                <div class="bg-white/[0.04] backdrop-blur-md p-3.5 rounded-2xl border border-white/10">
-                    <span class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold block">Waste Avoidance</span>
-                    <span class="text-xl font-black text-emerald-400 font-mono mt-0.5 block">68.4%</span>
-                    <span class="text-[10px] text-slate-400">vs Guesswork</span>
+                <div class="bg-white/[0.03] backdrop-blur-md p-4 rounded-3xl border border-white/10 hover:border-[#00f5a0]/40 transition">
+                    <span class="text-[9px] text-slate-400 uppercase tracking-widest font-mono font-bold block">Waste Avoidance</span>
+                    <span class="text-xl font-black text-[#00f5a0] font-mono mt-0.5 block">68.4%</span>
+                    <span class="text-[10px] text-slate-400 font-mono">vs Guesswork</span>
                 </div>
-                <div class="bg-white/[0.04] backdrop-blur-md p-3.5 rounded-2xl border border-white/10">
-                    <span class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold block">Marketplace Tier</span>
+                <div class="bg-white/[0.03] backdrop-blur-md p-4 rounded-3xl border border-white/10 hover:border-amber-500/40 transition">
+                    <span class="text-[9px] text-slate-400 uppercase tracking-widest font-mono font-bold block">Marketplace Tier</span>
                     <span class="text-xl font-black text-amber-400 font-mono mt-0.5 block">55% OFF</span>
-                    <span class="text-[10px] text-slate-400">Surprise Boxes</span>
+                    <span class="text-[10px] text-slate-400 font-mono">Surprise Boxes</span>
                 </div>
-                <div class="bg-white/[0.04] backdrop-blur-md p-3.5 rounded-2xl border border-white/10">
-                    <span class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold block">Landfill Diversion</span>
-                    <span class="text-xl font-black text-teal-400 font-mono mt-0.5 block">100%</span>
-                    <span class="text-[10px] text-slate-400">Bio-Compost Yard</span>
+                <div class="bg-white/[0.03] backdrop-blur-md p-4 rounded-3xl border border-white/10 hover:border-[#00d9f5]/40 transition">
+                    <span class="text-[9px] text-slate-400 uppercase tracking-widest font-mono font-bold block">Landfill Diversion</span>
+                    <span class="text-xl font-black text-[#00d9f5] font-mono mt-0.5 block">100%</span>
+                    <span class="text-[10px] text-slate-400 font-mono">Bio-Compost Yard</span>
                 </div>
             </div>
 
             <!-- Author & Academic Credit Badge -->
             <div class="pt-2 flex flex-wrap items-center gap-3 text-xs text-slate-300">
-                <div class="inline-flex items-center space-x-2 bg-white/[0.05] px-3.5 py-1.5 rounded-xl border border-white/10">
-                    <i data-lucide="user" class="w-3.5 h-3.5 text-emerald-400"></i>
-                    <span><strong>Yogesh Vyas</strong> · Roll No: <span class="font-mono text-emerald-400 font-bold">2106389</span></span>
+                <div class="inline-flex items-center space-x-2 bg-white/[0.04] px-4 py-2 rounded-full border border-white/10">
+                    <i data-lucide="user" class="w-3.5 h-3.5 text-[#00f5a0]"></i>
+                    <span><strong>Yogesh Vyas</strong> · Roll No: <span class="font-mono text-[#00f5a0] font-bold">2106389</span></span>
                 </div>
-                <div class="inline-flex items-center space-x-2 bg-white/[0.05] px-3.5 py-1.5 rounded-xl border border-white/10">
-                    <i data-lucide="award" class="w-3.5 h-3.5 text-emerald-400"></i>
+                <div class="inline-flex items-center space-x-2 bg-white/[0.04] px-4 py-2 rounded-full border border-white/10">
+                    <i data-lucide="award" class="w-3.5 h-3.5 text-[#00f5a0]"></i>
                     <span>Supervisor: <strong>Ms. Shivani Sharma</strong> (Assistant Professor)</span>
                 </div>
             </div>
@@ -65,18 +61,18 @@
 
     <!-- The 3 Pillars of Prevention Before Cure -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="glass-card p-7 space-y-3 relative overflow-hidden group">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-black text-lg border border-emerald-500/20 group-hover:scale-110 transition shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+        <div class="hyper-glass p-8 rounded-[2.5rem] space-y-3 relative overflow-hidden group">
+            <div class="w-12 h-12 rounded-full bg-[#00f5a0]/15 text-[#00f5a0] flex items-center justify-center font-black text-base border border-[#00f5a0]/30 group-hover:scale-110 transition shadow-[0_0_15px_rgba(0,245,160,0.3)]">
                 01
             </div>
             <h3 class="text-xl font-bold text-white font-heading">1. Forecast</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-                Anticipate demand item-by-item <strong class="text-emerald-400">before production begins</strong> using Gradient Boosting and Random Forest regression with weather, exams, and sales momentum.
+                Anticipate demand item-by-item <strong class="text-[#00f5a0]">before production begins</strong> using Gradient Boosting and Random Forest regression with weather, exams, and sales momentum.
             </p>
         </div>
 
-        <div class="glass-card p-7 space-y-3 relative overflow-hidden group">
-            <div class="w-12 h-12 rounded-2xl bg-teal-500/10 text-teal-400 flex items-center justify-center font-black text-lg border border-teal-500/20 group-hover:scale-110 transition shadow-[0_0_15px_rgba(20,184,166,0.15)]">
+        <div class="hyper-glass p-8 rounded-[2.5rem] space-y-3 relative overflow-hidden group">
+            <div class="w-12 h-12 rounded-full bg-[#00d9f5]/15 text-[#00d9f5] flex items-center justify-center font-black text-base border border-[#00d9f5]/30 group-hover:scale-110 transition shadow-[0_0_15px_rgba(0,217,245,0.3)]">
                 02
             </div>
             <h3 class="text-xl font-bold text-white font-heading">2. Plan</h3>
@@ -85,71 +81,71 @@
             </p>
         </div>
 
-        <div class="glass-card p-7 space-y-3 relative overflow-hidden group">
-            <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-black text-lg border border-amber-500/20 group-hover:scale-110 transition shadow-[0_0_15px_rgba(245,158,11,0.15)]">
+        <div class="hyper-glass p-8 rounded-[2.5rem] space-y-3 relative overflow-hidden group">
+            <div class="w-12 h-12 rounded-full bg-amber-500/15 text-amber-400 flex items-center justify-center font-black text-base border border-amber-500/30 group-hover:scale-110 transition shadow-[0_0_15px_rgba(245,158,11,0.3)]">
                 03
             </div>
             <h3 class="text-xl font-bold text-white font-heading">3. Redistribute</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-                Move unavoidable surplus through a prioritized 3-tier escalation engine: <strong class="text-amber-300">Student Marketplace</strong> &rarr; <strong class="text-blue-300">Verified NGO</strong> &rarr; <strong class="text-emerald-300">Campus Composting</strong>.
+                Move unavoidable surplus through a prioritized 3-tier escalation engine: <strong class="text-amber-300">Student Marketplace</strong> &rarr; <strong class="text-blue-300">Verified NGO</strong> &rarr; <strong class="text-[#00f5a0]">Campus Composting</strong>.
             </p>
         </div>
     </div>
 
     <!-- The 5-Step Continuous Operating Loop -->
-    <div class="glass-card p-8 space-y-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-4">
+    <div class="hyper-glass p-8 sm:p-10 rounded-[2.5rem] space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
             <div>
-                <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-400">Continuous Operating Loop</span>
-                <h2 class="text-2xl font-black text-white font-heading">From Data Collection to Zero-Landfill Recovery</h2>
+                <span class="text-[11px] font-bold uppercase tracking-wider text-[#00f5a0] font-mono">Continuous Operating Loop</span>
+                <h2 class="text-2xl font-black text-white font-heading">From Point-of-Sale Data to Zero-Landfill Recovery</h2>
             </div>
-            <span class="self-start sm:self-auto px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 flex items-center space-x-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-neon"></span>
+            <span class="self-start sm:self-auto px-4 py-1.5 rounded-full text-xs font-semibold bg-[#00f5a0]/10 text-[#00f5a0] border border-[#00f5a0]/25 flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-[#00f5a0] animate-pulse shadow-[0_0_8px_#00f5a0]"></span>
                 <span>Automated State Machine</span>
             </span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-2 hover:border-emerald-500/30 transition">
-                <span class="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider">Step 01</span>
-                <div class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-slate-300">
-                    <i data-lucide="database" class="w-4 h-4"></i>
+            <div class="bg-black/40 p-5 rounded-3xl border border-white/10 space-y-2 hover:border-[#00f5a0]/40 transition">
+                <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest font-mono">Step 01</span>
+                <div class="w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center text-slate-200">
+                    <i data-lucide="database" class="w-5 h-5"></i>
                 </div>
                 <h4 class="font-bold text-sm text-white">Collect Data</h4>
                 <p class="text-xs text-slate-400">Sales history, Dehradun weather, exam schedules & 7/14d trends.</p>
             </div>
 
-            <div class="bg-black/30 p-5 rounded-2xl border border-emerald-500/20 space-y-2 hover:border-emerald-500/40 transition">
-                <span class="text-[10px] font-extrabold text-emerald-400 uppercase tracking-wider">Step 02</span>
-                <div class="w-9 h-9 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400">
-                    <i data-lucide="brain" class="w-4 h-4"></i>
+            <div class="bg-black/40 p-5 rounded-3xl border border-[#00f5a0]/30 space-y-2 hover:border-[#00f5a0]/60 transition shadow-[0_0_15px_rgba(0,245,160,0.1)]">
+                <span class="text-[10px] font-extrabold text-[#00f5a0] uppercase tracking-widest font-mono">Step 02</span>
+                <div class="w-10 h-10 rounded-2xl bg-[#00f5a0]/15 flex items-center justify-center text-[#00f5a0]">
+                    <i data-lucide="brain" class="w-5 h-5"></i>
                 </div>
                 <h4 class="font-bold text-sm text-white">Predict Demand</h4>
                 <p class="text-xs text-slate-400">Item-level ML regression (RMSE 12.53 vs 40.44 baseline).</p>
             </div>
 
-            <div class="bg-black/30 p-5 rounded-2xl border border-teal-500/20 space-y-2 hover:border-teal-500/40 transition">
-                <span class="text-[10px] font-extrabold text-teal-400 uppercase tracking-wider">Step 03</span>
-                <div class="w-9 h-9 rounded-xl bg-teal-500/10 flex items-center justify-center text-teal-400">
-                    <i data-lucide="clipboard-list" class="w-4 h-4"></i>
+            <div class="bg-black/40 p-5 rounded-3xl border border-[#00d9f5]/30 space-y-2 hover:border-[#00d9f5]/60 transition">
+                <span class="text-[10px] font-extrabold text-[#00d9f5] uppercase tracking-widest font-mono">Step 03</span>
+                <div class="w-10 h-10 rounded-2xl bg-[#00d9f5]/15 flex items-center justify-center text-[#00d9f5]">
+                    <i data-lucide="clipboard-list" class="w-5 h-5"></i>
                 </div>
                 <h4 class="font-bold text-sm text-white">Plan Production</h4>
                 <p class="text-xs text-slate-400">Kitchen portion targets & raw ingredient prep ratios.</p>
             </div>
 
-            <div class="bg-black/30 p-5 rounded-2xl border border-amber-500/20 space-y-2 hover:border-amber-500/40 transition">
-                <span class="text-[10px] font-extrabold text-amber-400 uppercase tracking-wider">Step 04</span>
-                <div class="w-9 h-9 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400">
-                    <i data-lucide="activity" class="w-4 h-4"></i>
+            <div class="bg-black/40 p-5 rounded-3xl border border-amber-500/30 space-y-2 hover:border-amber-500/60 transition">
+                <span class="text-[10px] font-extrabold text-amber-400 uppercase tracking-widest font-mono">Step 04</span>
+                <div class="w-10 h-10 rounded-2xl bg-amber-500/15 flex items-center justify-center text-amber-400">
+                    <i data-lucide="activity" class="w-5 h-5"></i>
                 </div>
                 <h4 class="font-bold text-sm text-white">Monitor Sales</h4>
                 <p class="text-xs text-slate-400">Detect likely surplus before canteen closing window.</p>
             </div>
 
-            <div class="bg-black/30 p-5 rounded-2xl border border-blue-500/20 space-y-2 hover:border-blue-500/40 transition">
-                <span class="text-[10px] font-extrabold text-blue-400 uppercase tracking-wider">Step 05</span>
-                <div class="w-9 h-9 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400">
-                    <i data-lucide="truck" class="w-4 h-4"></i>
+            <div class="bg-black/40 p-5 rounded-3xl border border-blue-500/30 space-y-2 hover:border-blue-500/60 transition">
+                <span class="text-[10px] font-extrabold text-blue-400 uppercase tracking-widest font-mono">Step 05</span>
+                <div class="w-10 h-10 rounded-2xl bg-blue-500/15 flex items-center justify-center text-blue-400">
+                    <i data-lucide="truck" class="w-5 h-5"></i>
                 </div>
                 <h4 class="font-bold text-sm text-white">Redistribute</h4>
                 <p class="text-xs text-slate-400">Surprise Box &rarr; NGO Handover &rarr; Bio-Composting.</p>
@@ -161,10 +157,10 @@
     <div>
         <div class="flex items-center justify-between mb-6">
             <div>
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">System Modules (Section 5.4)</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">System Modules (Section 5.4)</span>
                 <h2 class="text-2xl font-black text-white font-heading">Six Operational Engine Pillars</h2>
             </div>
-            <a href="/simulation" class="text-xs font-bold text-emerald-400 hover:text-emerald-300 flex items-center space-x-1">
+            <a href="/simulation" class="text-xs font-bold text-[#00f5a0] hover:text-[#00d9f5] flex items-center space-x-1.5 transition">
                 <span>Test Temporal Triggers</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </a>
@@ -172,61 +168,61 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Module 1 -->
-            <a href="/forecast" class="glass-card p-6 flex flex-col justify-between group">
+            <a href="/forecast" class="hyper-glass p-7 rounded-[2.25rem] flex flex-col justify-between group">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <div class="w-11 h-11 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center border border-emerald-500/30 group-hover:scale-105 transition shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-                            <i data-lucide="line-chart" class="w-5 h-5"></i>
+                        <div class="w-12 h-12 rounded-2xl bg-[#00f5a0]/15 text-[#00f5a0] flex items-center justify-center border border-[#00f5a0]/30 group-hover:scale-105 transition shadow-[0_0_15px_rgba(0,245,160,0.3)]">
+                            <i data-lucide="line-chart" class="w-6 h-6"></i>
                         </div>
-                        <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-500/10 text-emerald-300 border border-emerald-500/25">Module 1</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-[#00f5a0]/10 text-[#00f5a0] border border-[#00f5a0]/30">Module 1</span>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-white group-hover:text-emerald-300 transition font-heading">Demand Prediction Dashboard</h3>
-                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                        <h3 class="text-lg font-bold text-white group-hover:text-[#00f5a0] transition font-heading">Demand Prediction Dashboard</h3>
+                        <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
                             Item-level regression via Random Forest & Gradient Boosting. Includes weather context, Graphic Era exams, and an interactive prediction simulator.
                         </p>
                     </div>
                 </div>
-                <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-bold text-emerald-400">
+                <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-bold text-[#00f5a0]">
                     <span>Inspect AI Models & RMSE</span>
                     <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
                 </div>
             </a>
 
             <!-- Module 2 -->
-            <a href="/production" class="glass-card p-6 flex flex-col justify-between group">
+            <a href="/production" class="hyper-glass p-7 rounded-[2.25rem] flex flex-col justify-between group">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <div class="w-11 h-11 rounded-2xl bg-teal-500/15 text-teal-400 flex items-center justify-center border border-teal-500/30 group-hover:scale-105 transition shadow-[0_0_15px_rgba(20,184,166,0.2)]">
-                            <i data-lucide="boxes" class="w-5 h-5"></i>
+                        <div class="w-12 h-12 rounded-2xl bg-[#00d9f5]/15 text-[#00d9f5] flex items-center justify-center border border-[#00d9f5]/30 group-hover:scale-105 transition shadow-[0_0_15px_rgba(0,217,245,0.3)]">
+                            <i data-lucide="boxes" class="w-6 h-6"></i>
                         </div>
-                        <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-teal-500/10 text-teal-300 border border-teal-500/25">Module 2</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-[#00d9f5]/10 text-[#00d9f5] border border-[#00d9f5]/30">Module 2</span>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-white group-hover:text-teal-300 transition font-heading">Inventory & Production Planning</h3>
-                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                        <h3 class="text-lg font-bold text-white group-hover:text-[#00d9f5] transition font-heading">Inventory & Production Planning</h3>
+                        <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
                             Translates ML demand forecast into kitchen cooking targets before morning prep starts, computing raw ingredient weights (rice, dal, atta).
                         </p>
                     </div>
                 </div>
-                <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-bold text-teal-400">
+                <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-bold text-[#00d9f5]">
                     <span>Kitchen Schedule ({{ counts.plans }} items)</span>
                     <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
                 </div>
             </a>
 
             <!-- Module 3 -->
-            <a href="/marketplace" class="glass-card p-6 flex flex-col justify-between group">
+            <a href="/marketplace" class="hyper-glass p-7 rounded-[2.25rem] flex flex-col justify-between group">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <div class="w-11 h-11 rounded-2xl bg-amber-500/15 text-amber-400 flex items-center justify-center border border-amber-500/30 group-hover:scale-105 transition shadow-[0_0_15px_rgba(245,158,11,0.2)]">
-                            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-400 flex items-center justify-center border border-amber-500/30 group-hover:scale-105 transition shadow-[0_0_15px_rgba(245,158,11,0.3)]">
+                            <i data-lucide="shopping-bag" class="w-6 h-6"></i>
                         </div>
-                        <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-amber-500/10 text-amber-300 border border-amber-500/25">Tier 1</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">Tier 1</span>
                     </div>
                     <div>
                         <h3 class="text-lg font-bold text-white group-hover:text-amber-300 transition font-heading">Student Surplus Marketplace</h3>
-                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                        <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
                             Discounted surprise meal boxes (55% off) for campus students within the closing window, with digital token redemption codes.
                         </p>
                     </div>
@@ -238,17 +234,17 @@
             </a>
 
             <!-- Module 4 -->
-            <a href="/ngo" class="glass-card p-6 flex flex-col justify-between group">
+            <a href="/ngo" class="hyper-glass p-7 rounded-[2.25rem] flex flex-col justify-between group">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <div class="w-11 h-11 rounded-2xl bg-blue-500/15 text-blue-400 flex items-center justify-center border border-blue-500/30 group-hover:scale-105 transition shadow-[0_0_15px_rgba(59,130,246,0.2)]">
-                            <i data-lucide="heart-handshake" class="w-5 h-5"></i>
+                        <div class="w-12 h-12 rounded-2xl bg-blue-500/15 text-blue-400 flex items-center justify-center border border-blue-500/30 group-hover:scale-105 transition shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                            <i data-lucide="heart-handshake" class="w-6 h-6"></i>
                         </div>
-                        <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-blue-500/10 text-blue-300 border border-blue-500/25">Tier 2</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-blue-500/10 text-blue-300 border border-blue-500/30">Tier 2</span>
                     </div>
                     <div>
                         <h3 class="text-lg font-bold text-white group-hover:text-blue-300 transition font-heading">NGO Donation Coordination</h3>
-                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                        <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
                             Closing-time surplus escalation to verified local NGOs (Robin Hood Army, Feeding India) with a 60-min timer and PIN handover verification.
                         </p>
                     </div>
@@ -260,39 +256,39 @@
             </a>
 
             <!-- Module 5 -->
-            <a href="/composting" class="glass-card p-6 flex flex-col justify-between group">
+            <a href="/composting" class="hyper-glass p-7 rounded-[2.25rem] flex flex-col justify-between group">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <div class="w-11 h-11 rounded-2xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center border border-emerald-500/30 group-hover:scale-105 transition shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-                            <i data-lucide="sprout" class="w-5 h-5"></i>
+                        <div class="w-12 h-12 rounded-2xl bg-[#00f5a0]/15 text-[#00f5a0] flex items-center justify-center border border-[#00f5a0]/30 group-hover:scale-105 transition shadow-[0_0_15px_rgba(0,245,160,0.3)]">
+                            <i data-lucide="sprout" class="w-6 h-6"></i>
                         </div>
-                        <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-emerald-500/10 text-emerald-300 border border-emerald-500/25">Tier 3</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-[#00f5a0]/10 text-[#00f5a0] border border-[#00f5a0]/30">Tier 3</span>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-white group-hover:text-emerald-300 transition font-heading">Composting & Waste Routing</h3>
-                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                        <h3 class="text-lg font-bold text-white group-hover:text-[#00f5a0] transition font-heading">Composting & Waste Routing</h3>
+                        <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
                             Uncollected NGO batches & prep trimmings diverted to Graphic Era Bio-Compost Facility. Tracks organic compost yield and abated CO₂e.
                         </p>
                     </div>
                 </div>
-                <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-bold text-emerald-400">
+                <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-bold text-[#00f5a0]">
                     <span>Compost Ledger ({{ counts.compost }} batches)</span>
                     <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
                 </div>
             </a>
 
             <!-- Module 6 -->
-            <a href="/analytics" class="glass-card p-6 flex flex-col justify-between group">
+            <a href="/analytics" class="hyper-glass p-7 rounded-[2.25rem] flex flex-col justify-between group">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <div class="w-11 h-11 rounded-2xl bg-purple-500/15 text-purple-400 flex items-center justify-center border border-purple-500/30 group-hover:scale-105 transition shadow-[0_0_15px_rgba(168,85,247,0.2)]">
-                            <i data-lucide="pie-chart" class="w-5 h-5"></i>
+                        <div class="w-12 h-12 rounded-2xl bg-purple-500/15 text-purple-400 flex items-center justify-center border border-purple-500/30 group-hover:scale-105 transition shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                            <i data-lucide="pie-chart" class="w-6 h-6"></i>
                         </div>
-                        <span class="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-purple-500/10 text-purple-300 border border-purple-500/25">Module 6</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-purple-500/10 text-purple-300 border border-purple-500/30">Module 6</span>
                     </div>
                     <div>
                         <h3 class="text-lg font-bold text-white group-hover:text-purple-300 transition font-heading">Analytics & Impact Reporting</h3>
-                        <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                        <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
                             Tracks avoided waste (kg & %), cost savings (₹), meals redistributed, and RMSE accuracy comparisons across evaluation cycles.
                         </p>
                     </div>

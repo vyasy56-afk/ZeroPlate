@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Module 1 · AI Demand Prediction Dashboard{% endblock %}
+{% block title %}Module 1 · Demand Prediction Dashboard{% endblock %}
 
 {% block content %}
 <div class="space-y-8">
@@ -8,19 +8,21 @@
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
             <div class="flex items-center space-x-2.5">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Module 1</span>
-                <span class="text-xs text-slate-400 uppercase tracking-widest font-mono">Tree-Based Regression Architecture</span>
+                <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase bg-[#00f5a0]/15 text-[#00f5a0] border border-[#00f5a0]/30 shadow-[0_0_12px_rgba(0,245,160,0.25)]">Module 1</span>
+                <span class="text-xs text-slate-400 uppercase tracking-widest font-mono">Tree-Based Machine Learning Regression</span>
             </div>
-            <h1 class="text-3xl sm:text-4xl font-black text-white font-heading mt-1">Demand Prediction Dashboard</h1>
-            <p class="text-xs sm:text-sm text-slate-400 mt-1">
-                Contextual item-level regression accounting for Dehradun weather, Graphic Era academic calendars, and rolling sales trends.
+            <h1 class="text-3xl sm:text-5xl font-black text-white font-heading mt-2">
+                Demand <span class="text-gradient-aurora">Forecasting</span> Dashboard
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
+                Item-level regression problem mapping Dehradun meteorological trends, Graphic Era exam schedules, and historical rolling sales momentum.
             </p>
         </div>
         <div class="flex items-center space-x-3">
-            <div class="glass-card px-4 py-2.5 flex items-center space-x-3">
-                <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 pulse-neon"></div>
+            <div class="hyper-glass-pill px-5 py-2.5 flex items-center space-x-3 border border-white/15 shadow-lg">
+                <div class="w-2.5 h-2.5 rounded-full bg-[#00f5a0] shadow-[0_0_10px_#00f5a0] animate-pulse"></div>
                 <div>
-                    <span class="text-[10px] text-slate-400 block uppercase font-mono">Current Context</span>
+                    <span class="text-[9px] text-slate-400 block uppercase font-mono tracking-wider">Campus Context</span>
                     <span class="text-xs font-bold text-white">
                         {{ 'Exam Week Active 📚' if settings.is_exam_day else 'Regular Semester' }} · {{ settings.temperature_c }}°C, {{ 'Rain 🌧️' if settings.rainfall_mm > 0 else 'Clear ☀️' }}
                     </span>
@@ -30,63 +32,63 @@
     </div>
 
     <!-- RMSE Formula & Benchmark Scoreboard Card (Section 5.2) -->
-    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0c1322] via-[#090d16] to-[#040711] border border-emerald-500/25 p-7 sm:p-9 shadow-[0_15px_50px_-10px_rgba(16,185,129,0.18)]">
-        <!-- Background Glow -->
-        <div class="absolute -top-24 -right-24 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="hyper-glass p-8 sm:p-10 rounded-[2.5rem] border border-white/15 relative overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)]">
+        <!-- Ambient Internal Glow -->
+        <div class="absolute -top-32 -right-32 w-96 h-96 bg-[#00f5a0]/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <!-- Formula Breakdown -->
             <div class="lg:col-span-5 space-y-4">
-                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/25">
-                    <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-white/5 text-[#00f5a0] border border-white/10 shadow-sm">
+                    <i data-lucide="calculator" class="w-3.5 h-3.5 text-[#00f5a0]"></i>
                     <span>Evaluation Metric (Section 5.2)</span>
                 </div>
-                <h3 class="text-2xl font-black text-white font-heading">Root Mean Squared Error</h3>
+                <h3 class="text-2xl sm:text-3xl font-black text-white font-heading">Root Mean Squared Error</h3>
                 
-                <div class="p-4 rounded-2xl bg-black/60 border border-white/10 font-mono text-center shadow-inner">
-                    <span class="text-lg sm:text-xl font-bold text-emerald-400 tracking-wide">
+                <div class="p-5 rounded-3xl bg-black/50 border border-white/10 font-mono text-center shadow-inner relative group">
+                    <span class="text-lg sm:text-xl font-black text-gradient-aurora tracking-wider block">
                         RMSE = √[ (1/n) · Σ(pᵢ − aᵢ)² ]
                     </span>
                 </div>
                 
                 <p class="text-xs text-slate-400 leading-relaxed">
-                    Evaluates the residual delta between model predicted portion demand (<span class="font-mono text-emerald-300">pᵢ</span>) and actual sales (<span class="font-mono text-emerald-300">aᵢ</span>) over <span class="font-mono text-emerald-300">n</span> item-day test instances.
+                    Quantifies the delta between model predicted portion demand (<span class="font-mono text-[#00f5a0]">pᵢ</span>) and actual meal sales (<span class="font-mono text-[#00f5a0]">aᵢ</span>) across <span class="font-mono text-[#00f5a0]">n</span> item-day test instances.
                 </p>
             </div>
 
-            <!-- Model Comparison Cards -->
-            <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            <!-- Model Comparison Cards (Ultra-Curved Glass Capsules) -->
+            <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <!-- Baseline -->
-                <div class="bg-white/[0.03] p-4.5 rounded-2xl border border-white/10 text-center space-y-2 hover:border-white/20 transition">
-                    <span class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider block">Manual Intuition (MA)</span>
+                <div class="bg-white/[0.03] p-5 rounded-[2rem] border border-white/10 text-center space-y-2 hover:border-white/20 transition backdrop-blur-md">
+                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Manual Baseline</span>
                     <span class="text-3xl font-black text-slate-300 font-mono block">40.44</span>
                     <span class="text-[10px] text-slate-500 font-mono">RMSE (portions)</span>
-                    <div class="pt-2 border-t border-white/5 text-[11px] text-slate-400 space-y-0.5">
+                    <div class="pt-3 border-t border-white/5 text-[11px] text-slate-400 space-y-1">
                         <div class="flex justify-between"><span>R² Score:</span> <strong class="text-slate-300 font-mono">0.381</strong></div>
                         <div class="flex justify-between"><span>MAE:</span> <strong class="text-slate-300 font-mono">31.9</strong></div>
                     </div>
                 </div>
 
                 <!-- Random Forest -->
-                <div class="bg-white/[0.04] p-4.5 rounded-2xl border border-white/10 text-center space-y-2 hover:border-emerald-500/40 transition">
-                    <span class="text-[10px] text-emerald-400 font-semibold uppercase tracking-wider block">Random Forest (RFR)</span>
-                    <span class="text-3xl font-black text-emerald-400 font-mono block">16.25</span>
-                    <span class="text-[10px] text-emerald-500/80 font-mono">RMSE (portions)</span>
-                    <div class="pt-2 border-t border-white/5 text-[11px] text-slate-300 space-y-0.5">
-                        <div class="flex justify-between"><span>R² Score:</span> <strong class="text-emerald-400 font-mono">0.900</strong></div>
-                        <div class="flex justify-between"><span>MAE:</span> <strong class="text-emerald-400 font-mono">10.7</strong></div>
+                <div class="bg-white/[0.04] p-5 rounded-[2rem] border border-white/10 text-center space-y-2 hover:border-[#00d9f5]/50 transition backdrop-blur-md shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3)]">
+                    <span class="text-[10px] text-[#00d9f5] font-bold uppercase tracking-wider block">Random Forest (RFR)</span>
+                    <span class="text-3xl font-black text-[#00d9f5] font-mono block">16.25</span>
+                    <span class="text-[10px] text-[#00d9f5]/70 font-mono">RMSE (portions)</span>
+                    <div class="pt-3 border-t border-white/5 text-[11px] text-slate-300 space-y-1">
+                        <div class="flex justify-between"><span>R² Score:</span> <strong class="text-[#00d9f5] font-mono">0.900</strong></div>
+                        <div class="flex justify-between"><span>MAE:</span> <strong class="text-[#00d9f5] font-mono">10.7</strong></div>
                     </div>
                 </div>
 
                 <!-- Gradient Boosting (Champion) -->
-                <div class="bg-emerald-500/[0.12] p-4.5 rounded-2xl border-2 border-emerald-500 text-center space-y-2 relative shadow-[0_0_25px_rgba(16,185,129,0.25)]">
-                    <span class="absolute -top-3 right-3 px-2 py-0.5 rounded text-[9px] font-black bg-emerald-500 text-slate-950 uppercase tracking-widest shadow-sm">
-                        Champion
+                <div class="bg-[#00f5a0]/[0.08] p-5 rounded-[2rem] border-2 border-[#00f5a0] text-center space-y-2 relative shadow-[0_0_35px_rgba(0,245,160,0.3)] backdrop-blur-md">
+                    <span class="absolute -top-3.5 right-4 px-2.5 py-0.5 rounded-full text-[9px] font-black bg-[#00f5a0] text-slate-950 uppercase tracking-widest shadow-md">
+                        CHAMPION
                     </span>
-                    <span class="text-[10px] text-emerald-300 font-bold uppercase tracking-wider block">Gradient Boosting (GBR)</span>
+                    <span class="text-[10px] text-[#00f5a0] font-bold uppercase tracking-wider block">Gradient Boosting (GBR)</span>
                     <span class="text-3xl font-black text-white font-mono block">12.53</span>
-                    <span class="text-[10px] text-emerald-300 font-mono">RMSE (portions)</span>
-                    <div class="pt-2 border-t border-emerald-500/30 text-[11px] text-emerald-200 space-y-0.5 font-medium">
+                    <span class="text-[10px] text-[#00f5a0] font-mono">RMSE (portions)</span>
+                    <div class="pt-3 border-t border-[#00f5a0]/30 text-[11px] text-emerald-200 space-y-1 font-medium">
                         <div class="flex justify-between"><span>R² Score:</span> <strong class="text-white font-mono">0.941</strong></div>
                         <div class="flex justify-between"><span>MAE:</span> <strong class="text-white font-mono">9.3</strong></div>
                     </div>
@@ -94,12 +96,12 @@
             </div>
         </div>
 
-        <div class="mt-6 pt-4 border-t border-white/5 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-2">
+        <div class="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-3">
             <div class="flex items-center space-x-2">
-                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
-                <span><strong class="text-emerald-300">69.0% Error Reduction</strong> achieved over traditional kitchen guesswork.</span>
+                <i data-lucide="check-circle" class="w-4 h-4 text-[#00f5a0]"></i>
+                <span><strong class="text-white">69.0% Error Reduction</strong> achieved over traditional manual kitchen intuition.</span>
             </div>
-            <div class="text-[11px] text-slate-500 font-mono">
+            <div class="text-[11px] text-slate-400 font-mono">
                 Trained on 2,400 daily canteen records with seasonal Dehradun climate parameters.
             </div>
         </div>
@@ -108,45 +110,45 @@
     <!-- Feature Importance & Interactive AI Playground -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <!-- Feature Importances -->
-        <div class="lg:col-span-5 glass-card p-6 space-y-5">
-            <div class="flex items-center justify-between border-b border-white/5 pb-3">
+        <div class="lg:col-span-5 hyper-glass p-7 rounded-[2rem] space-y-5">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
                 <h3 class="font-bold text-white text-base font-heading">Contextual Feature Importance</h3>
-                <span class="text-[10px] font-mono text-emerald-400 uppercase tracking-wider">GBR Tree Splits</span>
+                <span class="text-[10px] font-mono text-[#00f5a0] uppercase tracking-wider font-bold">GBR Tree Splits</span>
             </div>
-            <div class="space-y-3.5">
+            <div class="space-y-4">
                 {% for feat in ml_metrics.top_features[:6] %}
                 <div>
                     <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1.5">
                         <span class="capitalize font-medium">{{ feat.feature.replace('_', ' ') }}</span>
-                        <span class="font-mono text-emerald-400 font-bold">{{ (feat.importance * 100) | round(1) }}%</span>
+                        <span class="font-mono text-[#00f5a0] font-bold">{{ (feat.importance * 100) | round(1) }}%</span>
                     </div>
-                    <div class="w-full bg-slate-900 rounded-full h-2 overflow-hidden border border-white/5">
-                        <div class="bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 h-2 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]" style="width: {{ feat.importance * 100 * 2.5 }}%"></div>
+                    <div class="w-full bg-black/40 rounded-full h-2.5 overflow-hidden border border-white/10">
+                        <div class="bg-gradient-to-r from-[#00f5a0] via-[#00d9f5] to-[#8b5cf6] h-2.5 rounded-full shadow-[0_0_12px_rgba(0,245,160,0.6)]" style="width: {{ feat.importance * 100 * 2.5 }}%"></div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
-            <p class="text-[11px] text-slate-400 pt-3 border-t border-white/5 leading-relaxed">
+            <p class="text-[11px] text-slate-400 pt-3 border-t border-white/10 leading-relaxed">
                 Notice how recent sales trends, exam days, and weather dynamically drive customer demand in the university canteen.
             </p>
         </div>
 
         <!-- Interactive AI Demand Prediction Playground -->
-        <div class="lg:col-span-7 glass-card p-6 space-y-5">
-            <div class="flex items-center justify-between border-b border-white/5 pb-3">
+        <div class="lg:col-span-7 hyper-glass p-7 rounded-[2rem] space-y-5">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
                 <div>
                     <h3 class="font-bold text-white text-base font-heading">Interactive ML Prediction Console</h3>
                     <p class="text-xs text-slate-400">Test live inference under custom contextual scenarios.</p>
                 </div>
-                <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                <span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase bg-purple-500/15 text-purple-300 border border-purple-500/30">
                     Live REST API
                 </span>
             </div>
 
             <form id="playground-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1">Menu Dish</label>
-                    <select id="play-item" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-medium focus:border-emerald-500 focus:outline-none">
+                    <label class="block font-semibold text-slate-300 mb-1.5">Menu Dish</label>
+                    <select id="play-item" class="w-full px-4 py-3 rounded-2xl border border-white/10 bg-black/40 text-white font-medium focus:border-[#00f5a0] focus:outline-none transition">
                         {% for item in menu_items %}
                         <option value="{{ item.id }}">{{ item.image_emoji }} {{ item.name }} ({{ item.meal_type }})</option>
                         {% endfor %}
@@ -154,8 +156,8 @@
                 </div>
 
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1">Day of Week</label>
-                    <select id="play-dow" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-medium focus:border-emerald-500 focus:outline-none">
+                    <label class="block font-semibold text-slate-300 mb-1.5">Day of Week</label>
+                    <select id="play-dow" class="w-full px-4 py-3 rounded-2xl border border-white/10 bg-black/40 text-white font-medium focus:border-[#00f5a0] focus:outline-none transition">
                         <option value="0">Monday</option>
                         <option value="1">Tuesday</option>
                         <option value="2" selected>Wednesday (Mid-week peak)</option>
@@ -167,16 +169,16 @@
                 </div>
 
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1">Academic Calendar</label>
-                    <select id="play-exam" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-medium focus:border-emerald-500 focus:outline-none">
+                    <label class="block font-semibold text-slate-300 mb-1.5">Academic Calendar</label>
+                    <select id="play-exam" class="w-full px-4 py-3 rounded-2xl border border-white/10 bg-black/40 text-white font-medium focus:border-[#00f5a0] focus:outline-none transition">
                         <option value="1" selected>Exam Day / Midterms (High Coffee/Snacks)</option>
                         <option value="0">Regular Academic Semester</option>
                     </select>
                 </div>
 
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1">Dehradun Weather Context</label>
-                    <select id="play-weather" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-medium focus:border-emerald-500 focus:outline-none">
+                    <label class="block font-semibold text-slate-300 mb-1.5">Dehradun Weather Context</label>
+                    <select id="play-weather" class="w-full px-4 py-3 rounded-2xl border border-white/10 bg-black/40 text-white font-medium focus:border-[#00f5a0] focus:outline-none transition">
                         <option value="mild" selected>Pleasant Mild (24°C, Clear)</option>
                         <option value="rain">Monsoon Rain (20°C, 25mm Rain)</option>
                         <option value="hot">Summer Heatwave (36°C, Clear)</option>
@@ -185,50 +187,50 @@
                 </div>
 
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1">Promotion Status</label>
-                    <select id="play-promo" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-medium focus:border-emerald-500 focus:outline-none">
+                    <label class="block font-semibold text-slate-300 mb-1.5">Promotion Status</label>
+                    <select id="play-promo" class="w-full px-4 py-3 rounded-2xl border border-white/10 bg-black/40 text-white font-medium focus:border-[#00f5a0] focus:outline-none transition">
                         <option value="0" selected>Standard Menu Item</option>
                         <option value="1">Promoted / Special Featured Item</option>
                     </select>
                 </div>
 
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1">Past 7-Day Average Sales</label>
-                    <input type="number" id="play-trend" value="120" min="20" max="300" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-mono focus:border-emerald-500 focus:outline-none">
+                    <label class="block font-semibold text-slate-300 mb-1.5">Past 7-Day Average Sales</label>
+                    <input type="number" id="play-trend" value="120" min="20" max="300" class="w-full px-4 py-3 rounded-2xl border border-white/10 bg-black/40 text-white font-mono focus:border-[#00f5a0] focus:outline-none transition">
                 </div>
 
-                <div class="sm:col-span-2 pt-1">
-                    <button type="submit" class="w-full py-3 px-4 rounded-xl btn-glow-emerald flex items-center justify-center space-x-2 font-bold text-xs uppercase tracking-wider">
+                <div class="sm:col-span-2 pt-2">
+                    <button type="submit" class="w-full py-3.5 px-6 rounded-full btn-glass-primary flex items-center justify-center space-x-2 text-xs uppercase tracking-wider font-extrabold">
                         <i data-lucide="sparkles" class="w-4 h-4"></i>
                         <span>Run Real-Time AI Demand Forecast</span>
                     </button>
                 </div>
             </form>
 
-            <!-- Live Prediction Result HUD Box -->
-            <div id="playground-result" class="hidden p-5 rounded-2xl bg-[#09101f] border border-emerald-500/40 space-y-3 transition shadow-[0_0_25px_rgba(16,185,129,0.15)]">
-                <div class="flex items-center justify-between border-b border-white/5 pb-2">
-                    <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold">Model Inference Output</span>
-                    <span id="res-model" class="text-xs text-slate-300 font-semibold font-mono"></span>
+            <!-- Live Prediction Result HUD Box (Holographic Card) -->
+            <div id="playground-result" class="hidden p-5 rounded-[1.75rem] bg-black/60 border border-[#00f5a0]/40 space-y-3 transition shadow-[0_0_30px_rgba(0,245,160,0.2)]">
+                <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#00f5a0] font-bold">Model Inference Output</span>
+                    <span id="res-model" class="text-xs text-slate-200 font-semibold font-mono"></span>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                    <div class="bg-black/40 p-3 rounded-xl border border-white/5">
-                        <span class="text-[10px] text-slate-400 block uppercase font-mono">Predicted Demand</span>
+                    <div class="bg-white/[0.03] p-3.5 rounded-2xl border border-white/10">
+                        <span class="text-[9px] text-slate-400 block uppercase font-mono">Predicted Demand</span>
                         <span id="res-demand" class="text-2xl font-black text-white font-mono"></span>
                         <span class="text-[10px] text-slate-400 block">portions</span>
                     </div>
-                    <div class="bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/30">
-                        <span class="text-[10px] text-emerald-400 font-bold block uppercase font-mono">Recommended Cook</span>
-                        <span id="res-cook" class="text-2xl font-black text-emerald-300 font-mono"></span>
-                        <span class="text-[10px] text-emerald-400/80 block">+8% safety buffer</span>
+                    <div class="bg-[#00f5a0]/15 p-3.5 rounded-2xl border border-[#00f5a0]/40 shadow-[0_0_15px_rgba(0,245,160,0.2)]">
+                        <span class="text-[9px] text-[#00f5a0] font-bold block uppercase font-mono">Recommended Cook</span>
+                        <span id="res-cook" class="text-2xl font-black text-[#00f5a0] font-mono"></span>
+                        <span class="text-[10px] text-[#00f5a0]/80 block">+8% safety buffer</span>
                     </div>
-                    <div class="bg-black/40 p-3 rounded-xl border border-white/5">
-                        <span class="text-[10px] text-slate-400 block uppercase font-mono">Random Forest</span>
+                    <div class="bg-white/[0.03] p-3.5 rounded-2xl border border-white/10">
+                        <span class="text-[9px] text-slate-400 block uppercase font-mono">Random Forest</span>
                         <span id="res-rf" class="text-xl font-bold text-slate-300 font-mono"></span>
                         <span class="text-[10px] text-slate-500 block">portions</span>
                     </div>
-                    <div class="bg-black/40 p-3 rounded-xl border border-white/5">
-                        <span class="text-[10px] text-slate-400 block uppercase font-mono">Gradient Boost</span>
+                    <div class="bg-white/[0.03] p-3.5 rounded-2xl border border-white/10">
+                        <span class="text-[9px] text-slate-400 block uppercase font-mono">Gradient Boost</span>
                         <span id="res-gb" class="text-xl font-bold text-slate-300 font-mono"></span>
                         <span class="text-[10px] text-slate-500 block">portions</span>
                     </div>
@@ -238,20 +240,20 @@
     </div>
 
     <!-- Active Menu Demand Predictions Table for Today -->
-    <div class="glass-card overflow-hidden">
-        <div class="p-6 border-b border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+    <div class="hyper-glass overflow-hidden rounded-[2.5rem]">
+        <div class="p-7 border-b border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
                 <h3 class="font-bold text-white text-lg font-heading">Today's Forecast & Production Guidance</h3>
                 <p class="text-xs text-slate-400">Portions predicted per menu item for {{ settings.simulated_date }}</p>
             </div>
-            <a href="/production" class="inline-flex items-center space-x-1.5 text-xs font-bold text-emerald-400 hover:text-emerald-300">
+            <a href="/production" class="inline-flex items-center space-x-1.5 text-xs font-bold text-[#00f5a0] hover:text-[#00d9f5] transition">
                 <span>Open Kitchen Production Planner</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </a>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-left text-sm text-slate-300">
-                <thead class="bg-slate-950/60 text-[11px] text-slate-400 uppercase font-mono font-bold border-b border-white/5">
+                <thead class="bg-black/40 text-[11px] text-slate-400 uppercase font-mono font-bold border-b border-white/10">
                     <tr>
                         <th class="px-6 py-4">Menu Item</th>
                         <th class="px-6 py-4">Meal / Category</th>
@@ -266,37 +268,37 @@
                     {% for plan in daily_plans %}
                     {% set trad_cook = (plan.predicted_demand * 1.25) | round | int %}
                     {% set avoided = trad_cook - plan.recommended_cook_qty %}
-                    <tr class="sleek-table-row">
+                    <tr class="glass-table-row">
                         <td class="px-6 py-4.5 font-semibold text-white flex items-center space-x-3">
-                            <span class="text-2xl">{{ plan.image_emoji }}</span>
+                            <span class="text-2xl p-2 rounded-2xl bg-white/5 border border-white/10 shadow-sm">{{ plan.image_emoji }}</span>
                             <span class="font-heading text-base">{{ plan.item_name }}</span>
                         </td>
                         <td class="px-6 py-4.5">
-                            <span class="px-2.5 py-1 rounded-md text-xs font-medium bg-white/5 text-slate-300 border border-white/5">
+                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-slate-300 border border-white/10">
                                 {{ plan.meal_type }} · {{ plan.category }}
                             </span>
                         </td>
                         <td class="px-6 py-4.5 text-center font-mono font-bold text-white">
                             {{ plan.predicted_demand }}
                         </td>
-                        <td class="px-6 py-4.5 text-center font-mono font-bold text-emerald-400 bg-emerald-500/10 border-x border-emerald-500/10">
+                        <td class="px-6 py-4.5 text-center font-mono font-bold text-[#00f5a0] bg-[#00f5a0]/10 border-x border-[#00f5a0]/10">
                             {{ plan.recommended_cook_qty }}
-                            <span class="text-[10px] text-emerald-400/70 block font-sans font-normal">+{{ plan.safety_buffer }} safety buffer</span>
+                            <span class="text-[10px] text-[#00f5a0]/80 block font-sans font-normal">+{{ plan.safety_buffer }} safety buffer</span>
                         </td>
                         <td class="px-6 py-4.5 text-center font-mono text-slate-500 line-through">
                             {{ trad_cook }}
                         </td>
                         <td class="px-6 py-4.5 text-center">
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#00f5a0]/15 text-[#00f5a0] border border-[#00f5a0]/30 shadow-[0_0_12px_rgba(0,245,160,0.2)]">
                                 -{{ avoided }} portions saved
                             </span>
                         </td>
                         <td class="px-6 py-4.5 text-right">
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold
-                                {% if plan.status == 'IN_SERVICE' %}badge-neon-blue
-                                {% elif plan.status == 'SURPLUS_DETECTED' %}badge-neon-amber
-                                {% elif plan.status == 'CLOSED' %}bg-white/5 text-slate-400 border border-white/10
-                                {% else %}badge-neon-emerald{% endif %}">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
+                                {% if plan.status == 'IN_SERVICE' %}pill-badge-purple
+                                {% elif plan.status == 'SURPLUS_DETECTED' %}pill-badge-amber
+                                {% elif plan.status == 'CLOSED' %}bg-white/5 text-slate-400 border border-white/10 rounded-full
+                                {% else %}pill-badge-emerald{% endif %}">
                                 {{ plan.status.replace('_', ' ') }}
                             </span>
                         </td>
