@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,23 +8,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            800: '#166534',
-                            900: '#14532d',
+                        dark: {
+                            950: '#040711',
+                            900: '#070c18',
+                            850: '#0b1122',
+                            800: '#0f172a',
+                            700: '#1e293b',
+                            600: '#334155'
                         },
-                        amberbrand: {
-                            50: '#fffbeb',
-                            100: '#fef3c7',
-                            500: '#f59e0b',
-                            600: '#d97706',
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857'
                         }
                     }
                 }
@@ -35,82 +35,88 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Custom CSS -->
+    <!-- Custom Modern Stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% block extra_head %}{% endblock %}
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
-    <!-- Top Announcement / Academic Context Bar -->
-    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
+<body class="min-h-screen flex flex-col antialiased selection:bg-emerald-500 selection:text-white">
+
+    <!-- Top Academic & University Meta Bar -->
+    <div class="bg-black/50 backdrop-blur border-b border-white/5 text-[11px] py-2 px-4 text-slate-400">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center space-x-2">
-                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800">
-                    BCA (AI & DS) Major Project
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    BCA [AI & DS] · 2026
                 </span>
-                <span>Graphic Era (Deemed to be University) · Yogesh Vyas (2106389)</span>
-                <span class="hidden md:inline text-slate-500">|</span>
-                <span class="hidden md:inline text-slate-400">Guide: Ms. Shivani Sharma</span>
+                <span class="text-slate-300 font-medium">Graphic Era (Deemed to be University) · Dept. of Computer Applications</span>
+                <span class="hidden md:inline text-slate-600">|</span>
+                <span class="hidden md:inline text-slate-400">Investigator: <strong class="text-slate-200">Yogesh Vyas (2106389)</strong></span>
+                <span class="hidden md:inline text-slate-600">|</span>
+                <span class="hidden md:inline text-slate-400">Guide: <strong class="text-slate-300">Ms. Shivani Sharma</strong></span>
             </div>
-            <div class="flex items-center space-x-4">
-                <a href="/simulation" class="inline-flex items-center space-x-1.5 text-amber-300 hover:text-amber-200 transition font-medium">
-                    <span class="w-2 h-2 rounded-full bg-amber-400 pulse-badge"></span>
-                    <span>Sim Clock: <strong class="font-mono">{{ settings.simulated_time if settings else '19:45' }}</strong></span>
-                    <span class="text-xs text-slate-400">({{ 'Exam Day' if settings and settings.is_exam_day else 'Regular' }})</span>
+            <div class="flex items-center space-x-3">
+                <a href="/simulation" class="inline-flex items-center space-x-2 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 hover:bg-emerald-500/20 transition">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-neon"></span>
+                    <span class="font-mono font-bold">{{ settings.simulated_time if settings else '19:45' }}</span>
+                    <span class="text-slate-400 text-[10px]">({{ 'Exam Week' if settings and settings.is_exam_day else 'Regular' }})</span>
                 </a>
             </div>
         </div>
     </div>
 
     <!-- Main Navigation Header -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+    <header class="sticky top-0 z-50 backdrop-blur-2xl bg-[#060911]/85 border-b border-white/10 transition">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
+            <div class="flex items-center justify-between h-20">
                 <!-- Brand Logo & Motto -->
                 <div class="flex items-center space-x-3">
-                    <a href="/" class="flex items-center space-x-2.5 group">
-                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition transform">
-                            <i data-lucide="utensils-crossed" class="w-5 h-5"></i>
+                    <a href="/" class="flex items-center space-x-3 group">
+                        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-cyan-400 flex items-center justify-center text-slate-950 shadow-[0_0_20px_rgba(16,185,129,0.4)] group-hover:scale-105 transition transform">
+                            <i data-lucide="utensils" class="w-6 h-6 stroke-[2.5]"></i>
                         </div>
                         <div>
-                            <span class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-emerald-600 transition">ZeroPlate</span>
-                            <span class="hidden sm:block text-xs font-medium text-emerald-600 tracking-wide uppercase">Prevention Before Cure</span>
+                            <div class="flex items-center space-x-1.5">
+                                <span class="text-2xl font-black tracking-tight text-white font-heading">Zero<span class="gradient-text-emerald">Plate</span></span>
+                                <span class="px-1.5 py-0.5 rounded text-[9px] font-black uppercase bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">AI 2.0</span>
+                            </div>
+                            <span class="text-[10px] font-semibold text-slate-400 tracking-wider uppercase block">Prevention Before Cure</span>
                         </div>
                     </a>
                 </div>
 
                 <!-- Navigation Tabs (All 6 Modules from Section 5.4) -->
-                <nav class="hidden lg:flex items-center space-x-1">
-                    <a href="/forecast" class="px-3 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-1.5 {% if request.path == '/forecast' %}bg-emerald-50 text-emerald-700 font-semibold{% else %}text-slate-600 hover:text-slate-900 hover:bg-slate-100{% endif %}">
-                        <i data-lucide="line-chart" class="w-4 h-4 text-emerald-600"></i>
-                        <span>1. Demand Forecast</span>
+                <nav class="hidden lg:flex items-center space-x-1.5 bg-slate-900/60 p-1.5 rounded-2xl border border-white/5">
+                    <a href="/forecast" class="px-3.5 py-2 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 {% if request.path == '/forecast' %}bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.2)]{% else %}text-slate-400 hover:text-white hover:bg-white/5{% endif %}">
+                        <i data-lucide="line-chart" class="w-4 h-4 text-emerald-400"></i>
+                        <span>1. Forecast</span>
                     </a>
-                    <a href="/production" class="px-3 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-1.5 {% if request.path == '/production' %}bg-emerald-50 text-emerald-700 font-semibold{% else %}text-slate-600 hover:text-slate-900 hover:bg-slate-100{% endif %}">
-                        <i data-lucide="chef-hat" class="w-4 h-4 text-emerald-600"></i>
-                        <span>2. Production Plan</span>
+                    <a href="/production" class="px-3.5 py-2 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 {% if request.path == '/production' %}bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.2)]{% else %}text-slate-400 hover:text-white hover:bg-white/5{% endif %}">
+                        <i data-lucide="chef-hat" class="w-4 h-4 text-teal-400"></i>
+                        <span>2. Kitchen Plan</span>
                     </a>
-                    <a href="/marketplace" class="px-3 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-1.5 {% if request.path.startswith('/marketplace') %}bg-amber-50 text-amber-700 font-semibold{% else %}text-slate-600 hover:text-slate-900 hover:bg-slate-100{% endif %}">
-                        <i data-lucide="shopping-bag" class="w-4 h-4 text-amber-600"></i>
+                    <a href="/marketplace" class="px-3.5 py-2 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 {% if request.path.startswith('/marketplace') %}bg-amber-500/15 text-amber-300 border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.2)]{% else %}text-slate-400 hover:text-white hover:bg-white/5{% endif %}">
+                        <i data-lucide="shopping-bag" class="w-4 h-4 text-amber-400"></i>
                         <span>3. Surplus Market</span>
-                        <span class="ml-1 px-1.5 py-0.5 rounded-full text-xs bg-amber-100 text-amber-700 font-bold">55% Off</span>
+                        <span class="ml-1 px-1.5 py-0.2 rounded-full text-[9px] font-black bg-amber-500/20 text-amber-300 border border-amber-500/40">55% OFF</span>
                     </a>
-                    <a href="/ngo" class="px-3 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-1.5 {% if request.path.startswith('/ngo') %}bg-blue-50 text-blue-700 font-semibold{% else %}text-slate-600 hover:text-slate-900 hover:bg-slate-100{% endif %}">
-                        <i data-lucide="heart-handshake" class="w-4 h-4 text-blue-600"></i>
+                    <a href="/ngo" class="px-3.5 py-2 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 {% if request.path.startswith('/ngo') %}bg-blue-500/15 text-blue-300 border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.2)]{% else %}text-slate-400 hover:text-white hover:bg-white/5{% endif %}">
+                        <i data-lucide="heart-handshake" class="w-4 h-4 text-blue-400"></i>
                         <span>4. NGO Rescue</span>
                     </a>
-                    <a href="/composting" class="px-3 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-1.5 {% if request.path.startswith('/composting') %}bg-emerald-50 text-emerald-700 font-semibold{% else %}text-slate-600 hover:text-slate-900 hover:bg-slate-100{% endif %}">
-                        <i data-lucide="sprout" class="w-4 h-4 text-emerald-700"></i>
-                        <span>5. Composting</span>
+                    <a href="/composting" class="px-3.5 py-2 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 {% if request.path.startswith('/composting') %}bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.2)]{% else %}text-slate-400 hover:text-white hover:bg-white/5{% endif %}">
+                        <i data-lucide="sprout" class="w-4 h-4 text-emerald-400"></i>
+                        <span>5. Compost</span>
                     </a>
-                    <a href="/analytics" class="px-3 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-1.5 {% if request.path == '/analytics' %}bg-purple-50 text-purple-700 font-semibold{% else %}text-slate-600 hover:text-slate-900 hover:bg-slate-100{% endif %}">
-                        <i data-lucide="bar-chart-3" class="w-4 h-4 text-purple-600"></i>
+                    <a href="/analytics" class="px-3.5 py-2 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 {% if request.path == '/analytics' %}bg-purple-500/15 text-purple-300 border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.2)]{% else %}text-slate-400 hover:text-white hover:bg-white/5{% endif %}">
+                        <i data-lucide="pie-chart" class="w-4 h-4 text-purple-400"></i>
                         <span>6. Analytics & RMSE</span>
                     </a>
                 </nav>
 
-                <!-- Right Actions: Quick Simulation / Role Switcher -->
+                <!-- Right Actions: Quick Simulation / Controller -->
                 <div class="flex items-center space-x-2">
-                    <a href="/simulation" class="inline-flex items-center space-x-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
-                        <i data-lucide="sliders" class="w-3.5 h-3.5 text-slate-500"></i>
+                    <a href="/simulation" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-bold bg-white/5 hover:bg-white/10 text-white border border-white/10 transition hover:border-emerald-500/50">
+                        <i data-lucide="sliders" class="w-4 h-4 text-emerald-400"></i>
                         <span>Simulate & Demo</span>
                     </a>
                 </div>
@@ -118,40 +124,42 @@
         </div>
 
         <!-- Mobile sub-navigation bar -->
-        <div class="lg:hidden border-t border-slate-200 bg-slate-50 px-4 py-2 flex items-center space-x-2 overflow-x-auto text-xs whitespace-nowrap">
-            <a href="/forecast" class="px-2 py-1 rounded bg-white border border-slate-200 text-slate-700">1. Forecast</a>
-            <a href="/production" class="px-2 py-1 rounded bg-white border border-slate-200 text-slate-700">2. Kitchen Plan</a>
-            <a href="/marketplace" class="px-2 py-1 rounded bg-amber-100 border border-amber-200 text-amber-800 font-semibold">3. Student Market</a>
-            <a href="/ngo" class="px-2 py-1 rounded bg-blue-100 border border-blue-200 text-blue-800">4. NGO</a>
-            <a href="/composting" class="px-2 py-1 rounded bg-emerald-100 border border-emerald-200 text-emerald-800">5. Compost</a>
-            <a href="/analytics" class="px-2 py-1 rounded bg-purple-100 border border-purple-200 text-purple-800">6. Analytics</a>
+        <div class="lg:hidden border-t border-white/5 bg-slate-950/80 px-4 py-2 flex items-center space-x-2 overflow-x-auto text-xs whitespace-nowrap">
+            <a href="/forecast" class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-300">1. Forecast</a>
+            <a href="/production" class="px-3 py-1.5 rounded-lg bg-white/5 text-slate-300">2. Kitchen Plan</a>
+            <a href="/marketplace" class="px-3 py-1.5 rounded-lg bg-amber-500/15 text-amber-300 font-bold border border-amber-500/30">3. Market (55% off)</a>
+            <a href="/ngo" class="px-3 py-1.5 rounded-lg bg-blue-500/15 text-blue-300">4. NGO</a>
+            <a href="/composting" class="px-3 py-1.5 rounded-lg bg-emerald-500/15 text-emerald-300">5. Compost</a>
+            <a href="/analytics" class="px-3 py-1.5 rounded-lg bg-purple-500/15 text-purple-300">6. Analytics</a>
         </div>
     </header>
 
     <!-- Page Content Container -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {% block content %}{% endblock %}
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-6 text-sm text-slate-500 mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold text-xs">ZP</div>
+    <footer class="border-t border-white/5 bg-[#040711] py-8 text-xs text-slate-400 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3.5">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center text-slate-950 font-black text-sm shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                    ZP
+                </div>
                 <div>
-                    <p class="font-semibold text-slate-800">ZeroPlate: AI-Powered Demand Forecasting & Surplus Redistribution</p>
-                    <p class="text-xs text-slate-500">Prevention Before Cure Model · Graphic Era (Deemed to be University), Dehradun</p>
+                    <p class="font-bold text-white text-sm">ZeroPlate · AI Demand Forecasting & Surplus Redistribution</p>
+                    <p class="text-slate-500 text-[11px]">Prevention Before Cure Operational Model · Graphic Era (Deemed to be University), Dehradun</p>
                 </div>
             </div>
-            <div class="text-xs text-right text-slate-500 space-y-1">
-                <p>Project by <span class="font-semibold text-slate-700">Yogesh Vyas</span> · University Roll No: <strong>2106389</strong></p>
-                <p>Under the Guidance of <span class="font-semibold text-slate-700">Ms. Shivani Sharma</span>, Assistant Professor (Dept. of Computer Applications)</p>
+            <div class="text-right space-y-1">
+                <p>Candidate: <strong class="text-slate-200">Yogesh Vyas</strong> · University Roll No: <strong class="text-emerald-400 font-mono">2106389</strong> (BCA AI & DS)</p>
+                <p class="text-slate-500">Supervised by: <strong class="text-slate-300">Ms. Shivani Sharma</strong>, Assistant Professor (Dept. of Computer Applications)</p>
             </div>
         </div>
     </footer>
 
     <!-- Toast Notification Anchor -->
-    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-2 pointer-events-none"></div>
 
     <!-- Scripts -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>

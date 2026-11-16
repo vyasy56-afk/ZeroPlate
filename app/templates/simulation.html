@@ -7,17 +7,17 @@
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-            <div class="flex items-center space-x-2">
-                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800">Demo Controller</span>
-                <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Temporal State Machine & Context Simulator</span>
+            <div class="flex items-center space-x-2.5">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">Demo Console</span>
+                <span class="text-xs text-slate-400 uppercase tracking-widest font-mono">Temporal State Machine & Trigger Engine</span>
             </div>
-            <h1 class="text-3xl font-extrabold text-slate-900 mt-1">Simulation & Demo Control Panel</h1>
-            <p class="text-sm text-slate-600 mt-1">
-                Fast-forward the simulation clock to test and demonstrate each phase of the 3-tier surplus escalation pipeline.
+            <h1 class="text-3xl sm:text-4xl font-black text-white font-heading mt-1">Simulation & Demo Controller</h1>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1">
+                Fast-forward the simulation clock to test and demonstrate each phase of the 3-tier surplus escalation pipeline during viva.
             </p>
         </div>
         <div class="flex items-center space-x-2">
-            <span class="px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-slate-900 text-amber-400 border border-slate-800">
+            <span class="px-4 py-2 rounded-2xl text-xs font-mono font-bold bg-[#0d1629] text-amber-400 border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
                 Clock: {{ settings.simulated_time }}
             </span>
         </div>
@@ -25,84 +25,84 @@
 
     <!-- Quick Time-Warp Scenarios Grid -->
     <div>
-        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-3">One-Click Demonstration Scenarios</h3>
+        <h3 class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-3 font-bold">One-Click Demonstration Scenarios</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <!-- Scenario 1: Morning -->
-            <button onclick="setSimulationClock('08:30', 1, 'mild')" class="bg-white p-5 rounded-2xl border border-slate-200 text-left hover-lift shadow-sm space-y-2 group">
-                <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs group-hover:scale-105 transition">
+            <button onclick="setSimulationClock('08:30', 1, 'mild')" class="glass-card p-5 text-left space-y-2 group hover:border-emerald-500/50">
+                <div class="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-bold text-xs group-hover:scale-110 transition border border-emerald-500/30">
                     <i data-lucide="sun" class="w-4 h-4"></i>
                 </div>
-                <h4 class="font-bold text-slate-900 text-sm">1. Morning Prep (08:30)</h4>
-                <p class="text-xs text-slate-500">
+                <h4 class="font-bold text-white text-sm font-heading">1. Morning Prep (08:30)</h4>
+                <p class="text-xs text-slate-400">
                     Runs morning forecast. Kitchen staff plans production targets & weighs ingredients before cooking.
                 </p>
-                <span class="inline-block text-[11px] font-bold text-emerald-600">Prevention Mode</span>
+                <span class="inline-block text-[10px] font-mono font-bold text-emerald-400 uppercase">Prevention Mode</span>
             </button>
 
             <!-- Scenario 2: Active Service -->
-            <button onclick="setSimulationClock('14:00', 1, 'mild')" class="bg-white p-5 rounded-2xl border border-slate-200 text-left hover-lift shadow-sm space-y-2 group">
-                <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs group-hover:scale-105 transition">
+            <button onclick="setSimulationClock('14:00', 1, 'mild')" class="glass-card p-5 text-left space-y-2 group hover:border-blue-500/50">
+                <div class="w-9 h-9 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center font-bold text-xs group-hover:scale-110 transition border border-blue-500/30">
                     <i data-lucide="utensils" class="w-4 h-4"></i>
                 </div>
-                <h4 class="font-bold text-slate-900 text-sm">2. Lunch Service (14:00)</h4>
-                <p class="text-xs text-slate-500">
+                <h4 class="font-bold text-white text-sm font-heading">2. Lunch Service (14:00)</h4>
+                <p class="text-xs text-slate-400">
                     High canteen volume. System monitors live sales vs planned cooking, forecasting likely surplus.
                 </p>
-                <span class="inline-block text-[11px] font-bold text-blue-600">Active Service</span>
+                <span class="inline-block text-[10px] font-mono font-bold text-blue-400 uppercase">Active Service</span>
             </button>
 
             <!-- Scenario 3: Closing Window (Marketplace Trigger) -->
-            <button onclick="setSimulationClock('19:15', 1, 'mild')" class="bg-white p-5 rounded-2xl border-2 border-amber-400 text-left hover-lift shadow-sm space-y-2 group relative">
-                <span class="absolute -top-2.5 right-3 px-2 py-0.5 rounded text-[10px] font-extrabold bg-amber-500 text-white uppercase">
+            <button onclick="setSimulationClock('19:15', 1, 'mild')" class="glass-card p-5 text-left space-y-2 group hover:border-amber-500/50 relative border-2 border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.15)]">
+                <span class="absolute -top-3 right-3 px-2 py-0.5 rounded text-[9px] font-black bg-amber-500 text-slate-950 uppercase tracking-widest">
                     Tier 1 Trigger
                 </span>
-                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-xs group-hover:scale-105 transition">
+                <div class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center font-bold text-xs group-hover:scale-110 transition border border-amber-500/30">
                     <i data-lucide="shopping-bag" class="w-4 h-4"></i>
                 </div>
-                <h4 class="font-bold text-slate-900 text-sm">3. Closing Window (19:15)</h4>
-                <p class="text-xs text-slate-500">
+                <h4 class="font-bold text-white text-sm font-heading">3. Closing Window (19:15)</h4>
+                <p class="text-xs text-slate-400">
                     Within 90 mins of closing. Unsold stock automatically lists as discounted <strong>Surprise Boxes</strong> for students!
                 </p>
-                <span class="inline-block text-[11px] font-bold text-amber-600">Student Marketplace Live</span>
+                <span class="inline-block text-[10px] font-mono font-bold text-amber-400 uppercase">Student Market Live</span>
             </button>
 
             <!-- Scenario 4: Canteen Closing (NGO Trigger) -->
-            <button onclick="setSimulationClock('20:45', 1, 'mild')" class="bg-white p-5 rounded-2xl border-2 border-blue-400 text-left hover-lift shadow-sm space-y-2 group relative">
-                <span class="absolute -top-2.5 right-3 px-2 py-0.5 rounded text-[10px] font-extrabold bg-blue-600 text-white uppercase">
+            <button onclick="setSimulationClock('20:45', 1, 'mild')" class="glass-card p-5 text-left space-y-2 group hover:border-blue-500/50 relative border-2 border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.15)]">
+                <span class="absolute -top-3 right-3 px-2 py-0.5 rounded text-[9px] font-black bg-blue-500 text-white uppercase tracking-widest">
                     Tier 2 Trigger
                 </span>
-                <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs group-hover:scale-105 transition">
+                <div class="w-9 h-9 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center font-bold text-xs group-hover:scale-110 transition border border-blue-500/30">
                     <i data-lucide="heart-handshake" class="w-4 h-4"></i>
                 </div>
-                <h4 class="font-bold text-slate-900 text-sm">4. Closing Time (20:45)</h4>
-                <p class="text-xs text-slate-500">
+                <h4 class="font-bold text-white text-sm font-heading">4. Closing Time (20:45)</h4>
+                <p class="text-xs text-slate-400">
                     Canteen closes. Unsold meals escalate to verified NGOs (Robin Hood Army) with a 60-min pickup timer & PIN.
                 </p>
-                <span class="inline-block text-[11px] font-bold text-blue-600">NGO Dispatch Active</span>
+                <span class="inline-block text-[10px] font-mono font-bold text-blue-400 uppercase">NGO Rescue Dispatched</span>
             </button>
         </div>
     </div>
 
     <!-- Manual Controls Form -->
-    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-        <h3 class="font-bold text-slate-900 text-lg">Custom Simulation Environmental Context</h3>
+    <div class="glass-card p-6 space-y-4">
+        <h3 class="font-bold text-white text-base font-heading border-b border-white/5 pb-3">Custom Environmental Simulation Controls</h3>
         <form id="custom-sim-form" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
             <div>
-                <label class="block font-semibold text-slate-700 mb-1">Simulated Clock Time</label>
-                <input type="time" id="sim-clock" value="{{ settings.simulated_time }}" class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white font-mono font-bold">
+                <label class="block font-semibold text-slate-300 mb-1">Simulated Clock Time</label>
+                <input type="time" id="sim-clock" value="{{ settings.simulated_time }}" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-mono font-bold focus:border-emerald-500 focus:outline-none">
             </div>
 
             <div>
-                <label class="block font-semibold text-slate-700 mb-1">Academic Context</label>
-                <select id="sim-exam" class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white font-medium">
+                <label class="block font-semibold text-slate-300 mb-1">Academic Context</label>
+                <select id="sim-exam" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-medium focus:border-emerald-500 focus:outline-none">
                     <option value="1" {% if settings.is_exam_day %}selected{% endif %}>Exam Session (Boosts Coffee/Snacks, Lowers Thali)</option>
                     <option value="0" {% if not settings.is_exam_day %}selected{% endif %}>Regular Semester Days</option>
                 </select>
             </div>
 
             <div>
-                <label class="block font-semibold text-slate-700 mb-1">Dehradun Weather Condition</label>
-                <select id="sim-weather" class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white font-medium">
+                <label class="block font-semibold text-slate-300 mb-1">Dehradun Weather Context</label>
+                <select id="sim-weather" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-medium focus:border-emerald-500 focus:outline-none">
                     <option value="mild" selected>Pleasant Weather (23.5°C, Clear)</option>
                     <option value="rain">Monsoon Downpour (20.0°C, 18mm Rain)</option>
                     <option value="hot">Summer Heatwave (34.0°C, Clear)</option>
@@ -110,17 +110,17 @@
             </div>
 
             <div>
-                <label class="block font-semibold text-slate-700 mb-1">Closing Window Threshold</label>
-                <select id="sim-window" class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white font-medium">
+                <label class="block font-semibold text-slate-300 mb-1">Closing Window Threshold</label>
+                <select id="sim-window" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-medium focus:border-emerald-500 focus:outline-none">
                     <option value="90" selected>90 Minutes Before Close</option>
                     <option value="60">60 Minutes Before Close</option>
                     <option value="120">120 Minutes Before Close</option>
                 </select>
             </div>
 
-            <div class="sm:col-span-2 lg:col-span-4 pt-2">
-                <button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold transition flex items-center justify-center space-x-2">
-                    <i data-lucide="play" class="w-4 h-4 text-emerald-400"></i>
+            <div class="sm:col-span-2 lg:col-span-4 pt-1">
+                <button type="submit" class="w-full py-3 px-4 rounded-xl btn-glow-emerald font-bold text-xs uppercase tracking-wider flex items-center justify-center space-x-2">
+                    <i data-lucide="play" class="w-4 h-4 text-slate-950"></i>
                     <span>Apply Environmental Parameters & Run Surplus Escalation Cycle</span>
                 </button>
             </div>
@@ -128,12 +128,12 @@
     </div>
 
     <!-- Live Escalation Engine Pseudocode Reference (From Section 5.3) -->
-    <div class="bg-slate-900 text-slate-300 p-6 rounded-2xl border border-slate-800 font-mono text-xs space-y-3">
-        <div class="flex items-center justify-between text-slate-400 border-b border-slate-800 pb-2">
-            <span class="font-bold text-emerald-400 font-sans uppercase">Section 5.3 Surplus Redistribution Logic</span>
-            <span class="text-[11px]">Implemented in app/escalation_engine.py</span>
+    <div class="glass-card p-6 font-mono text-xs space-y-3 bg-[#050811] border border-emerald-500/20">
+        <div class="flex items-center justify-between text-slate-400 border-b border-white/5 pb-2">
+            <span class="font-bold text-emerald-400 uppercase font-sans">Section 5.3 Surplus Redistribution Logic</span>
+            <span class="text-[11px] text-slate-500 font-mono">Implemented in app/escalation_engine.py</span>
         </div>
-        <pre class="overflow-x-auto text-emerald-300">
+        <pre class="overflow-x-auto text-emerald-300/90 leading-relaxed">
 Input: predicted_qty, actual_sold, time_remaining, threshold begin
  remaining_stock = predicted_qty − actual_sold
  if time_remaining &lt; closing_window and remaining_stock &gt; threshold then 

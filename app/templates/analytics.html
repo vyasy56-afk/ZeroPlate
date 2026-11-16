@@ -7,17 +7,17 @@
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-            <div class="flex items-center space-x-2">
-                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-100 text-purple-800">Module 6</span>
-                <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Evaluation & Empirical Assessment</span>
+            <div class="flex items-center space-x-2.5">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-purple-500/10 text-purple-300 border border-purple-500/30">Module 6</span>
+                <span class="text-xs text-slate-400 uppercase tracking-widest font-mono">Empirical Assessment & Impact Audit</span>
             </div>
-            <h1 class="text-3xl font-extrabold text-slate-900 mt-1">Analytics & Reporting Dashboard</h1>
-            <p class="text-sm text-slate-600 mt-1">
+            <h1 class="text-3xl sm:text-4xl font-black text-white font-heading mt-1">Analytics & Reporting Dashboard</h1>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1">
                 Rigorous empirical assessment measuring RMSE accuracy, food waste avoided, financial savings, and meals redistributed.
             </p>
         </div>
-        <button onclick="window.print()" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold text-xs shadow-sm transition">
-            <i data-lucide="printer" class="w-4 h-4 text-slate-500"></i>
+        <button onclick="window.print()" class="inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold text-xs border border-white/10 transition shadow-sm">
+            <i data-lucide="printer" class="w-4 h-4 text-emerald-400"></i>
             <span>Export Synopsis Report</span>
         </button>
     </div>
@@ -25,56 +25,56 @@
     <!-- Five Key Synopsis Evaluation Metrics Scoreboard (From Project Slide) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         <!-- 1. Waste Avoided -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-1 hover-lift">
-            <div class="flex items-center justify-between text-xs text-slate-500 font-bold uppercase">
+        <div class="glass-card p-5 space-y-1.5 hover:border-emerald-500/40">
+            <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono font-bold uppercase tracking-wider">
                 <span>Waste Avoided</span>
-                <i data-lucide="trash-2" class="w-4 h-4 text-emerald-600"></i>
+                <i data-lucide="trash-2" class="w-4 h-4 text-emerald-400"></i>
             </div>
-            <div class="text-2xl font-black text-emerald-600 font-mono">{{ summary.waste_avoided_kg }} <span class="text-xs font-sans text-slate-400">kg</span></div>
-            <span class="inline-flex items-center text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">
+            <div class="text-3xl font-black text-white font-mono">{{ summary.waste_avoided_kg }} <span class="text-xs font-sans text-emerald-400">kg</span></div>
+            <span class="inline-flex items-center text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20 font-mono">
                 ↓ {{ summary.waste_reduction_pct }}% vs baseline
             </span>
         </div>
 
         <!-- 2. Cost Savings -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-1 hover-lift">
-            <div class="flex items-center justify-between text-xs text-slate-500 font-bold uppercase">
+        <div class="glass-card p-5 space-y-1.5 hover:border-teal-500/40">
+            <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono font-bold uppercase tracking-wider">
                 <span>Cost Savings</span>
-                <i data-lucide="indian-rupee" class="w-4 h-4 text-teal-600"></i>
+                <i data-lucide="indian-rupee" class="w-4 h-4 text-teal-400"></i>
             </div>
-            <div class="text-2xl font-black text-teal-700 font-mono">₹{{ summary.total_savings_inr }}</div>
-            <p class="text-[11px] text-slate-500">Raw materials + marketplace</p>
+            <div class="text-3xl font-black text-teal-300 font-mono">₹{{ summary.total_savings_inr }}</div>
+            <p class="text-[10px] text-slate-400">Prep saved + marketplace</p>
         </div>
 
         <!-- 3. Meals Redistributed -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-1 hover-lift">
-            <div class="flex items-center justify-between text-xs text-slate-500 font-bold uppercase">
+        <div class="glass-card p-5 space-y-1.5 hover:border-blue-500/40">
+            <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono font-bold uppercase tracking-wider">
                 <span>Redistributed</span>
-                <i data-lucide="utensils" class="w-4 h-4 text-blue-600"></i>
+                <i data-lucide="utensils" class="w-4 h-4 text-blue-400"></i>
             </div>
-            <div class="text-2xl font-black text-blue-700 font-mono">{{ summary.total_meals_redistributed }} <span class="text-xs font-sans text-slate-400">meals</span></div>
-            <p class="text-[11px] text-slate-500">{{ summary.student_meals }} students · {{ summary.ngo_meals }} NGO</p>
+            <div class="text-3xl font-black text-blue-300 font-mono">{{ summary.total_meals_redistributed }} <span class="text-xs font-sans text-slate-400">meals</span></div>
+            <p class="text-[10px] text-slate-400">{{ summary.student_meals }} students · {{ summary.ngo_meals }} NGO</p>
         </div>
 
         <!-- 4. Composting Diversion -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-1 hover-lift">
-            <div class="flex items-center justify-between text-xs text-slate-500 font-bold uppercase">
+        <div class="glass-card p-5 space-y-1.5 hover:border-emerald-500/40">
+            <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono font-bold uppercase tracking-wider">
                 <span>Compost Diverted</span>
-                <i data-lucide="sprout" class="w-4 h-4 text-emerald-700"></i>
+                <i data-lucide="sprout" class="w-4 h-4 text-emerald-400"></i>
             </div>
-            <div class="text-2xl font-black text-emerald-800 font-mono">{{ summary.compost_kg }} <span class="text-xs font-sans text-slate-400">kg</span></div>
-            <p class="text-[11px] text-slate-500">{{ summary.co2_saved_kg }} kg CO₂e abated</p>
+            <div class="text-3xl font-black text-emerald-400 font-mono">{{ summary.compost_kg }} <span class="text-xs font-sans text-slate-400">kg</span></div>
+            <p class="text-[10px] text-slate-400">{{ summary.co2_saved_kg }} kg CO₂e abated</p>
         </div>
 
         <!-- 5. ML Accuracy RMSE -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-1 hover-lift">
-            <div class="flex items-center justify-between text-xs text-slate-500 font-bold uppercase">
+        <div class="glass-card p-5 space-y-1.5 hover:border-purple-500/40">
+            <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono font-bold uppercase tracking-wider">
                 <span>Model RMSE</span>
-                <i data-lucide="check-circle" class="w-4 h-4 text-purple-600"></i>
+                <i data-lucide="check-circle" class="w-4 h-4 text-purple-400"></i>
             </div>
-            <div class="text-2xl font-black text-purple-700 font-mono">12.53 <span class="text-xs font-sans text-slate-400">portions</span></div>
-            <span class="inline-flex items-center text-[11px] font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md">
-                {{ ml_metrics.rmse_improvement_vs_baseline_pct }}% error reduction
+            <div class="text-3xl font-black text-purple-300 font-mono">12.53 <span class="text-xs font-sans text-slate-400">portions</span></div>
+            <span class="inline-flex items-center text-[10px] font-bold text-purple-300 bg-purple-500/10 px-2 py-0.5 rounded-md border border-purple-500/20 font-mono">
+                69.0% error drop
             </span>
         </div>
     </div>
@@ -82,11 +82,11 @@
     <!-- Charts Row -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <!-- Chart 1: Traditional vs ZeroPlate Waste -->
-        <div class="lg:col-span-6 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-            <div class="flex items-center justify-between">
+        <div class="lg:col-span-6 glass-card p-6 space-y-4">
+            <div class="flex items-center justify-between border-b border-white/5 pb-3">
                 <div>
-                    <h3 class="font-bold text-slate-900">Food Waste Comparison: Before vs After</h3>
-                    <p class="text-xs text-slate-500">Daily overproduction waste (portions) across dishes</p>
+                    <h3 class="font-bold text-white font-heading">Food Waste Comparison: Before vs After</h3>
+                    <p class="text-xs text-slate-400">Daily overproduction waste (portions) across dishes</p>
                 </div>
             </div>
             <div class="h-64">
@@ -94,12 +94,12 @@
             </div>
         </div>
 
-        <!-- Chart 2: Surplus Redistribution Pipeline Shares -->
-        <div class="lg:col-span-6 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-            <div class="flex items-center justify-between">
+        <!-- Chart 2: Surplus Escalation Channels Distribution -->
+        <div class="lg:col-span-6 glass-card p-6 space-y-4">
+            <div class="flex items-center justify-between border-b border-white/5 pb-3">
                 <div>
-                    <h3 class="font-bold text-slate-900">3-Tier Surplus Escalation Breakdown</h3>
-                    <p class="text-xs text-slate-500">Distribution of unavoidable surplus across channels</p>
+                    <h3 class="font-bold text-white font-heading">3-Tier Surplus Escalation Breakdown</h3>
+                    <p class="text-xs text-slate-400">Volume distribution across recovery channels</p>
                 </div>
             </div>
             <div class="h-64">
@@ -109,56 +109,56 @@
     </div>
 
     <!-- Detailed Before vs After Table -->
-    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+    <div class="glass-card overflow-hidden">
+        <div class="p-6 border-b border-white/5 flex items-center justify-between">
             <div>
-                <h3 class="font-bold text-slate-900 text-lg">Item-by-Item Prevention & Savings Ledger</h3>
-                <p class="text-xs text-slate-500">Empirical validation on simulated canteen service dataset</p>
+                <h3 class="font-bold text-white text-lg font-heading">Item-by-Item Prevention & Savings Ledger</h3>
+                <p class="text-xs text-slate-400">Empirical validation on simulated canteen service dataset</p>
             </div>
-            <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+            <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
                 Prevention Before Cure Active
             </span>
         </div>
         <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm text-slate-600">
-                <thead class="bg-slate-50 text-xs text-slate-500 uppercase font-semibold border-b border-slate-100">
+            <table class="w-full text-left text-sm text-slate-300">
+                <thead class="bg-slate-950/60 text-[11px] text-slate-400 uppercase font-mono font-bold border-b border-white/5">
                     <tr>
-                        <th class="px-6 py-3.5">Menu Item</th>
-                        <th class="px-6 py-3.5 text-center">AI Predicted Demand</th>
-                        <th class="px-6 py-3.5 text-center">ZeroPlate Cook</th>
-                        <th class="px-6 py-3.5 text-center">Traditional Intuition Cook</th>
-                        <th class="px-6 py-3.5 text-center">Actual Sold</th>
-                        <th class="px-6 py-3.5 text-center">Traditional Waste</th>
-                        <th class="px-6 py-3.5 text-center">ZeroPlate Surplus</th>
-                        <th class="px-6 py-3.5 text-right">Cost Saved (₹)</th>
+                        <th class="px-6 py-4">Menu Item</th>
+                        <th class="px-6 py-4 text-center">AI Demand</th>
+                        <th class="px-6 py-4 text-center">ZeroPlate Cook</th>
+                        <th class="px-6 py-4 text-center">Traditional Intuition</th>
+                        <th class="px-6 py-4 text-center">Actual Sold</th>
+                        <th class="px-6 py-4 text-center">Traditional Waste</th>
+                        <th class="px-6 py-4 text-center">ZeroPlate Surplus</th>
+                        <th class="px-6 py-4 text-right">Cost Saved (₹)</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100">
+                <tbody class="divide-y divide-white/5">
                     {% for row in comparison_data %}
-                    <tr class="hover:bg-slate-50/70 transition">
-                        <td class="px-6 py-4 font-semibold text-slate-900">
-                            {{ row.item_name }}
-                            <span class="text-xs text-slate-400 block font-normal">{{ row.category }}</span>
+                    <tr class="sleek-table-row">
+                        <td class="px-6 py-4.5 font-semibold text-white">
+                            <span class="font-heading text-base">{{ row.item_name }}</span>
+                            <span class="text-xs text-slate-500 block font-normal">{{ row.category }}</span>
                         </td>
-                        <td class="px-6 py-4 text-center font-mono font-bold text-slate-700">
+                        <td class="px-6 py-4.5 text-center font-mono font-bold text-slate-300">
                             {{ row.predicted }}
                         </td>
-                        <td class="px-6 py-4 text-center font-mono font-bold text-emerald-600 bg-emerald-50/40">
+                        <td class="px-6 py-4.5 text-center font-mono font-bold text-emerald-400 bg-emerald-500/10 border-x border-emerald-500/10">
                             {{ row.zeroplate_prep }}
                         </td>
-                        <td class="px-6 py-4 text-center font-mono text-slate-400 line-through">
+                        <td class="px-6 py-4.5 text-center font-mono text-slate-500 line-through">
                             {{ row.traditional_prep }}
                         </td>
-                        <td class="px-6 py-4 text-center font-mono text-slate-800 font-bold">
+                        <td class="px-6 py-4.5 text-center font-mono text-white font-bold">
                             {{ row.sold }}
                         </td>
-                        <td class="px-6 py-4 text-center font-mono font-bold text-rose-600">
+                        <td class="px-6 py-4.5 text-center font-mono font-bold text-rose-400">
                             {{ row.traditional_waste }} portions
                         </td>
-                        <td class="px-6 py-4 text-center font-mono font-bold text-emerald-600">
+                        <td class="px-6 py-4.5 text-center font-mono font-bold text-emerald-400">
                             {{ row.zeroplate_surplus }} portions
                         </td>
-                        <td class="px-6 py-4 text-right font-mono font-bold text-teal-700">
+                        <td class="px-6 py-4.5 text-right font-mono font-bold text-teal-300">
                             ₹{{ row.cost_saved }}
                         </td>
                     </tr>
@@ -182,28 +182,38 @@ new Chart(ctxWaste, {
             {
                 label: 'Traditional Guesswork Waste (portions)',
                 data: [{% for row in comparison_data[:6] %}{{ row.traditional_waste }},{% endfor %}],
-                backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                backgroundColor: 'rgba(239, 68, 68, 0.65)',
                 borderColor: '#ef4444',
-                borderWidth: 1,
-                borderRadius: 6
+                borderWidth: 1.5,
+                borderRadius: 8
             },
             {
                 label: 'ZeroPlate AI Surplus (portions)',
                 data: [{% for row in comparison_data[:6] %}{{ row.zeroplate_surplus }},{% endfor %}],
-                backgroundColor: 'rgba(16, 185, 129, 0.8)',
+                backgroundColor: 'rgba(16, 185, 129, 0.75)',
                 borderColor: '#10b981',
-                borderWidth: 1,
-                borderRadius: 6
+                borderWidth: 1.5,
+                borderRadius: 8
             }
         ]
     },
     options: {
         responsive: true,
         maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                labels: { color: '#cbd5e1', font: { family: 'Plus Jakarta Sans', size: 11 } }
+            }
+        },
         scales: {
+            x: {
+                ticks: { color: '#94a3b8', font: { size: 10 } },
+                grid: { color: 'rgba(255, 255, 255, 0.05)' }
+            },
             y: {
                 beginAtZero: true,
-                title: { display: true, text: 'Wasted Portions' }
+                ticks: { color: '#94a3b8', font: { size: 10 } },
+                grid: { color: 'rgba(255, 255, 255, 0.05)' }
             }
         }
     }
@@ -227,14 +237,17 @@ new Chart(ctxPie, {
                 '#10b981'
             ],
             borderWidth: 2,
-            borderColor: '#ffffff'
+            borderColor: '#060911'
         }]
     },
     options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-            legend: { position: 'bottom' }
+            legend: {
+                position: 'bottom',
+                labels: { color: '#cbd5e1', font: { family: 'Plus Jakarta Sans', size: 11 } }
+            }
         }
     }
 });
