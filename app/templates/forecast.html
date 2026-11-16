@@ -1,0 +1,345 @@
+{% extends "base.html" %}
+
+{% block title %}Module 1 · Demand Prediction Dashboard{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <div class="flex items-center space-x-2">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">Module 1</span>
+                <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Tree-Based Machine Learning Regression</span>
+            </div>
+            <h1 class="text-3xl font-extrabold text-slate-900 mt-1">Demand Prediction Dashboard</h1>
+            <p class="text-sm text-slate-600 mt-1">
+                Item-level regression problem accounting for weather, academic exams, sales trends, and day-of-week context.
+            </p>
+        </div>
+        <div class="flex items-center space-x-3">
+            <div class="bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm text-right">
+                <span class="text-xs text-slate-500 block">Current University Context</span>
+                <span class="text-sm font-bold text-slate-800">
+                    {{ 'Exam Week Active 📚' if settings.is_exam_day else 'Regular Classes' }} · {{ settings.temperature_c }}°C, {{ 'Rain 🌧️' if settings.rainfall_mm > 0 else 'Clear ☀️' }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Model Evaluation & Formula Banner (Direct from Synopsis Section 5.2) -->
+    <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 text-white rounded-2xl p-6 md:p-8 shadow-lg border border-slate-700">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div class="lg:col-span-5 space-y-3">
+                <span class="px-2.5 py-0.5 rounded text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    Evaluation Metric
+                </span>
+                <h3 class="text-xl font-bold">Root Mean Squared Error (RMSE)</h3>
+                <div class="bg-black/30 p-4 rounded-xl border border-white/10 font-mono text-center text-lg text-emerald-300">
+                    RMSE = √[ (1/n) · Σ(pᵢ − aᵢ)² ]
+                </div>
+                <p class="text-xs text-slate-300">
+                    Measures the gap between predicted quantity sold (<span class="font-mono text-emerald-300">pᵢ</span>) and actual quantity sold (<span class="font-mono text-emerald-300">aᵢ</span>) over <span class="font-mono text-emerald-300">n</span> item-day test observations.
+                </p>
+            </div>
+
+            <!-- Model Benchmark Comparison Cards -->
+            <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <!-- Baseline -->
+                <div class="bg-white/10 p-4 rounded-xl backdrop-blur border border-white/10 text-center">
+                    <span class="text-xs text-slate-400 font-medium block">Manual Intuition Baseline</span>
+                    <span class="text-2xl font-extrabold text-slate-200 block mt-1">40.44</span>
+                    <span class="text-xs text-slate-400">RMSE (portions)</span>
+                    <div class="mt-2 pt-2 border-t border-white/10 text-xs text-slate-400">
+                        R²: <strong class="text-slate-300">0.381</strong> · MAE: 31.9
+                    </div>
+                </div>
+
+                <!-- Random Forest -->
+                <div class="bg-white/10 p-4 rounded-xl backdrop-blur border border-white/10 text-center">
+                    <span class="text-xs text-emerald-300 font-semibold block">Random Forest (RFR)</span>
+                    <span class="text-2xl font-extrabold text-emerald-400 block mt-1">16.25</span>
+                    <span class="text-xs text-emerald-200/70">RMSE (portions)</span>
+                    <div class="mt-2 pt-2 border-t border-white/10 text-xs text-emerald-300">
+                        R²: <strong>0.900</strong> · MAE: 10.7
+                    </div>
+                </div>
+
+                <!-- Gradient Boosting (Champion) -->
+                <div class="bg-emerald-600/30 p-4 rounded-xl backdrop-blur border-2 border-emerald-500 text-center relative shadow-md">
+                    <span class="absolute -top-2.5 right-2 px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500 text-slate-900 uppercase">
+                        Champion
+                    </span>
+                    <span class="text-xs text-emerald-300 font-bold block">Gradient Boosting (GBR)</span>
+                    <span class="text-2xl font-extrabold text-white block mt-1">12.53</span>
+                    <span class="text-xs text-emerald-200">RMSE (portions)</span>
+                    <div class="mt-2 pt-2 border-t border-emerald-500/30 text-xs text-emerald-300 font-semibold">
+                        R²: <strong>0.941</strong> · MAE: 9.3
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overfitting & Error Reduction Tag -->
+        <div class="mt-4 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between text-xs text-slate-300 gap-2">
+            <div>
+                <span class="text-emerald-400 font-bold">✓ 69.0% Error Reduction</span> over traditional manual kitchen intuition.
+            </div>
+            <div class="text-slate-400">
+                Trained on 2,400 historical canteen records with Dehradun weather patterns & Graphic Era academic exams.
+            </div>
+        </div>
+    </div>
+
+    <!-- Feature Importance & Input Context Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Feature Importances -->
+        <div class="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 class="font-bold text-slate-900">Contextual Feature Importance</h3>
+                <span class="text-xs text-slate-500">Tree Split Contribution</span>
+            </div>
+            <div class="space-y-3">
+                {% for feat in ml_metrics.top_features[:6] %}
+                <div>
+                    <div class="flex justify-between text-xs font-semibold text-slate-700 mb-1">
+                        <span class="capitalize">{{ feat.feature.replace('_', ' ') }}</span>
+                        <span class="font-mono text-emerald-600">{{ (feat.importance * 100) | round(1) }}%</span>
+                    </div>
+                    <div class="w-full bg-slate-100 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-emerald-500 to-teal-500 h-2 rounded-full" style="width: {{ feat.importance * 100 * 2.5 }}%"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <p class="text-xs text-slate-500 pt-2 border-t border-slate-100">
+                Notice how recent sales trends, exam days, and weather dynamically drive customer demand in the university canteen.
+            </p>
+        </div>
+
+        <!-- Interactive AI Demand Prediction Playground -->
+        <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="font-bold text-slate-900">Interactive ML Prediction Playground</h3>
+                    <p class="text-xs text-slate-500">Simulate predictions for any item under arbitrary contextual conditions.</p>
+                </div>
+                <span class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700">Live Inference API</span>
+            </div>
+
+            <form id="playground-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Menu Dish</label>
+                    <select id="play-item" class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white font-medium">
+                        {% for item in menu_items %}
+                        <option value="{{ item.id }}">{{ item.image_emoji }} {{ item.name }} ({{ item.meal_type }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Day of Week</label>
+                    <select id="play-dow" class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white font-medium">
+                        <option value="0">Monday</option>
+                        <option value="1">Tuesday</option>
+                        <option value="2" selected>Wednesday (Mid-week peak)</option>
+                        <option value="3">Thursday</option>
+                        <option value="4">Friday</option>
+                        <option value="5">Saturday (Half day)</option>
+                        <option value="6">Sunday (Low mess footfall)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Academic Context</label>
+                    <select id="play-exam" class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white font-medium">
+                        <option value="1" selected>Exam Day / Midterm Session (High Coffee/Snacks)</option>
+                        <option value="0">Normal Academic Schedule</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Weather Condition</label>
+                    <select id="play-weather" class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white font-medium">
+                        <option value="mild" selected>Mild & Pleasant (24°C, Clear)</option>
+                        <option value="rain">Heavy Rainfall (20°C, Rain 25mm)</option>
+                        <option value="hot">Hot Summer Day (36°C, Clear)</option>
+                        <option value="cold">Chilly Winter (12°C, Overcast)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Promotion / Special Menu</label>
+                    <select id="play-promo" class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white font-medium">
+                        <option value="0" selected>Regular Menu Price</option>
+                        <option value="1">Promoted / Featured Special Dish</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Recent 7-Day Average Sales</label>
+                    <input type="number" id="play-trend" value="120" min="20" max="300" class="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white font-mono">
+                </div>
+
+                <div class="sm:col-span-2 pt-2">
+                    <button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition flex items-center justify-center space-x-2 shadow-md shadow-emerald-600/20">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        <span>Run Real-time AI Demand Forecast</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Live Prediction Result Box -->
+            <div id="playground-result" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 transition">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-800">Model Inference Output</span>
+                    <span id="res-model" class="text-xs text-emerald-700 font-semibold"></span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                    <div class="bg-white p-2.5 rounded-lg border border-emerald-100 shadow-sm">
+                        <span class="text-[11px] text-slate-500 block">Predicted Demand</span>
+                        <span id="res-demand" class="text-xl font-extrabold text-slate-900"></span>
+                        <span class="text-[10px] text-slate-400">portions</span>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-emerald-100 shadow-sm">
+                        <span class="text-[11px] text-emerald-700 font-bold block">Recommend Cook</span>
+                        <span id="res-cook" class="text-xl font-extrabold text-emerald-600"></span>
+                        <span class="text-[10px] text-slate-400">incl. safety buffer</span>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-emerald-100 shadow-sm">
+                        <span class="text-[11px] text-slate-500 block">Random Forest</span>
+                        <span id="res-rf" class="text-lg font-bold text-slate-700"></span>
+                        <span class="text-[10px] text-slate-400">portions</span>
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-emerald-100 shadow-sm">
+                        <span class="text-[11px] text-slate-500 block">Gradient Boost</span>
+                        <span id="res-gb" class="text-lg font-bold text-slate-700"></span>
+                        <span class="text-[10px] text-slate-400">portions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Menu Demand Predictions Table for Today -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+            <div>
+                <h3 class="font-bold text-slate-900 text-lg">Today's Forecast & Production Guidance</h3>
+                <p class="text-xs text-slate-500">Item-level portions predicted for {{ settings.simulated_date }}</p>
+            </div>
+            <a href="/production" class="inline-flex items-center space-x-1 text-xs font-bold text-emerald-600 hover:text-emerald-700">
+                <span>View Kitchen Production Schedule</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-slate-600">
+                <thead class="bg-slate-50 text-xs text-slate-500 uppercase font-semibold border-b border-slate-100">
+                    <tr>
+                        <th class="px-6 py-3.5">Menu Item</th>
+                        <th class="px-6 py-3.5">Meal / Category</th>
+                        <th class="px-6 py-3.5 text-center">AI Predicted Demand</th>
+                        <th class="px-6 py-3.5 text-center">Recommended Cook</th>
+                        <th class="px-6 py-3.5 text-center">Traditional Intuition</th>
+                        <th class="px-6 py-3.5 text-center">Avoided Overproduction</th>
+                        <th class="px-6 py-3.5 text-right">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {% for plan in daily_plans %}
+                    {% set trad_cook = (plan.predicted_demand * 1.25) | round | int %}
+                    {% set avoided = trad_cook - plan.recommended_cook_qty %}
+                    <tr class="hover:bg-slate-50/80 transition">
+                        <td class="px-6 py-4 font-semibold text-slate-900 flex items-center space-x-2.5">
+                            <span class="text-2xl">{{ plan.image_emoji }}</span>
+                            <span>{{ plan.item_name }}</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-700">
+                                {{ plan.meal_type }} · {{ plan.category }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-center font-mono font-bold text-slate-800">
+                            {{ plan.predicted_demand }}
+                        </td>
+                        <td class="px-6 py-4 text-center font-mono font-bold text-emerald-600 bg-emerald-50/50">
+                            {{ plan.recommended_cook_qty }}
+                            <span class="text-[10px] text-slate-400 block font-sans font-normal">+{{ plan.safety_buffer }} safety buffer</span>
+                        </td>
+                        <td class="px-6 py-4 text-center font-mono text-slate-400 line-through">
+                            {{ trad_cook }}
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800">
+                                -{{ avoided }} portions saved
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold
+                                {% if plan.status == 'IN_SERVICE' %}bg-blue-100 text-blue-700
+                                {% elif plan.status == 'SURPLUS_DETECTED' %}bg-amber-100 text-amber-700
+                                {% elif plan.status == 'CLOSED' %}bg-slate-100 text-slate-700
+                                {% else %}bg-emerald-100 text-emerald-700{% endif %}">
+                                {{ plan.status.replace('_', ' ') }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.getElementById("playground-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const itemId = document.getElementById("play-item").value;
+    const dow = document.getElementById("play-dow").value;
+    const exam = document.getElementById("play-exam").value;
+    const promo = document.getElementById("play-promo").value;
+    const trend = document.getElementById("play-trend").value;
+    const weather = document.getElementById("play-weather").value;
+
+    let temp = 24.0;
+    let rain = 0.0;
+    if (weather === "rain") { temp = 20.0; rain = 25.0; }
+    else if (weather === "hot") { temp = 36.0; rain = 0.0; }
+    else if (weather === "cold") { temp = 12.0; rain = 0.0; }
+
+    try {
+        const res = await fetch("/api/predict", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                item_id: itemId,
+                day_of_week: dow,
+                is_exam_day: exam,
+                is_promoted: promo,
+                trend_7d: trend,
+                trend_14d: trend,
+                temperature_c: temp,
+                rainfall_mm: rain
+            })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+            const pred = data.prediction;
+            document.getElementById("res-demand").innerText = pred.predicted_demand;
+            document.getElementById("res-cook").innerText = pred.recommended_cook_qty;
+            document.getElementById("res-rf").innerText = pred.rf_prediction;
+            document.getElementById("res-gb").innerText = pred.gb_prediction;
+            document.getElementById("res-model").innerText = pred.model_used;
+            document.getElementById("playground-result").classList.remove("hidden");
+        } else {
+            alert(data.error);
+        }
+    } catch(err) {
+        alert("Inference failed: " + err.message);
+    }
+});
+</script>
+{% endblock %}

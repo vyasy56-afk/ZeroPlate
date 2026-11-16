@@ -1,0 +1,73 @@
+{
+  "formula": "RMSE = sqrt( sum( (p_i - a_i)^2 ) / n )",
+  "sample_size_test": 480,
+  "models": {
+    "Baseline (Moving Average)": {
+      "rmse": 40.44,
+      "mae": 31.9,
+      "r2": 0.381
+    },
+    "Random Forest Regressor": {
+      "rmse": 16.25,
+      "mae": 10.67,
+      "r2": 0.9
+    },
+    "Gradient Boosting Regressor": {
+      "rmse": 12.53,
+      "mae": 9.27,
+      "r2": 0.941,
+      "is_primary": true
+    }
+  },
+  "top_features": [
+    {
+      "feature": "trend_14d",
+      "importance": 0.3106
+    },
+    {
+      "feature": "is_weekend",
+      "importance": 0.1929
+    },
+    {
+      "feature": "trend_7d",
+      "importance": 0.1714
+    },
+    {
+      "feature": "day_of_week",
+      "importance": 0.1639
+    },
+    {
+      "feature": "is_holiday",
+      "importance": 0.046
+    },
+    {
+      "feature": "rainfall_mm",
+      "importance": 0.0274
+    },
+    {
+      "feature": "is_promoted",
+      "importance": 0.0198
+    },
+    {
+      "feature": "is_exam_day",
+      "importance": 0.0191
+    },
+    {
+      "feature": "temperature_c",
+      "importance": 0.0114
+    },
+    {
+      "feature": "cat_Quick Bites",
+      "importance": 0.0094
+    },
+    {
+      "feature": "item_107",
+      "importance": 0.0082
+    },
+    {
+      "feature": "meal_Snacks",
+      "importance": 0.0038
+    }
+  ],
+  "rmse_improvement_vs_baseline_pct": 69.0
+}

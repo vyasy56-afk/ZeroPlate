@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.env
+
+# Database (optional - keep zeroplate.db if seeded or ignore temporary logs)
+*.log
+
+# OS
+Thumbs.db
+.DS_Store

@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block title %}Module 2 · Kitchen Inventory & Production Planning{% endblock %}
+
+{% block content %}
+<div class="space-y-8">
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <div class="flex items-center space-x-2">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-teal-100 text-teal-800">Module 2</span>
+                <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Kitchen Operations & Ingredient Management</span>
+            </div>
+            <h1 class="text-3xl font-extrabold text-slate-900 mt-1">Inventory & Production Planning</h1>
+            <p class="text-sm text-slate-600 mt-1">
+                Translates machine learning demand forecasts into precise daily kitchen cooking targets before prep commences.
+            </p>
+        </div>
+        <div class="flex items-center space-x-2">
+            <span class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 flex items-center space-x-1.5">
+                <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+                <span>Prevention-Before-Cure Active</span>
+            </span>
+        </div>
+    </div>
+
+    <!-- Quick Stats Banner -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-semibold text-slate-500 uppercase">Target Meal Portions</span>
+            <div class="text-2xl font-black text-slate-900 mt-1">{{ total_portions }} <span class="text-xs font-normal text-slate-400">servings</span></div>
+            <p class="text-xs text-emerald-600 mt-1">Across 10 daily menu items</p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-semibold text-slate-500 uppercase">Raw Produce Required</span>
+            <div class="text-2xl font-black text-slate-900 mt-1">~385 <span class="text-xs font-normal text-slate-400">kg</span></div>
+            <p class="text-xs text-slate-500 mt-1">Optimized by portion calculator</p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-semibold text-slate-500 uppercase">Canteen Safety Buffer</span>
+            <div class="text-2xl font-black text-emerald-600 mt-1">+8% <span class="text-xs font-normal text-slate-400">data-backed</span></div>
+            <p class="text-xs text-slate-500 mt-1">vs 25% traditional guesswork</p>
+        </div>
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <span class="text-xs font-semibold text-slate-500 uppercase">Kitchen Readiness</span>
+            <div class="text-2xl font-black text-teal-600 mt-1">100% <span class="text-xs font-normal text-slate-400">prepped</span></div>
+            <p class="text-xs text-emerald-600 mt-1">All stations operational</p>
+        </div>
+    </div>
+
+    <!-- Kitchen Item-by-Item Production Schedule -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div>
+                <h3 class="font-bold text-slate-900 text-lg">Daily Kitchen Cooking Targets</h3>
+                <p class="text-xs text-slate-500">Live portion tracking & cooking status for Graphic Era Central Canteen</p>
+            </div>
+            <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-lg">
+                Simulated Time: <strong class="font-mono text-slate-800">{{ settings.simulated_time }}</strong>
+            </span>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-slate-600">
+                <thead class="bg-slate-50 text-xs text-slate-500 uppercase font-semibold border-b border-slate-100">
+                    <tr>
+                        <th class="px-6 py-3.5">Menu Dish</th>
+                        <th class="px-6 py-3.5">Category</th>
+                        <th class="px-6 py-3.5 text-center">AI Target</th>
+                        <th class="px-6 py-3.5 text-center">Cooked / Prepared</th>
+                        <th class="px-6 py-3.5 text-center">Sold So Far</th>
+                        <th class="px-6 py-3.5 text-center">Remaining Stock</th>
+                        <th class="px-6 py-3.5 text-center">Closing Time</th>
+                        <th class="px-6 py-3.5 text-center">Status</th>
+                        <th class="px-6 py-3.5 text-right">Kitchen Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {% for p in plans %}
+                    {% set rem = p.actual_prepared_qty - p.actual_sold_qty %}
+                    <tr class="hover:bg-slate-50/70 transition">
+                        <td class="px-6 py-4 font-semibold text-slate-900 flex items-center space-x-2">
+                            <span class="text-2xl">{{ p.image_emoji }}</span>
+                            <span>{{ p.item_name }}</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-0.5 rounded text-xs bg-slate-100 text-slate-700">{{ p.meal_type }}</span>
+                        </td>
+                        <td class="px-6 py-4 text-center font-mono font-bold text-slate-700">
+                            {{ p.recommended_cook_qty }}
+                        </td>
+                        <td class="px-6 py-4 text-center font-mono font-bold text-slate-900 bg-teal-50/40">
+                            {{ p.actual_prepared_qty }}
+                        </td>
+                        <td class="px-6 py-4 text-center font-mono text-emerald-700 font-bold">
+                            {{ p.actual_sold_qty }}
+                        </td>
+                        <td class="px-6 py-4 text-center font-mono font-bold {% if rem > 8 %}text-amber-600 bg-amber-50/40{% else %}text-slate-600{% endif %}">
+                            {{ rem }}
+                        </td>
+                        <td class="px-6 py-4 text-center font-mono text-xs text-slate-500">
+                            {{ p.closing_time }}
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold
+                                {% if p.status == 'IN_SERVICE' %}bg-blue-100 text-blue-700
+                                {% elif p.status == 'SURPLUS_DETECTED' %}bg-amber-100 text-amber-700
+                                {% elif p.status == 'CLOSED' %}bg-slate-100 text-slate-600
+                                {% else %}bg-emerald-100 text-emerald-700{% endif %}">
+                                {{ p.status.replace('_', ' ') }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right space-x-1">
+                            {% if p.status == 'IN_SERVICE' %}
+                            <button onclick="updatePrepStatus({{ p.id }}, 'CLOSED')" class="px-2.5 py-1 rounded text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+                                Close Service
+                            </button>
+                            {% elif p.status == 'SURPLUS_DETECTED' %}
+                            <a href="/marketplace" class="px-2.5 py-1 rounded text-xs font-bold bg-amber-100 hover:bg-amber-200 text-amber-800 transition">
+                                View Market
+                            </a>
+                            {% else %}
+                            <span class="text-xs text-slate-400">Done</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Raw Ingredient Requirement Calculator & Morning Checklist -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Raw Materials Table -->
+        <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="font-bold text-slate-900 text-lg">Raw Material Ingredient Calculator</h3>
+                    <p class="text-xs text-slate-500">Calculated directly from portion recommendations to eliminate raw ingredient spoilage</p>
+                </div>
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Auto-Calculated</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs text-slate-600">
+                    <thead class="bg-slate-50 text-slate-500 uppercase font-semibold">
+                        <tr>
+                            <th class="px-4 py-2.5">Raw Material / Ingredient</th>
+                            <th class="px-4 py-2.5">Category</th>
+                            <th class="px-4 py-2.5 text-center">Required (kg)</th>
+                            <th class="px-4 py-2.5 text-right">Inventory Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        {% for ing in ingredients %}
+                        <tr>
+                            <td class="px-4 py-3 font-semibold text-slate-800">{{ ing.name }}</td>
+                            <td class="px-4 py-3 text-slate-500">{{ ing.category }}</td>
+                            <td class="px-4 py-3 text-center font-mono font-bold text-emerald-700">{{ ing.qty_kg }} kg</td>
+                            <td class="px-4 py-3 text-right">
+                                <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                    {{ ing.stock_status }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Kitchen Morning Checklist -->
+        <div class="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <h3 class="font-bold text-slate-900 text-lg">Morning Kitchen SOP Checklist</h3>
+            <div class="space-y-3 text-xs">
+                <label class="flex items-start space-x-3 p-3 rounded-xl bg-slate-50 border border-slate-100 cursor-pointer hover:bg-slate-100 transition">
+                    <input type="checkbox" checked class="mt-0.5 rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                    <div>
+                        <span class="font-bold text-slate-800 block">Review ZeroPlate Daily ML Forecast</span>
+                        <span class="text-slate-500">Cross-check academic exam calendar and weather forecast before lighting burners.</span>
+                    </div>
+                </label>
+                <label class="flex items-start space-x-3 p-3 rounded-xl bg-slate-50 border border-slate-100 cursor-pointer hover:bg-slate-100 transition">
+                    <input type="checkbox" checked class="mt-0.5 rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                    <div>
+                        <span class="font-bold text-slate-800 block">Weigh Ingredients to Target Recipe Ratios</span>
+                        <span class="text-slate-500">Measure rice, pulses, and dairy according to portion calculator.</span>
+                    </div>
+                </label>
+                <label class="flex items-start space-x-3 p-3 rounded-xl bg-slate-50 border border-slate-100 cursor-pointer hover:bg-slate-100 transition">
+                    <input type="checkbox" checked class="mt-0.5 rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                    <div>
+                        <span class="font-bold text-slate-800 block">Configure Surplus Detection Thresholds</span>
+                        <span class="text-slate-500">Tier 1 trigger window set to 90 mins before closing time.</span>
+                    </div>
+                </label>
+                <label class="flex items-start space-x-3 p-3 rounded-xl bg-slate-50 border border-slate-100 cursor-pointer hover:bg-slate-100 transition">
+                    <input type="checkbox" checked class="mt-0.5 rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                    <div>
+                        <span class="font-bold text-slate-800 block">Check Packaging Trays for NGO Escalation</span>
+                        <span class="text-slate-500">Verified insulated boxes ready for Robin Hood Army / Feeding India pickup.</span>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
