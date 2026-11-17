@@ -197,7 +197,7 @@ def run_escalation_cycle():
             cursor.execute("""
                 INSERT INTO composting_logs 
                 (daily_plan_id, item_name, weight_kg, source_reason, facility_partner, estimated_compost_kg, co2_diverted_kg, logged_at, batch_code)
-                VALUES (?, ?, ?, 'EXPIRED_UNCOLLECTED_NGO', 'Graphic Era Campus Bio-Compost Facility / Green Digester Unit 2', ?, ?, ?, ?)
+                VALUES (?, ?, ?, 'EXPIRED_UNCOLLECTED_NGO', 'Main Compost Facility / Green Digester Unit 2', ?, ?, ?, ?)
             """, (
                 don["daily_plan_id"],
                 item_name,
