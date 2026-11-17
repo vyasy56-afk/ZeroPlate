@@ -50,12 +50,14 @@ def test_routes():
     assert b"Discounted meals" in resp.data
     assert b"Active Student Reservations" not in resp.data
     assert b"Student Name / Roll" not in resp.data
+    assert b"student_id_roll" not in resp.data
 
     # 5. Module 4: NGO
     resp = client.get("/ngo/")
     assert resp.status_code == 200
     assert b"Community donations" in resp.data
     assert b"Staff Handover PIN" not in resp.data
+    assert b"verification_pin" not in resp.data
 
     # 6. Module 5: Composting
     resp = client.get("/composting/")
