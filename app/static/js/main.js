@@ -130,7 +130,7 @@ async function claimSurpriseBox(listingId, title, price) {
 }
 
 // NGO Claim Dispatch
-async function claimNgoDonation(donationId, itemName) {
+async function claimNgoDonation(donationId, itemName, ngoId) {
     const volunteerName = prompt(`Assign volunteer name for picking up ${itemName}:`, "Volunteer Officer");
     if (!volunteerName) return;
 
@@ -140,7 +140,7 @@ async function claimNgoDonation(donationId, itemName) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 donation_id: donationId,
-                ngo_id: 1,
+                ngo_id: ngoId,
                 volunteer_name: volunteerName
             })
         });
