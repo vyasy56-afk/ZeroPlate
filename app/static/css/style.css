@@ -247,7 +247,7 @@ button { cursor: pointer; }
 input, select, textarea {
     color: var(--text) !important;
     background: #fff !important;
-    border: 1px solid #d8e0da !important;
+    border: 1px solid #dce2ea !important;
     border-radius: 8px !important;
     box-shadow: none !important;
 }
@@ -325,7 +325,7 @@ pre {
     color-scheme: light;
     --page: #f4f6f8;
     --surface: #ffffff;
-    --surface-soft: #f8faf8;
+    --surface-soft: #f8fafc;
     --border: #e3e7ed;
     --text: #202938;
     --muted: #667085;
@@ -373,7 +373,7 @@ pre {
 }
 
 :root[data-theme="dark"] .brand-mark {
-    color: #f8fbf8;
+    color: #f2f5f9;
     background: var(--accent-dark);
 }
 :root[data-theme="dark"] .app-footer {
