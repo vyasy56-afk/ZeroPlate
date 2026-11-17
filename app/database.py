@@ -8,15 +8,20 @@ import os
 import sqlite3
 from datetime import datetime, timedelta
 
-DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "zeroplate.db")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DB_PATH = os.environ.get(
+    "DATABASE_PATH", os.path.join(BASE_DIR, "data", "zeroplate.db")
+)
+
 
 def get_db_connection():
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, timeout=30)
     conn.row_factory = sqlite3.Row
     return conn
 
+
 def init_db():
-    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+    os.makedirs(os.path.dirname(os.path.abspath(DB_PATH)), exist_ok=True)
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -180,6 +185,7 @@ def init_db():
         conn.commit()
 
     conn.close()
+
 
 if __name__ == "__main__":
     init_db()
