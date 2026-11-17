@@ -27,7 +27,7 @@ def test_routes():
     # 2. Module 1: Forecast
     resp = client.get("/forecast")
     assert resp.status_code == 200
-    assert b"Demand Prediction Dashboard" in resp.data
+    assert b"Demand forecast" in resp.data
 
     # 3. Module 2: Production
     resp = client.get("/production")
@@ -37,17 +37,17 @@ def test_routes():
     # 4. Module 3: Marketplace
     resp = client.get("/marketplace/")
     assert resp.status_code == 200
-    assert b"Student Surplus Marketplace" in resp.data
+    assert b"Surplus market" in resp.data
 
     # 5. Module 4: NGO
     resp = client.get("/ngo/")
     assert resp.status_code == 200
-    assert b"NGO Donation Coordination" in resp.data
+    assert b"Community donations" in resp.data
 
     # 6. Module 5: Composting
     resp = client.get("/composting/")
     assert resp.status_code == 200
-    assert b"Composting & Waste Routing" in resp.data
+    assert b"Compost tracking" in resp.data
 
     # 7. Module 6: Analytics
     resp = client.get("/analytics/")
