@@ -152,7 +152,7 @@ def init_db():
     if cursor.fetchone()[0] == 0:
         ngos_seed = [
             ("Robin Hood Army (Dehradun Chapter)", "RHA-DDN-2021", "Arun Negi", "+91 98971 23456", "dehradun@robinhoodarmy.com", "Rajpur Road, Dehradun", 1),
-            ("Feeding India by Zomato (GEU Volunteers)", "FI-UK-8821", "Pooja Rawat", "+91 97600 45678", "contact@feedingindia.org", "Subhash Nagar, Clement Town, Dehradun", 1),
+            ("Feeding India (Dehradun Chapter)", "FI-UK-8821", "Pooja Rawat", "+91 97600 45678", "contact@feedingindia.org", "Subhash Nagar, Clement Town, Dehradun", 1),
             ("Wasteless Smiles Foundation", "WSF-DDN-4412", "Dr. Manoj Joshi", "+91 94120 78901", "support@wasteless-smiles.org", "Patel Nagar, Dehradun", 1)
         ]
         cursor.executemany("""
