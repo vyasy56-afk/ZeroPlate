@@ -41,7 +41,7 @@
             </div>
 
             {% if available > 0 %}
-            <button onclick="claimSurpriseBox({{ item.id }}, {{ item.title|tojson }}, {{ item.discounted_price }})" class="btn-primary w-full">
+            <button type="button" data-listing-id="{{ item.id }}" data-listing-title="{{ item.title|e }}" data-price="{{ item.discounted_price }}" onclick="claimSurpriseBox(Number(this.dataset.listingId), this.dataset.listingTitle, Number(this.dataset.price))" class="btn-primary w-full">
                 <i data-lucide="shopping-bag" class="w-4 h-4"></i>
                 Reserve meal
             </button>
