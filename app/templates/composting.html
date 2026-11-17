@@ -3,117 +3,88 @@
 {% block title %}Compost tracking{% endblock %}
 
 {% block content %}
-<div class="space-y-8">
-    <!-- Header Banner -->
-    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0d2818] via-[#081b10] to-[#040d08] border border-emerald-500/30 p-8 sm:p-10 shadow-[0_15px_50px_-10px_rgba(16,185,129,0.2)]">
-        <div class="absolute -top-24 -left-24 w-80 h-80 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="relative z-10 max-w-3xl space-y-3">
-            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                <i data-lucide="sprout" class="w-3.5 h-3.5 text-emerald-400"></i>
-                <span>Surplus recovery · Tier 3</span>
-            </div>
-            <h1 class="text-3xl sm:text-5xl font-black text-white font-heading tracking-tight">
-                Compost <span class="gradient-text-emerald">tracking</span>
-            </h1>
-            <p class="text-xs sm:text-sm text-emerald-100/80 max-w-xl font-normal leading-relaxed">
-                The zero-landfill safeguard: when surplus is not collected within the safe NGO pickup window or for vegetable prep scraps, organic matter is diverted to aerobic composting facilities.
-            </p>
-            <div class="flex flex-wrap items-center gap-4 pt-2 text-xs text-emerald-200/70 font-mono">
-                <span class="flex items-center space-x-1.5">
-                    <i data-lucide="recycle" class="w-3.5 h-3.5 text-emerald-400"></i>
-                    <span>Organic composting facility</span>
-                </span>
-                <span>•</span>
-                <span class="flex items-center space-x-1.5 text-emerald-300">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-neon"></span>
-                    <span>100% Landfill Methane Abatement</span>
-                </span>
-            </div>
+<div class="page-stack">
+    <header class="page-header">
+        <div>
+            <p class="page-eyebrow">Organic recovery</p>
+            <h1 class="page-title">Compost tracking</h1>
+            <p class="page-description">Review kitchen scraps and food that could not be collected, and track the material sent for composting.</p>
         </div>
-        <div class="absolute right-8 top-1/2 -translate-y-1/2 opacity-10 hidden md:block pointer-events-none">
-            <i data-lucide="sprout" class="w-64 h-64 text-emerald-400"></i>
-        </div>
-    </div>
+        <span class="status-chip">{{ logs|length }} recorded batch{{ '' if logs|length == 1 else 'es' }}</span>
+    </header>
 
-    <!-- Impact & Conversion Scorecards -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="glass-card p-6 space-y-1 hover:border-emerald-500/40">
-            <span class="text-[10px] font-mono uppercase font-bold text-slate-400 tracking-wider">Organic Waste Diverted</span>
-            <div class="text-4xl font-black text-white font-mono mt-1">{{ totals.weight_kg }} <span class="text-xs font-sans text-emerald-400">kg</span></div>
-            <p class="text-xs text-slate-400 mt-1">Organic material diverted from landfill</p>
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="metric-card">
+            <span class="metric-label">Organic material recorded</span>
+            <strong class="metric-value">{{ totals.weight_kg }} kg</strong>
+            <span class="metric-hint">Total weight sent for composting</span>
         </div>
-
-        <div class="glass-card p-6 space-y-1 hover:border-teal-500/40">
-            <span class="text-[10px] font-mono uppercase font-bold text-slate-400 tracking-wider">Organic Fertilizer Generated</span>
-            <div class="text-4xl font-black text-teal-400 font-mono mt-1">{{ totals.compost_kg }} <span class="text-xs font-sans text-teal-300">kg</span></div>
-            <p class="text-xs text-slate-400 mt-1">Returning nutrients to the soil</p>
+        <div class="metric-card">
+            <span class="metric-label">Estimated compost output</span>
+            <strong class="metric-value">{{ totals.compost_kg }} kg</strong>
+            <span class="metric-hint">Based on an estimated conversion</span>
         </div>
-
-        <div class="glass-card p-6 space-y-1 hover:border-emerald-500/40">
-            <span class="text-[10px] font-mono uppercase font-bold text-slate-400 tracking-wider">Greenhouse Gas CO₂e Abated</span>
-            <div class="text-4xl font-black text-emerald-300 font-mono mt-1">{{ totals.co2_diverted_kg }} <span class="text-xs font-sans text-emerald-400">kg CO₂e</span></div>
-            <p class="text-xs text-slate-400 mt-1">Calculated via IPCC anaerobic landfill diversion factor</p>
+        <div class="metric-card">
+            <span class="metric-label">Estimated emissions avoided</span>
+            <strong class="metric-value">{{ totals.co2_diverted_kg }} kg</strong>
+            <span class="metric-hint">CO₂e estimate from diverted material</span>
         </div>
-    </div>
+    </section>
 
-    <!-- Composting Batch Logs Table -->
-    <div class="glass-card overflow-hidden">
-        <div class="p-6 border-b border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+    <section class="panel-card overflow-hidden">
+        <div class="panel-heading">
             <div>
-                <h3 class="font-bold text-white text-lg font-heading">Composting batch history</h3>
-                <p class="text-xs text-slate-400">Recorded organic waste and processing batches</p>
+                <h2 class="panel-title">Composting records</h2>
+                <p class="panel-description">A record of the organic material collected and its estimated output.</p>
             </div>
-            
         </div>
 
-        <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm text-slate-300">
-                <thead class="bg-slate-950/60 text-[11px] text-slate-400 uppercase font-mono font-bold border-b border-white/5">
+        {% if logs %}
+        <div class="table-scroll">
+            <table class="data-table">
+                <thead>
                     <tr>
-                        <th class="px-6 py-4">Batch Code</th>
-                        <th class="px-6 py-4">Diverted Organic Material</th>
-                        <th class="px-6 py-4">Escalation Source</th>
-                        <th class="px-6 py-4 text-center">Net Weight</th>
-                        <th class="px-6 py-4 text-center">Compost Yield</th>
-                        <th class="px-6 py-4 text-center">CO₂e Abatement</th>
-                        <th class="px-6 py-4 text-right">Destination Facility</th>
+                        <th>Batch reference</th>
+                        <th>Material</th>
+                        <th>Source</th>
+                        <th class="text-right">Weight</th>
+                        <th class="text-right">Estimated compost</th>
+                        <th class="text-right">Recorded at</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-white/5">
+                <tbody>
                     {% for log in logs %}
-                    <tr class="sleek-table-row">
-                        <td class="px-6 py-4.5 font-mono font-bold text-emerald-400 text-xs">
-                            {{ log.batch_code }}
+                    <tr>
+                        <td class="font-semibold">{{ log.batch_code }}</td>
+                        <td>{{ log.item_name }}</td>
+                        <td>
+                            {% if log.source_reason == 'EXPIRED_UNCOLLECTED_NGO' %}
+                                Uncollected donation
+                            {% elif log.source_reason == 'KITCHEN_SCRAPS' %}
+                                Kitchen preparation scraps
+                            {% elif log.source_reason == 'QUALITY_SAFETY_THRESHOLD' %}
+                                Food not suitable for donation
+                            {% else %}
+                                Organic material
+                            {% endif %}
                         </td>
-                        <td class="px-6 py-4.5 font-semibold text-white font-heading text-base">
-                            {{ log.item_name }}
-                        </td>
-                        <td class="px-6 py-4.5">
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-mono
-                                {% if log.source_reason == 'EXPIRED_UNCOLLECTED_NGO' %}badge-neon-amber
-                                {% else %}bg-white/5 text-slate-400 border border-white/10{% endif %}">
-                                {{ log.source_reason.replace('_', ' ') }}
-                            </span>
-                        </td>
-                        <td class="px-6 py-4.5 text-center font-mono font-bold text-white">
-                            {{ log.weight_kg }} kg
-                        </td>
-                        <td class="px-6 py-4.5 text-center font-mono font-bold text-teal-400 bg-teal-500/10 border-x border-teal-500/10">
-                            {{ log.estimated_compost_kg }} kg
-                        </td>
-                        <td class="px-6 py-4.5 text-center font-mono font-bold text-emerald-400">
-                            {{ log.co2_diverted_kg }} kg
-                        </td>
-                        <td class="px-6 py-4.5 text-right text-xs text-slate-400 font-mono">
-                            {{ log.facility_partner | replace('Graphic Era Campus Bio-Compost Facility / Green Digester Unit 2', 'Main Compost Facility / Green Digester Unit 2') }}
-                        </td>
+                        <td class="text-right tabular-nums">{{ log.weight_kg }} kg</td>
+                        <td class="text-right tabular-nums font-semibold">{{ log.estimated_compost_kg }} kg</td>
+                        <td class="text-right">{{ log.logged_at }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
-    </div>
-</div>
+        {% else %}
+        <div class="empty-state">
+            <i data-lucide="sprout" class="w-8 h-8"></i>
+            <h3>No compost records yet</h3>
+            <p>When organic material is routed to composting, its batch details will appear here.</p>
+        </div>
+        {% endif %}
+    </section>
 
+    <p class="helper-note">Compost output and emissions avoided are estimates calculated from recorded material weights. This page is not connected to a weighing scale or an external compost facility.</p>
+</div>
 {% endblock %}
