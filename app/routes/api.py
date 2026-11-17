@@ -335,28 +335,26 @@ def get_metrics():
         SELECT COALESCE(SUM(co2_diverted_kg), 0) FROM composting_logs
     """).fetchone()[0]
 
-    # ML model metrics
-    forecaster = get_forecaster()
-    ml_eval = forecaster.get_metrics()
-
     conn.close()
 
-    total_food_waste_avoided_kg = round(max(0, traditional_waste_portions - zeroplate_waste_portions) * 0.35, 1)
+    portions_avoided = max(0, traditional_waste_portions - zeroplate_waste_portions)
+    total_food_waste_avoided_kg = round(portions_avoided * 0.35, 1)
+    waste_reduction_pct = (
+        round((traditional_waste_portions - zeroplate_waste_portions) / traditional_waste_portions * 100, 1)
+        if traditional_waste_portions > 0 else 0
+    )
     total_savings_inr = round(cost_saved + marketplace_rev, 2)
 
     return jsonify({
         "status": "success",
         "metrics": {
             "projected_waste_avoided_kg": total_food_waste_avoided_kg,
-            "waste_reduction_pct": 68.4,
+            "waste_reduction_pct": waste_reduction_pct,
             "cost_saved_inr": total_savings_inr,
             "marketplace_revenue_recovered": round(marketplace_rev, 2),
             "student_meals_redistributed": marketplace_meals,
             "ngo_meals_donated": ngo_meals,
             "compost_diverted_kg": round(compost_kg, 1),
-            "co2_emissions_saved_kg": round(co2_diverted_kg, 1),
-            "model_rmse": ml_eval["models"]["Gradient Boosting Regressor"]["rmse"],
-            "baseline_rmse": ml_eval["models"]["Baseline (Moving Average)"]["rmse"],
-            "rmse_improvement_pct": ml_eval["rmse_improvement_vs_baseline_pct"]
+            "co2_emissions_saved_kg": round(co2_diverted_kg, 1)
         }
     })
