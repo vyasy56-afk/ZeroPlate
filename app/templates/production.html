@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Module 2 · Kitchen Inventory & Production Planning{% endblock %}
+{% block title %}Kitchen plan{% endblock %}
 
 {% block content %}
 <div class="space-y-8">
@@ -8,7 +8,7 @@
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
             <div class="flex items-center space-x-2.5">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-teal-500/10 text-teal-300 border border-teal-500/30">Module 2</span>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-teal-500/10 text-teal-300 border border-teal-500/30">Kitchen operations</span>
                 <span class="text-xs text-slate-400 uppercase tracking-widest font-mono">Kitchen Operations & Ingredient Optimization</span>
             </div>
             <h1 class="text-3xl sm:text-4xl font-black text-white font-heading mt-1">Inventory & Production Planning</h1>
@@ -53,7 +53,7 @@
         <div class="p-6 border-b border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
                 <h3 class="font-bold text-white text-lg font-heading">Daily Kitchen Target Schedule</h3>
-                <p class="text-xs text-slate-400">Live portion tracking & cooking status for Graphic Era Central Canteen</p>
+                <p class="text-xs text-slate-400">Live portion tracking and cooking status for the main canteen</p>
             </div>
             <span class="text-xs font-mono text-slate-300 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">
                 Simulated Clock: <strong class="text-emerald-400 font-bold">{{ settings.simulated_time }}</strong>
@@ -180,7 +180,7 @@
                     <input type="checkbox" checked class="mt-0.5 rounded bg-slate-900 border-white/20 text-emerald-500 focus:ring-emerald-500 w-4 h-4">
                     <div>
                         <span class="font-bold text-white block">Review ZeroPlate Daily ML Forecast</span>
-                        <span class="text-slate-400">Cross-check academic exam calendar and weather forecast before lighting burners.</span>
+                        <span class="text-slate-400">Review the calendar and weather context before preparing ingredients.</span>
                     </div>
                 </label>
                 <label class="flex items-start space-x-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/5 cursor-pointer hover:border-emerald-500/30 transition">
