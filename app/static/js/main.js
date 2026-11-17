@@ -99,7 +99,7 @@ function showToast(message, type = "success") {
 
 // Student Marketplace Reservation
 async function claimSurpriseBox(listingId, title, price) {
-    const studentName = prompt("Enter Student Full Name:", "Student");
+    const studentName = prompt("Enter your name for the reservation:", "Student");
     if (!studentName) return;
 
     const studentRoll = prompt("Enter Student ID:", "STU-" + Math.floor(1000 + Math.random() * 9000));
@@ -119,7 +119,7 @@ async function claimSurpriseBox(listingId, title, price) {
 
         const data = await response.json();
         if (response.ok) {
-            alert(`🎉 Success! Surprise Box Reserved.\n\nRedemption Token: ${data.token}\nTotal Price: ₹${data.total_price}\nPickup Until: ${data.pickup_until}\n\nPlease show this token at the canteen collection counter.`);
+            alert(`Reservation confirmed.\n\nCollection token: ${data.token}\nTotal: ₹${data.total_price}\nCollect by: ${data.pickup_until}\n\nShow this token to canteen staff when you collect your meal.`);
             window.location.reload();
         } else {
             alert("Error: " + (data.error || "Could not complete reservation"));
