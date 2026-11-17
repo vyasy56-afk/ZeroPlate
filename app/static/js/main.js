@@ -102,7 +102,7 @@ async function claimSurpriseBox(listingId, title, price) {
     const studentName = prompt("Enter Student Full Name:", "Student");
     if (!studentName) return;
 
-    const studentRoll = prompt("Enter University Roll No / Student ID:", "GEU/2026/BCADS/" + Math.floor(100 + Math.random() * 900));
+    const studentRoll = prompt("Enter Student ID:", "STU-" + Math.floor(1000 + Math.random() * 9000));
     if (!studentRoll) return;
 
     try {
