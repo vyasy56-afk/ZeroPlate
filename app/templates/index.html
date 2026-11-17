@@ -54,8 +54,8 @@
                     <h3 class="font-semibold text-slate-900">Demand forecast</h3>
                     <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400"></i>
                 </div>
-                <p class="text-sm text-slate-500 mt-2">Review predicted demand and test different calendar and weather conditions.</p>
-                <span class="block text-xs text-slate-500 mt-4">Model RMSE: {{ metrics.models['Gradient Boosting Regressor'].rmse }} portions</span>
+                <p class="text-sm text-slate-500 mt-2">See suggested servings for each dish and estimate how much to prepare.</p>
+                <span class="block text-xs text-slate-500 mt-4">Serving estimates for today's menu</span>
             </a>
 
             <a href="/production" class="glass-card app-module-card p-5">
@@ -74,7 +74,7 @@
                     <h3 class="font-semibold text-slate-900">Surplus market</h3>
                     <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400"></i>
                 </div>
-                <p class="text-sm text-slate-500 mt-2">List surplus meals at a reduced price and manage student reservations.</p>
+                <p class="text-sm text-slate-500 mt-2">Offer remaining meals at reduced prices and record reservations.</p>
                 <span class="block text-xs text-slate-500 mt-4">{{ counts.marketplace }} active listings</span>
             </a>
 
@@ -84,7 +84,7 @@
                     <h3 class="font-semibold text-slate-900">Community donations</h3>
                     <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400"></i>
                 </div>
-                <p class="text-sm text-slate-500 mt-2">Coordinate donation batches, partner claims and verified handovers.</p>
+                <p class="text-sm text-slate-500 mt-2">Coordinate collection of surplus food with community partners.</p>
                 <span class="block text-xs text-slate-500 mt-4">{{ counts.donations }} pending collections</span>
             </a>
 
@@ -94,7 +94,7 @@
                     <h3 class="font-semibold text-slate-900">Compost tracking</h3>
                     <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400"></i>
                 </div>
-                <p class="text-sm text-slate-500 mt-2">Track organic material, compost yield and estimated emissions avoided.</p>
+                <p class="text-sm text-slate-500 mt-2">Record food scraps and estimate compost output.</p>
                 <span class="block text-xs text-slate-500 mt-4">{{ counts.compost }} recorded batches</span>
             </a>
 
@@ -104,8 +104,8 @@
                     <h3 class="font-semibold text-slate-900">Analytics</h3>
                     <i data-lucide="arrow-up-right" class="w-4 h-4 text-slate-400"></i>
                 </div>
-                <p class="text-sm text-slate-500 mt-2">Review waste avoided, operating savings and redistribution outcomes.</p>
-                <span class="block text-xs text-slate-500 mt-4">{{ metrics.rmse_improvement_vs_baseline_pct }}% model error reduction</span>
+                <p class="text-sm text-slate-500 mt-2">Track food waste, recovered value, donations and composting.</p>
+                <span class="block text-xs text-slate-500 mt-4">Daily operating results</span>
             </a>
         </div>
     </section>
