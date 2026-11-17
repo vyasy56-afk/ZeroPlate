@@ -19,8 +19,25 @@ function applyAppTheme(theme, persist = true) {
 
     if (window.Chart) {
         const palette = getComputedStyle(document.documentElement);
-        Chart.defaults.color = palette.getPropertyValue("--muted").trim();
-        Chart.defaults.borderColor = palette.getPropertyValue("--border").trim();
+        const textColor = palette.getPropertyValue("--muted").trim();
+        const borderColor = palette.getPropertyValue("--border").trim();
+        Chart.defaults.color = textColor;
+        Chart.defaults.borderColor = borderColor;
+
+        // Restyle charts that are already visible when the user changes theme.
+        Object.values(Chart.instances || {}).forEach((chart) => {
+            chart.options.color = textColor;
+            if (chart.options.plugins && chart.options.plugins.legend && chart.options.plugins.legend.labels) {
+                chart.options.plugins.legend.labels.color = textColor;
+            }
+            if (chart.options.scales) {
+                Object.values(chart.options.scales).forEach((scale) => {
+                    if (scale.ticks) scale.ticks.color = textColor;
+                    if (scale.grid) scale.grid.color = borderColor;
+                });
+            }
+            chart.update("none");
+        });
     }
 
     if (persist) {
