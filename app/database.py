@@ -194,6 +194,16 @@ def init_db():
 
     # Keep academic-calendar settings out of the operational app state.
     cursor.execute("UPDATE contextual_settings SET is_exam_day = 0, active_canteen_name = 'Main Canteen' WHERE id = 1")
+    cursor.execute("UPDATE ngos SET name = 'Feeding India (Dehradun Chapter)' WHERE name = 'Feeding India by Zomato (GEU Volunteers)'")
+    cursor.execute("""
+        UPDATE composting_logs
+        SET facility_partner = REPLACE(
+            facility_partner,
+            'Graphic Era Campus Bio-Compost Facility / Green Digester Unit 2',
+            'Main Compost Facility / Green Digester Unit 2'
+        )
+        WHERE facility_partner LIKE '%Graphic Era Campus Bio-Compost Facility%'
+    """)
     conn.commit()
 
     conn.close()
