@@ -26,20 +26,8 @@ def index():
         ORDER BY mi.discount_pct DESC
     """).fetchall()
 
-    # Recent student orders / claimed surprise boxes
-    orders = conn.execute("""
-        SELECT mo.*, mi.title, mi.discounted_price, mi.pickup_until, m.image_emoji
-        FROM marketplace_orders mo
-        JOIN marketplace_items mi ON mo.marketplace_item_id = mi.id
-        JOIN daily_plans dp ON mi.daily_plan_id = dp.id
-        JOIN menu_items m ON dp.item_id = m.id
-        ORDER BY mo.id DESC
-        LIMIT 10
-    """).fetchall()
-
     conn.close()
 
     return render_template("marketplace.html", 
                            settings=settings, 
-                           listings=listings, 
-                           orders=orders)
+                           listings=listings)
