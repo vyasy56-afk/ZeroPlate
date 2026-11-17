@@ -7,7 +7,7 @@ function applyAppTheme(theme, persist = true) {
     const selectedTheme = theme === "dark" ? "dark" : "light";
     document.documentElement.dataset.theme = selectedTheme;
     const themeMeta = document.querySelector('meta[name="theme-color"]');
-    if (themeMeta) themeMeta.setAttribute("content", selectedTheme === "dark" ? "#171d19" : "#f4f6f4");
+    if (themeMeta) themeMeta.setAttribute("content", selectedTheme === "dark" ? "#161c25" : "#f4f6f8");
 
     const toggle = document.getElementById("theme-toggle");
     if (toggle) {
