@@ -1,257 +1,179 @@
 {% extends "base.html" %}
 
-{% block title %}Analytics and reporting{% endblock %}
+{% block title %}Operations analytics{% endblock %}
 
 {% block content %}
-<div class="space-y-8">
-    <!-- Header -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="page-stack">
+    <header class="page-header">
         <div>
-            <div class="flex items-center space-x-2.5">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-purple-500/10 text-purple-300 border border-purple-500/30">Module 6</span>
-                <span class="text-xs text-slate-400 uppercase tracking-widest font-mono">Performance and impact metrics</span>
-            </div>
-            <h1 class="text-3xl sm:text-4xl font-black text-white font-heading mt-1">Analytics & Reporting Dashboard</h1>
-            <p class="text-xs sm:text-sm text-slate-400 mt-1">
-                Rigorous empirical assessment measuring RMSE accuracy, food waste avoided, financial savings, and meals redistributed.
-            </p>
+            <p class="page-eyebrow">Business overview</p>
+            <h1 class="page-title">Operations analytics</h1>
+            <p class="page-description">See how much food was prepared and sold, what was recovered, and the estimated savings from better preparation planning.</p>
         </div>
-        <button onclick="window.print()" class="inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold text-xs border border-white/10 transition shadow-sm">
-            <i data-lucide="printer" class="w-4 h-4 text-emerald-400"></i>
-            <span>Print report</span>
+        <button onclick="window.print()" class="btn-secondary">
+            <i data-lucide="printer" class="w-4 h-4"></i>
+            Print report
         </button>
-    </div>
+    </header>
 
-    <!-- Operational performance metrics -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-        <!-- 1. Waste Avoided -->
-        <div class="glass-card p-5 space-y-1.5 hover:border-emerald-500/40">
-            <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono font-bold uppercase tracking-wider">
-                <span>Waste Avoided</span>
-                <i data-lucide="trash-2" class="w-4 h-4 text-emerald-400"></i>
-            </div>
-            <div class="text-3xl font-black text-white font-mono">{{ summary.waste_avoided_kg }} <span class="text-xs font-sans text-emerald-400">kg</span></div>
-            <span class="inline-flex items-center text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20 font-mono">
-                ↓ {{ summary.waste_reduction_pct }}% vs baseline
-            </span>
+    <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div class="metric-card">
+            <span class="metric-label">Estimated food waste avoided</span>
+            <strong class="metric-value">{{ summary.waste_avoided_kg }} kg</strong>
+            <span class="metric-hint">{{ summary.waste_reduction_pct }}% less leftover food than the comparison estimate</span>
         </div>
-
-        <!-- 2. Cost Savings -->
-        <div class="glass-card p-5 space-y-1.5 hover:border-teal-500/40">
-            <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono font-bold uppercase tracking-wider">
-                <span>Cost Savings</span>
-                <i data-lucide="indian-rupee" class="w-4 h-4 text-teal-400"></i>
-            </div>
-            <div class="text-3xl font-black text-teal-300 font-mono">₹{{ summary.total_savings_inr }}</div>
-            <p class="text-[10px] text-slate-400">Prep saved + marketplace</p>
+        <div class="metric-card">
+            <span class="metric-label">Estimated preparation cost avoided</span>
+            <strong class="metric-value">₹{{ summary.avoided_prep_cost }}</strong>
+            <span class="metric-hint">Based on the preparation-cost estimate</span>
         </div>
-
-        <!-- 3. Meals Redistributed -->
-        <div class="glass-card p-5 space-y-1.5 hover:border-blue-500/40">
-            <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono font-bold uppercase tracking-wider">
-                <span>Redistributed</span>
-                <i data-lucide="utensils" class="w-4 h-4 text-blue-400"></i>
-            </div>
-            <div class="text-3xl font-black text-blue-300 font-mono">{{ summary.total_meals_redistributed }} <span class="text-xs font-sans text-slate-400">meals</span></div>
-            <p class="text-[10px] text-slate-400">{{ summary.student_meals }} students · {{ summary.ngo_meals }} NGO</p>
+        <div class="metric-card">
+            <span class="metric-label">Revenue from discounted meals</span>
+            <strong class="metric-value">₹{{ summary.marketplace_revenue }}</strong>
+            <span class="metric-hint">Completed and active reservations, excluding cancellations</span>
         </div>
-
-        <!-- 4. Composting Diversion -->
-        <div class="glass-card p-5 space-y-1.5 hover:border-emerald-500/40">
-            <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono font-bold uppercase tracking-wider">
-                <span>Compost Diverted</span>
-                <i data-lucide="sprout" class="w-4 h-4 text-emerald-400"></i>
-            </div>
-            <div class="text-3xl font-black text-emerald-400 font-mono">{{ summary.compost_kg }} <span class="text-xs font-sans text-slate-400">kg</span></div>
-            <p class="text-[10px] text-slate-400">{{ summary.co2_saved_kg }} kg CO₂e abated</p>
+        <div class="metric-card">
+            <span class="metric-label">Meals redistributed</span>
+            <strong class="metric-value">{{ summary.total_meals_redistributed }}</strong>
+            <span class="metric-hint">{{ summary.student_meals }} reserved · {{ summary.ngo_meals }} donated</span>
         </div>
-
-        <!-- 5. ML Accuracy RMSE -->
-        <div class="glass-card p-5 space-y-1.5 hover:border-purple-500/40">
-            <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono font-bold uppercase tracking-wider">
-                <span>Model RMSE</span>
-                <i data-lucide="check-circle" class="w-4 h-4 text-purple-400"></i>
-            </div>
-            <div class="text-3xl font-black text-purple-300 font-mono">12.53 <span class="text-xs font-sans text-slate-400">portions</span></div>
-            <span class="inline-flex items-center text-[10px] font-bold text-purple-300 bg-purple-500/10 px-2 py-0.5 rounded-md border border-purple-500/20 font-mono">
-                69.0% error drop
-            </span>
+        <div class="metric-card">
+            <span class="metric-label">Organic material composted</span>
+            <strong class="metric-value">{{ summary.compost_kg }} kg</strong>
+            <span class="metric-hint">Material recorded in compost batches</span>
         </div>
-    </div>
-
-    <!-- Charts Row -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <!-- Chart 1: Traditional vs ZeroPlate Waste -->
-        <div class="lg:col-span-6 glass-card p-6 space-y-4">
-            <div class="flex items-center justify-between border-b border-white/5 pb-3">
-                <div>
-                    <h3 class="font-bold text-white font-heading">Food Waste Comparison: Before vs After</h3>
-                    <p class="text-xs text-slate-400">Daily overproduction waste (portions) across dishes</p>
-                </div>
-            </div>
-            <div class="h-64">
-                <canvas id="chart-waste-comparison"></canvas>
-            </div>
+        <div class="metric-card">
+            <span class="metric-label">Estimated emissions avoided</span>
+            <strong class="metric-value">{{ summary.co2_saved_kg }} kg</strong>
+            <span class="metric-hint">CO₂e estimate from recorded compost batches</span>
         </div>
+    </section>
 
-        <!-- Chart 2: Surplus Escalation Channels Distribution -->
-        <div class="lg:col-span-6 glass-card p-6 space-y-4">
-            <div class="flex items-center justify-between border-b border-white/5 pb-3">
-                <div>
-                    <h3 class="font-bold text-white font-heading">3-Tier Surplus Escalation Breakdown</h3>
-                    <p class="text-xs text-slate-400">Volume distribution across recovery channels</p>
-                </div>
-            </div>
-            <div class="h-64">
-                <canvas id="chart-escalation-pie"></canvas>
-            </div>
-        </div>
-    </div>
+    <p class="helper-note">Waste avoided and preparation cost avoided are estimates. They compare recorded preparation with a reference scenario that assumes 25% extra preparation; they are not audited financial or waste measurements.</p>
 
-    <!-- Detailed Before vs After Table -->
-    <div class="glass-card overflow-hidden">
-        <div class="p-6 border-b border-white/5 flex items-center justify-between">
+    <section class="panel-card">
+        <div class="panel-heading">
             <div>
-                <h3 class="font-bold text-white text-lg font-heading">Item-by-Item Prevention & Savings Ledger</h3>
-                <p class="text-xs text-slate-400">Performance metrics from sales, production and surplus records</p>
+                <h2 class="panel-title">Prepared servings and sales</h2>
+                <p class="panel-description">Compare how many servings were prepared with how many were sold for each menu item.</p>
             </div>
-            <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
-                Prevention Before Cure Active
-            </span>
         </div>
-        <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm text-slate-300">
-                <thead class="bg-slate-950/60 text-[11px] text-slate-400 uppercase font-mono font-bold border-b border-white/5">
+        {% if comparison_data %}
+        <div class="h-72">
+            <canvas id="chart-prepared-sold"></canvas>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i data-lucide="chart-column" class="w-8 h-8"></i>
+            <h3>No sales data to display</h3>
+            <p>Once daily preparation and sales are recorded, the comparison will appear here.</p>
+        </div>
+        {% endif %}
+    </section>
+
+    <section class="panel-card overflow-hidden">
+        <div class="panel-heading">
+            <div>
+                <h2 class="panel-title">Menu performance</h2>
+                <p class="panel-description">Review preparation, sales and remaining servings by dish.</p>
+            </div>
+        </div>
+        {% if comparison_data %}
+        <div class="table-scroll">
+            <table class="data-table">
+                <thead>
                     <tr>
-                        <th class="px-6 py-4">Menu Item</th>
-                        <th class="px-6 py-4 text-center">AI Demand</th>
-                        <th class="px-6 py-4 text-center">ZeroPlate Cook</th>
-                        <th class="px-6 py-4 text-center">Traditional Intuition</th>
-                        <th class="px-6 py-4 text-center">Actual Sold</th>
-                        <th class="px-6 py-4 text-center">Traditional Waste</th>
-                        <th class="px-6 py-4 text-center">ZeroPlate Surplus</th>
-                        <th class="px-6 py-4 text-right">Cost Saved (₹)</th>
+                        <th>Menu item</th>
+                        <th class="text-right">Suggested prep</th>
+                        <th class="text-right">Prepared</th>
+                        <th class="text-right">Sold</th>
+                        <th class="text-right">Remaining</th>
+                        <th class="text-right">Sell-through</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-white/5">
+                <tbody>
                     {% for row in comparison_data %}
-                    <tr class="sleek-table-row">
-                        <td class="px-6 py-4.5 font-semibold text-white">
-                            <span class="font-heading text-base">{{ row.item_name }}</span>
-                            <span class="text-xs text-slate-500 block font-normal">{{ row.category }}</span>
+                    <tr>
+                        <td>
+                            <span class="font-semibold">{{ row.item_name }}</span>
+                            <span class="block text-xs text-secondary">{{ row.category }}</span>
                         </td>
-                        <td class="px-6 py-4.5 text-center font-mono font-bold text-slate-300">
-                            {{ row.predicted }}
-                        </td>
-                        <td class="px-6 py-4.5 text-center font-mono font-bold text-emerald-400 bg-emerald-500/10 border-x border-emerald-500/10">
-                            {{ row.zeroplate_prep }}
-                        </td>
-                        <td class="px-6 py-4.5 text-center font-mono text-slate-500 line-through">
-                            {{ row.traditional_prep }}
-                        </td>
-                        <td class="px-6 py-4.5 text-center font-mono text-white font-bold">
-                            {{ row.sold }}
-                        </td>
-                        <td class="px-6 py-4.5 text-center font-mono font-bold text-rose-400">
-                            {{ row.traditional_waste }} portions
-                        </td>
-                        <td class="px-6 py-4.5 text-center font-mono font-bold text-emerald-400">
-                            {{ row.zeroplate_surplus }} portions
-                        </td>
-                        <td class="px-6 py-4.5 text-right font-mono font-bold text-teal-300">
-                            ₹{{ row.cost_saved }}
-                        </td>
+                        <td class="text-right tabular-nums">{{ row.suggested_prep }}</td>
+                        <td class="text-right tabular-nums">{{ row.prepared }}</td>
+                        <td class="text-right tabular-nums">{{ row.sold }}</td>
+                        <td class="text-right tabular-nums">{{ row.remaining }}</td>
+                        <td class="text-right font-semibold tabular-nums">{{ row.sell_through_pct }}%</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
-    </div>
+        {% else %}
+        <div class="empty-state">
+            <h3>No menu performance recorded</h3>
+            <p>Menu performance will appear here after preparation and sales quantities are entered.</p>
+        </div>
+        {% endif %}
+    </section>
 </div>
 {% endblock %}
 
 {% block extra_scripts %}
+{% if comparison_data %}
 <script>
-const chartPalette = getComputedStyle(document.documentElement);
-const chartText = chartPalette.getPropertyValue('--muted').trim() || '#68756d';
-const chartBorder = chartPalette.getPropertyValue('--border').trim() || '#e1e7e2';
-const chartAccent = chartPalette.getPropertyValue('--accent').trim() || '#2f6b4f';
-const chartAccentDark = chartPalette.getPropertyValue('--accent-dark').trim() || '#24543d';
+const rootStyles = getComputedStyle(document.documentElement);
+const chartText = rootStyles.getPropertyValue("--muted").trim();
+const chartBorder = rootStyles.getPropertyValue("--border").trim();
+const chartAccent = rootStyles.getPropertyValue("--accent").trim();
+const chartAccentSoft = rootStyles.getPropertyValue("--accent-soft").trim();
 
-// Chart 1: Before vs After Food Waste Bar Chart
-const ctxWaste = document.getElementById('chart-waste-comparison').getContext('2d');
-new Chart(ctxWaste, {
-    type: 'bar',
-    data: {
-        labels: [{% for row in comparison_data[:6] %}'{{ row.item_name }}',{% endfor %}],
-        datasets: [
-            {
-                label: 'Traditional Guesswork Waste (portions)',
-                data: [{% for row in comparison_data[:6] %}{{ row.traditional_waste }},{% endfor %}],
-                backgroundColor: 'rgba(148, 163, 151, 0.48)',
-                borderColor: '#94a397',
-                borderWidth: 1.5,
-                borderRadius: 8
-            },
-            {
-                label: 'ZeroPlate AI Surplus (portions)',
-                data: [{% for row in comparison_data[:6] %}{{ row.zeroplate_surplus }},{% endfor %}],
-                backgroundColor: chartAccent,
-                borderColor: chartAccentDark,
-                borderWidth: 1.5,
-                borderRadius: 8
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                labels: { color: chartText, font: { family: 'Inter, sans-serif', size: 11 } }
-            }
+const chartCanvas = document.getElementById("chart-prepared-sold");
+if (chartCanvas && window.Chart) {
+    new Chart(chartCanvas, {
+        type: "bar",
+        data: {
+            labels: [{% for row in comparison_data %}{{ row.item_name|tojson }}{% if not loop.last %},{% endif %}{% endfor %}],
+            datasets: [
+                {
+                    label: "Prepared",
+                    data: [{% for row in comparison_data %}{{ row.prepared }}{% if not loop.last %},{% endif %}{% endfor %}],
+                    backgroundColor: chartAccent,
+                    borderRadius: 6,
+                    maxBarThickness: 38
+                },
+                {
+                    label: "Sold",
+                    data: [{% for row in comparison_data %}{{ row.sold }}{% if not loop.last %},{% endif %}{% endfor %}],
+                    backgroundColor: chartAccentSoft,
+                    borderColor: chartAccent,
+                    borderWidth: 1,
+                    borderRadius: 6,
+                    maxBarThickness: 38
+                }
+            ]
         },
-        scales: {
-            x: {
-                ticks: { color: chartText, font: { size: 10 } },
-                grid: { color: chartBorder }
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: { color: chartText, usePointStyle: true, boxWidth: 8 }
+                }
             },
-            y: {
-                beginAtZero: true,
-                ticks: { color: '#647168', font: { size: 10 } },
-                grid: { color: 'rgba(31, 45, 37, 0.08)' }
+            scales: {
+                x: {
+                    ticks: { color: chartText },
+                    grid: { display: false }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: chartText, precision: 0 },
+                    grid: { color: chartBorder }
+                }
             }
         }
-    }
-});
-
-// Chart 2: Surplus Escalation Channels Pie Chart
-const ctxPie = document.getElementById('chart-escalation-pie').getContext('2d');
-new Chart(ctxPie, {
-    type: 'doughnut',
-    data: {
-        labels: ['Discounted meal listings', 'NGO donations', 'Compost recovery'],
-        datasets: [{
-            data: [
-                {{ summary.student_meals or 120 }},
-                {{ summary.ngo_meals or 85 }},
-                {{ (summary.compost_kg * 2.8) | round | int or 45 }}
-            ],
-            backgroundColor: ['#d6e4da', chartAccent, chartAccentDark],
-            borderWidth: 2,
-            borderColor: chartBorder
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                position: 'bottom',
-                labels: { color: '#647168', font: { family: 'Plus Jakarta Sans', size: 11 } }
-            }
-        }
-    }
-});
+    });
+}
 </script>
+{% endif %}
 {% endblock %}
