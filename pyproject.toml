@@ -1,2 +1,15 @@
+[project]
+name = "zeroplate"
+version = "1.0.0"
+description = "AI-powered food demand forecasting and surplus redistribution platform"
+requires-python = ">=3.12"
+dependencies = [
+    "Flask>=3.0.0",
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "scikit-learn>=1.3.0",
+    "joblib>=1.3.0",
+]
+
 [tool.vercel]
 entrypoint = "run:app"
