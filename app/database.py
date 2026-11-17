@@ -196,6 +196,11 @@ def init_db():
     cursor.execute("UPDATE contextual_settings SET is_exam_day = 0, active_canteen_name = 'Main Canteen' WHERE id = 1")
     cursor.execute("UPDATE ngos SET name = 'Feeding India (Dehradun Chapter)' WHERE name = 'Feeding India by Zomato (GEU Volunteers)'")
     cursor.execute("""
+        UPDATE marketplace_orders
+        SET student_id_roll = 'STU-' || id
+        WHERE student_id_roll LIKE 'GEU/%' OR student_id_roll LIKE '%BCADS%'
+    """)
+    cursor.execute("""
         UPDATE composting_logs
         SET facility_partner = REPLACE(
             facility_partner,
