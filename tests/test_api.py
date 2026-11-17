@@ -30,34 +30,45 @@ def test_routes():
     # 2. Module 1: Forecast
     resp = client.get("/forecast")
     assert resp.status_code == 200
-    assert b"Demand forecast" in resp.data
-    assert b"Exam period" not in resp.data
+    assert b"Plan the right amount of food" in resp.data
+    assert b"Root Mean Squared Error" not in resp.data
+    assert b"RMSE" not in resp.data
+    assert b"Random Forest" not in resp.data
+    assert b"Feature Importance" not in resp.data
     assert b"play-exam" not in resp.data
 
     # 3. Module 2: Production
     resp = client.get("/production")
     assert resp.status_code == 200
-    assert b"Inventory & Production Planning" in resp.data
+    assert b"Kitchen preparation plan" in resp.data
+    assert b"Inventory Stock" not in resp.data
+    assert b"100% ready" not in resp.data
 
     # 4. Module 3: Marketplace
     resp = client.get("/marketplace/")
     assert resp.status_code == 200
-    assert b"Surplus market" in resp.data
+    assert b"Discounted meals" in resp.data
+    assert b"Active Student Reservations" not in resp.data
+    assert b"Student Name / Roll" not in resp.data
 
     # 5. Module 4: NGO
     resp = client.get("/ngo/")
     assert resp.status_code == 200
     assert b"Community donations" in resp.data
+    assert b"Staff Handover PIN" not in resp.data
 
     # 6. Module 5: Composting
     resp = client.get("/composting/")
     assert resp.status_code == 200
     assert b"Compost tracking" in resp.data
+    assert b"100% Landfill Methane Abatement" not in resp.data
 
     # 7. Module 6: Analytics
     resp = client.get("/analytics/")
     assert resp.status_code == 200
-    assert b"Analytics & Reporting Dashboard" in resp.data
+    assert b"Operations analytics" in resp.data
+    assert b"RMSE" not in resp.data
+    assert b"Model accuracy" not in resp.data
 
     # 8. API: Predict
     resp = client.post("/api/predict", 
@@ -74,6 +85,8 @@ def test_routes():
     data = json.loads(resp.data)
     assert data["status"] == "success"
     assert "metrics" in data
+    assert "model_rmse" not in data["metrics"]
+    assert "rmse_improvement_pct" not in data["metrics"]
 
 if __name__ == "__main__":
     test_routes()
