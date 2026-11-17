@@ -8,9 +8,17 @@ import os
 import sqlite3
 from datetime import datetime, timedelta
 
-DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "zeroplate.db")
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Vercel's function filesystem is read-only except for /tmp. SQLite data there
+# is ephemeral per serverless instance. Locally, persist the DB under data/.
+DB_PATH = os.environ.get("DATABASE_PATH") or (
+    "/tmp/zeroplate.db" if os.environ.get("VERCEL") else
+    os.path.join(_PROJECT_ROOT, "data", "zeroplate.db")
+)
+
 
 def get_db_connection():
+    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
