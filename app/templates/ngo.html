@@ -74,8 +74,20 @@
                             {% endif %}
                         </td>
                         <td class="text-right">
-                            {% if d.status == 'PENDING_CLAIM' %}
-                            <button onclick="claimNgoDonation({{ d.id }}, {{ d.item_name|tojson }})" class="btn-primary btn-small">Assign collection</button>
+                            {% if d.status == 'PENDING_CLAIM' and ngos %}
+                            <div class="flex flex-col sm:flex-row items-stretch justify-end gap-2">
+                                <select id="ngo-select-{{ d.id }}" class="field-control min-w-36" aria-label="Choose donation partner">
+                                    {% for ngo in ngos %}
+                                    <option value="{{ ngo.id }}">{{ ngo.name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button
+                                    type="button"
+                                    data-donation-id="{{ d.id }}"
+                                    data-item-name="{{ d.item_name|e }}"
+                                    onclick="claimNgoDonation(Number(this.dataset.donationId), this.dataset.itemName, Number(document.getElementById('ngo-select-{{ d.id }}').value))"
+                                    class="btn-primary btn-small">Assign</button>
+                            </div>
                             {% elif d.status == 'CLAIMED' %}
                             <button onclick="verifyNgoPickup({{ d.id }})" class="btn-secondary btn-small">Confirm collection</button>
                             {% else %}
