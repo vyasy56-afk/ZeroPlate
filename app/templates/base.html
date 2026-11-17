@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f5f7f5">
+    <meta name="theme-color" content="#f4f6f8">
     <script>
         (function () {
             try {
@@ -20,12 +20,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            theme: { extend: { colors: { brand: { DEFAULT: '#2f6b4f', dark: '#24543d', soft: '#eaf2ed' } } } }
+            theme: { extend: { colors: { brand: { DEFAULT: '#52657a', dark: '#354a60', soft: '#edf1f5' } } } }
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20261117-customer-ui">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20261117-slate-theme">
     {% block extra_head %}{% endblock %}
 </head>
 <body class="min-h-screen flex flex-col antialiased">
@@ -63,7 +63,7 @@
         <span>Food demand · Kitchen planning · Surplus recovery</span>
     </footer>
     <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-2 pointer-events-none"></div>
-    <script src="{{ url_for('static', filename='js/main.js') }}?v=20261117-customer-ui"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}?v=20261117-slate-theme"></script>
     <script>
         if (window.lucide) lucide.createIcons();
         if (window.Chart) {
