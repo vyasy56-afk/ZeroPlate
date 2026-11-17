@@ -730,3 +730,7 @@ pre {
 
 .text-primary { color: var(--text) !important; }
 .text-secondary { color: var(--muted) !important; }
+
+:root[data-theme="dark"] .status-chip {
+    color: #d8e9dc;
+}
