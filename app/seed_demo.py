@@ -27,14 +27,14 @@ def seed_operational_day(sim_date="2026-11-16", sim_time="19:45"):
     cursor = conn.cursor()
 
     # Update or insert contextual settings
-    # Nov 16, 2026: Exam period at Graphic Era, 23.5°C, light evening drizzle
+    # Sample operating conditions: mild weather with light evening rainfall.
     cursor.execute("""
         UPDATE contextual_settings SET
             simulated_date = ?,
             simulated_time = ?,
             day_of_week = 0,
             is_holiday = 0,
-            is_exam_day = 1,
+            is_exam_day = 0,
             temperature_c = 23.5,
             rainfall_mm = 2.0,
             closing_window_mins = 90
@@ -63,7 +63,7 @@ def seed_operational_day(sim_date="2026-11-16", sim_time="19:45"):
             day_of_week=0,
             is_weekend=0,
             is_holiday=0,
-            is_exam_day=1, # Graphic Era exam week
+            is_exam_day=0,
             temperature_c=23.5,
             rainfall_mm=2.0,
             trend_7d=item["base_price"] * 1.5,
