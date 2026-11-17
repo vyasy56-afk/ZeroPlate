@@ -343,18 +343,16 @@ def get_metrics():
         round((traditional_waste_portions - zeroplate_waste_portions) / traditional_waste_portions * 100, 1)
         if traditional_waste_portions > 0 else 0
     )
-    total_savings_inr = round(cost_saved + marketplace_rev, 2)
-
     return jsonify({
         "status": "success",
         "metrics": {
-            "projected_waste_avoided_kg": total_food_waste_avoided_kg,
+            "estimated_waste_avoided_kg": total_food_waste_avoided_kg,
             "waste_reduction_pct": waste_reduction_pct,
-            "cost_saved_inr": total_savings_inr,
-            "marketplace_revenue_recovered": round(marketplace_rev, 2),
-            "student_meals_redistributed": marketplace_meals,
+            "estimated_prep_cost_avoided_inr": round(cost_saved, 2),
+            "marketplace_reservation_value_inr": round(marketplace_rev, 2),
+            "student_meals_reserved": marketplace_meals,
             "ngo_meals_donated": ngo_meals,
-            "compost_diverted_kg": round(compost_kg, 1),
-            "co2_emissions_saved_kg": round(co2_diverted_kg, 1)
+            "organic_material_composted_kg": round(compost_kg, 1),
+            "estimated_co2e_avoided_kg": round(co2_diverted_kg, 1)
         }
     })
