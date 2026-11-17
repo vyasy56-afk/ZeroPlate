@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Module 1 · Demand Prediction Dashboard{% endblock %}
+{% block title %}Demand forecast{% endblock %}
 
 {% block content %}
 <div class="space-y-8">
@@ -8,21 +8,21 @@
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
             <div class="flex items-center space-x-2.5">
-                <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase bg-[#00f5a0]/15 text-[#00f5a0] border border-[#00f5a0]/30 shadow-[0_0_12px_rgba(0,245,160,0.25)]">Module 1</span>
-                <span class="text-xs text-slate-400 uppercase tracking-widest font-mono">Tree-Based Machine Learning Regression</span>
+                <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase bg-[#00f5a0]/15 text-[#00f5a0] border border-[#00f5a0]/30 shadow-[0_0_12px_rgba(0,245,160,0.25)]">Demand planning</span>
+                <span class="text-xs text-slate-400 uppercase tracking-widest font-mono">Demand model performance</span>
             </div>
             <h1 class="text-3xl sm:text-5xl font-black text-white font-heading mt-2">
                 Demand <span class="text-gradient-aurora">Forecasting</span> Dashboard
             </h1>
             <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
-                Item-level regression problem mapping Dehradun meteorological trends, Graphic Era exam schedules, and historical rolling sales momentum.
+                Estimate item-level demand using recent sales trends, calendar conditions and local weather.
             </p>
         </div>
         <div class="flex items-center space-x-3">
             <div class="hyper-glass-pill px-5 py-2.5 flex items-center space-x-3 border border-white/15 shadow-lg">
                 <div class="w-2.5 h-2.5 rounded-full bg-[#00f5a0] shadow-[0_0_10px_#00f5a0] animate-pulse"></div>
                 <div>
-                    <span class="text-[9px] text-slate-400 block uppercase font-mono tracking-wider">Campus Context</span>
+                    <span class="text-[9px] text-slate-400 block uppercase font-mono tracking-wider">Current conditions</span>
                     <span class="text-xs font-bold text-white">
                         {{ 'Exam Week Active 📚' if settings.is_exam_day else 'Regular Semester' }} · {{ settings.temperature_c }}°C, {{ 'Rain 🌧️' if settings.rainfall_mm > 0 else 'Clear ☀️' }}
                     </span>
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <!-- RMSE Formula & Benchmark Scoreboard Card (Section 5.2) -->
+    <!-- Model performance comparison -->
     <div class="hyper-glass p-8 sm:p-10 rounded-[2.5rem] border border-white/15 relative overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)]">
         <!-- Ambient Internal Glow -->
         <div class="absolute -top-32 -right-32 w-96 h-96 bg-[#00f5a0]/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -41,7 +41,7 @@
             <div class="lg:col-span-5 space-y-4">
                 <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-white/5 text-[#00f5a0] border border-white/10 shadow-sm">
                     <i data-lucide="calculator" class="w-3.5 h-3.5 text-[#00f5a0]"></i>
-                    <span>Evaluation Metric (Section 5.2)</span>
+                    <span>Model evaluation</span>
                 </div>
                 <h3 class="text-2xl sm:text-3xl font-black text-white font-heading">Root Mean Squared Error</h3>
                 
@@ -169,10 +169,10 @@
                 </div>
 
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1.5">Academic Calendar</label>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Calendar context</label>
                     <select id="play-exam" class="w-full px-4 py-3 rounded-2xl border border-white/10 bg-black/40 text-white font-medium focus:border-[#00f5a0] focus:outline-none transition">
-                        <option value="1" selected>Exam Day / Midterms (High Coffee/Snacks)</option>
-                        <option value="0">Regular Academic Semester</option>
+                        <option value="1" selected>Exam period / midterms</option>
+                        <option value="0">Regular day</option>
                     </select>
                 </div>
 
