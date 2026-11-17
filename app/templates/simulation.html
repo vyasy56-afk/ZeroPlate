@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Simulation controls{% endblock %}
+{% block title %}Demo tools{% endblock %}
 
 {% block content %}
 <div class="space-y-8">
@@ -8,17 +8,17 @@
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
             <div class="flex items-center space-x-2.5">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">Time controls</span>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">Internal tools</span>
                 <span class="text-xs text-slate-400 uppercase tracking-widest font-mono">Temporal State Machine & Trigger Engine</span>
             </div>
-            <h1 class="text-3xl sm:text-4xl font-black text-white font-heading mt-1">Simulation controls</h1>
+            <h1 class="text-3xl sm:text-4xl font-black text-white font-heading mt-1">Demo tools</h1>
             <p class="text-xs sm:text-sm text-slate-400 mt-1">
-                Move the simulation clock to review each stage of the surplus recovery process.
+                Run sample operating scenarios to test surplus listings, donation hand-offs and compost routing.
             </p>
         </div>
         <div class="flex items-center space-x-2">
             <span class="px-4 py-2 rounded-2xl text-xs font-mono font-bold bg-[#0d1629] text-amber-400 border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
-                Clock: {{ settings.simulated_time }}
+                Demo time: {{ settings.simulated_time }}
             </span>
         </div>
     </div>
@@ -28,7 +28,7 @@
         <h3 class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-3 font-bold">Quick scenarios</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <!-- Scenario 1: Morning -->
-            <button onclick="setSimulationClock('08:30', 1, 'mild')" class="glass-card p-5 text-left space-y-2 group hover:border-emerald-500/50">
+            <button onclick="setSimulationClock('08:30', 'mild', 90)" class="glass-card p-5 text-left space-y-2 group hover:border-emerald-500/50">
                 <div class="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-bold text-xs group-hover:scale-110 transition border border-emerald-500/30">
                     <i data-lucide="sun" class="w-4 h-4"></i>
                 </div>
@@ -40,7 +40,7 @@
             </button>
 
             <!-- Scenario 2: Active Service -->
-            <button onclick="setSimulationClock('14:00', 1, 'mild')" class="glass-card p-5 text-left space-y-2 group hover:border-blue-500/50">
+            <button onclick="setSimulationClock('14:00', 'mild', 90)" class="glass-card p-5 text-left space-y-2 group hover:border-blue-500/50">
                 <div class="w-9 h-9 rounded-xl bg-blue-500/15 text-blue-400 flex items-center justify-center font-bold text-xs group-hover:scale-110 transition border border-blue-500/30">
                     <i data-lucide="utensils" class="w-4 h-4"></i>
                 </div>
@@ -52,7 +52,7 @@
             </button>
 
             <!-- Scenario 3: Closing Window (Marketplace Trigger) -->
-            <button onclick="setSimulationClock('19:15', 1, 'mild')" class="glass-card p-5 text-left space-y-2 group hover:border-amber-500/50 relative border-2 border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.15)]">
+            <button onclick="setSimulationClock('19:15', 'mild', 90)" class="glass-card p-5 text-left space-y-2 group hover:border-amber-500/50 relative border-2 border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.15)]">
                 <span class="absolute -top-3 right-3 px-2 py-0.5 rounded text-[9px] font-black bg-amber-500 text-slate-950 uppercase tracking-widest">
                     Tier 1 Trigger
                 </span>
@@ -67,7 +67,7 @@
             </button>
 
             <!-- Scenario 4: Canteen Closing (NGO Trigger) -->
-            <button onclick="setSimulationClock('20:45', 1, 'mild')" class="glass-card p-5 text-left space-y-2 group hover:border-blue-500/50 relative border-2 border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.15)]">
+            <button onclick="setSimulationClock('20:45', 'mild', 90)" class="glass-card p-5 text-left space-y-2 group hover:border-blue-500/50 relative border-2 border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.15)]">
                 <span class="absolute -top-3 right-3 px-2 py-0.5 rounded text-[9px] font-black bg-blue-500 text-white uppercase tracking-widest">
                     Tier 2 Trigger
                 </span>
@@ -93,61 +93,34 @@
             </div>
 
             <div>
-                <label class="block font-semibold text-slate-300 mb-1">Calendar context</label>
-                <select id="sim-exam" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-medium focus:border-emerald-500 focus:outline-none">
-                    <option value="1" {% if settings.is_exam_day %}selected{% endif %}>Exam Session (Boosts Coffee/Snacks, Lowers Thali)</option>
-                    <option value="0" {% if not settings.is_exam_day %}selected{% endif %}>Regular Semester Days</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="block font-semibold text-slate-300 mb-1">Dehradun Weather Context</label>
+                <label class="block font-semibold text-slate-300 mb-1">Weather scenario</label>
                 <select id="sim-weather" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-medium focus:border-emerald-500 focus:outline-none">
-                    <option value="mild" selected>Pleasant Weather (23.5°C, Clear)</option>
-                    <option value="rain">Monsoon Downpour (20.0°C, 18mm Rain)</option>
-                    <option value="hot">Summer Heatwave (34.0°C, Clear)</option>
+                    <option value="mild" selected>Mild (23.5°C, dry)</option>
+                    <option value="rain">Rain (20°C, 18 mm)</option>
+                    <option value="hot">Hot (34°C, dry)</option>
                 </select>
             </div>
 
             <div>
                 <label class="block font-semibold text-slate-300 mb-1">Closing Window Threshold</label>
                 <select id="sim-window" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-medium focus:border-emerald-500 focus:outline-none">
-                    <option value="90" selected>90 Minutes Before Close</option>
-                    <option value="60">60 Minutes Before Close</option>
-                    <option value="120">120 Minutes Before Close</option>
+                    <option value="90" {% if settings.closing_window_mins == 90 %}selected{% endif %}>90 Minutes Before Close</option>
+                    <option value="60" {% if settings.closing_window_mins == 60 %}selected{% endif %}>60 Minutes Before Close</option>
+                    <option value="120" {% if settings.closing_window_mins == 120 %}selected{% endif %}>120 Minutes Before Close</option>
                 </select>
             </div>
 
             <div class="sm:col-span-2 lg:col-span-4 pt-1">
                 <button type="submit" class="w-full py-3 px-4 rounded-xl btn-glow-emerald font-bold text-xs uppercase tracking-wider flex items-center justify-center space-x-2">
                     <i data-lucide="play" class="w-4 h-4 text-slate-950"></i>
-                    <span>Apply Environmental Parameters & Run Surplus Escalation Cycle</span>
+                    <span>Apply demo settings and run recovery</span>
                 </button>
             </div>
         </form>
     </div>
 
-    <!-- Recovery workflow -->
-    <div class="glass-card p-6 font-mono text-xs space-y-3 bg-[#050811] border border-emerald-500/20">
-        <div class="flex items-center justify-between text-slate-400 border-b border-white/5 pb-2">
-            <span class="font-bold text-emerald-400 uppercase font-sans">Surplus recovery rules</span>
-            <span class="text-[11px] text-slate-500 font-mono">Automatic workflow</span>
-        </div>
-        <pre class="overflow-x-auto text-emerald-300/90 leading-relaxed">
-Input: predicted_qty, actual_sold, time_remaining, threshold begin
- remaining_stock = predicted_qty − actual_sold
- if time_remaining &lt; closing_window and remaining_stock &gt; threshold then 
-   list item as discounted 'surprise box' on student marketplace 
- end if
- if item unsold at closing_time then
-   notify nearest verified NGO with quantity and pickup window 
- end if 
- if item not collected by NGO within pickup window then 
-   route item to composting / waste-management channel 
- end if 
-end</pre>
-    </div>
 </div>
+
 {% endblock %}
 
 {% block extra_scripts %}
@@ -155,9 +128,9 @@ end</pre>
 document.getElementById("custom-sim-form").addEventListener("submit", async function(e) {
     e.preventDefault();
     const timeVal = document.getElementById("sim-clock").value;
-    const examVal = document.getElementById("sim-exam").value;
     const weatherVal = document.getElementById("sim-weather").value;
-    await setSimulationClock(timeVal, parseInt(examVal), weatherVal);
+    const closingWindow = document.getElementById("sim-window").value;
+    await setSimulationClock(timeVal, weatherVal, closingWindow);
 });
 </script>
 {% endblock %}
