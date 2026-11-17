@@ -1,8 +1,6 @@
 """
 ZeroPlate: Application Factory
-Project: ZeroPlate - AI-Powered Food Demand Forecasting and Surplus Redistribution
-Author: Yogesh Vyas · BCA (AI & DS) · Graphic Era (Deemed to be University)
-Guide: Ms. Shivani Sharma (Assistant Professor)
+Food demand planning and surplus recovery application
 """
 
 import os
@@ -44,12 +42,7 @@ def create_app(config_class=Config):
     def inject_global_vars():
         return {
             "app_name": "ZeroPlate",
-            "tagline": "AI-Powered Demand Forecasting & Surplus Redistribution",
-            "author_name": "Yogesh Vyas",
-            "roll_no": "2106389",
-            "department": "BCA (AI & DS)",
-            "institution": "Graphic Era (Deemed to be University), Dehradun",
-            "guide_name": "Ms. Shivani Sharma (Assistant Professor)"
+            "tagline": "Food demand planning and surplus recovery"
         }
 
     return app
