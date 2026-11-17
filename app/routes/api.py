@@ -234,7 +234,7 @@ def update_simulation_state():
     data = request.get_json() or {}
     sim_time = data.get("simulated_time", "19:45")
     sim_date = data.get("simulated_date")
-    is_exam = int(data.get("is_exam_day", 1))
+    is_exam = int(data.get("is_exam_day", 0))
     is_holiday = int(data.get("is_holiday", 0))
     temp = float(data.get("temperature_c", 23.5))
     rain = float(data.get("rainfall_mm", 0.0))
