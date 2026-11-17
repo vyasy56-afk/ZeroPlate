@@ -23,11 +23,16 @@ def test_routes():
     assert b"ZeroPlate" in resp.data
     assert b"Operations overview" in resp.data
     assert b"Graphic Era" not in resp.data
+    assert b"Exam period" not in resp.data
+    assert b"Simulation time" not in resp.data
+    assert b"theme-toggle" in resp.data
 
     # 2. Module 1: Forecast
     resp = client.get("/forecast")
     assert resp.status_code == 200
     assert b"Demand forecast" in resp.data
+    assert b"Exam period" not in resp.data
+    assert b"play-exam" not in resp.data
 
     # 3. Module 2: Production
     resp = client.get("/production")
