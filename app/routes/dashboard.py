@@ -7,10 +7,8 @@ Covers:
 - Simulation Controller: Advance time and trigger real-time escalation
 """
 
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template
 from app.database import get_db_connection
-from models.predict import get_forecaster
-from app.escalation_engine import run_escalation_cycle
 
 dashboard_bp = Blueprint("dashboard", __name__)
 
@@ -30,13 +28,10 @@ def index():
     pending_donations = conn.execute("SELECT COUNT(*) FROM ngo_donations WHERE status IN ('PENDING_CLAIM', 'CLAIMED')").fetchone()[0]
     compost_logs_count = conn.execute("SELECT COUNT(*) FROM composting_logs").fetchone()[0]
     
-    forecaster = get_forecaster()
-    metrics = forecaster.get_metrics()
     conn.close()
 
     return render_template("index.html", 
                            settings=settings, 
-                           metrics=metrics,
                            counts={
                                "plans": active_plans,
                                "marketplace": active_marketplace,
@@ -64,15 +59,12 @@ def forecast():
         WHERE dp.date = ?
     """, (settings["simulated_date"],)).fetchall()
 
-    forecaster = get_forecaster()
-    ml_metrics = forecaster.get_metrics()
     conn.close()
 
     return render_template("forecast.html", 
                            settings=settings, 
                            daily_plans=daily_plans, 
-                           menu_items=menu_items,
-                           ml_metrics=ml_metrics)
+                           menu_items=menu_items)
 
 @dashboard_bp.route("/production")
 def production():
@@ -94,7 +86,7 @@ def production():
         ORDER BY mi.meal_type DESC
     """, (settings["simulated_date"],)).fetchall()
 
-    # Ingredient estimation matrix (kg needed based on total portions)
+    # Ingredient quantity estimates based on planned portions and typical recipe ratios
     total_portions = sum(p["recommended_cook_qty"] for p in plans)
     ingredients = [
         {"name": "Basmati Rice", "qty_kg": round(total_portions * 0.08, 1), "category": "Grains & Rice", "stock_status": "In Stock"},
