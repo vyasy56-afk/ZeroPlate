@@ -2,6 +2,50 @@
  * ZeroPlate: Core Frontend Logic & Interactivity
  */
 
+// Light / dark appearance preference
+function applyAppTheme(theme, persist = true) {
+    const selectedTheme = theme === "dark" ? "dark" : "light";
+    document.documentElement.dataset.theme = selectedTheme;
+
+    const toggle = document.getElementById("theme-toggle");
+    if (toggle) {
+        const nextLabel = selectedTheme === "dark" ? "Light mode" : "Dark mode";
+        const nextIcon = selectedTheme === "dark" ? "sun" : "moon";
+        toggle.setAttribute("aria-label", `Switch to ${nextLabel.toLowerCase()}`);
+        toggle.setAttribute("title", `Switch to ${nextLabel.toLowerCase()}`);
+        toggle.innerHTML = `<i data-lucide="${nextIcon}" class="w-4 h-4"></i><span class="theme-toggle-label">${nextLabel}</span>`;
+        if (window.lucide) window.lucide.createIcons();
+    }
+
+    if (window.Chart) {
+        const palette = getComputedStyle(document.documentElement);
+        Chart.defaults.color = palette.getPropertyValue("--muted").trim();
+        Chart.defaults.borderColor = palette.getPropertyValue("--border").trim();
+    }
+
+    if (persist) {
+        try { localStorage.setItem("zeroplate-theme", selectedTheme); } catch (_) {}
+    }
+}
+
+function initAppTheme() {
+    const currentTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    applyAppTheme(currentTheme, false);
+    const toggle = document.getElementById("theme-toggle");
+    if (toggle) {
+        toggle.addEventListener("click", () => {
+            const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+            applyAppTheme(nextTheme);
+        });
+    }
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAppTheme, { once: true });
+} else {
+    initAppTheme();
+}
+
 // Toast notification helper
 function showToast(message, type = "success") {
     let container = document.getElementById("toast-container");
@@ -145,8 +189,8 @@ async function updatePrepStatus(planId, newStatus) {
     }
 }
 
-// Simulation Clock Warp
-async function setSimulationClock(timeStr, examDay = 1, weather = "mild") {
+// Demo clock controls are kept separate from the normal customer navigation.
+async function setSimulationClock(timeStr, weather = "mild", closingWindow = 90) {
     let temp = 23.5;
     let rain = 0.0;
     if (weather === "rain") {
@@ -163,9 +207,10 @@ async function setSimulationClock(timeStr, examDay = 1, weather = "mild") {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 simulated_time: timeStr,
-                is_exam_day: examDay,
+                is_exam_day: 0,
                 temperature_c: temp,
-                rainfall_mm: rain
+                rainfall_mm: rain,
+                closing_window_mins: Number(closingWindow) || 90
             })
         });
 
