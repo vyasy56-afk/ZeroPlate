@@ -17,14 +17,19 @@ DB_PATH = os.environ.get("DATABASE_PATH") or (
 )
 
 
+def _ensure_db_directory():
+    db_directory = os.path.dirname(os.path.abspath(DB_PATH))
+    os.makedirs(db_directory, exist_ok=True)
+
+
 def get_db_connection():
-    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
-    conn = sqlite3.connect(DB_PATH)
+    _ensure_db_directory()
+    conn = sqlite3.connect(DB_PATH, timeout=30)
     conn.row_factory = sqlite3.Row
     return conn
 
 def init_db():
-    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+    _ensure_db_directory()
     conn = get_db_connection()
     cursor = conn.cursor()
 

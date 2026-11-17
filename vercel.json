@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "run.py": {
+      "includeFiles": [
+        "app/templates/**",
+        "app/static/**",
+        "models/*.json",
+        "models/*.pkl"
+      ]
+    }
+  }
+}
