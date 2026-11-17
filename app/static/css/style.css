@@ -505,3 +505,11 @@ pre {
     background: #365e46 !important;
     border-color: #365e46 !important;
 }
+
+.feature-meter {
+    height: 10px;
+    min-width: 3px;
+    border-radius: 999px;
+    background: var(--accent);
+    transition: width .25s ease, background .2s ease;
+}
