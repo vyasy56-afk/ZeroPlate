@@ -141,7 +141,7 @@ def seed_operational_day(sim_date="2026-11-16", sim_time="19:45"):
     if cursor.fetchone()[0] < 3:
         past_compost = [
             ("Chole Bhature (Trim & Prep)", 4.2, "KITCHEN_SCRAPS", "Main Compost Facility / Green Digester Unit 2", 1.89, 10.5, "14:15", "CMP-20261116-001"),
-            ("Mixed Salad & Vegetable Peelings", 6.8, "KITCHEN_SCRAPS", "Graphic Era Campus Bio-Compost Facility / Green Digester Unit 2", 3.06, 17.0, "15:30", "CMP-20261116-002")
+            ("Mixed Salad & Vegetable Peelings", 6.8, "KITCHEN_SCRAPS", "Main Compost Facility / Green Digester Unit 2", 3.06, 17.0, "15:30", "CMP-20261116-002")
         ]
         cursor.executemany("""
             INSERT INTO composting_logs (item_name, weight_kg, source_reason, facility_partner, estimated_compost_kg, co2_diverted_kg, logged_at, batch_code)
