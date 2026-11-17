@@ -89,10 +89,10 @@ def production():
     # Ingredient quantity estimates based on planned portions and typical recipe ratios
     total_portions = sum(p["recommended_cook_qty"] for p in plans)
     ingredients = [
-        {"name": "Basmati Rice", "qty_kg": round(total_portions * 0.08, 1), "category": "Grains & Rice", "stock_status": "In Stock"},
+        {"name": "Basmati Rice", "qty_kg": round(total_portions * 0.08, 1), "category": "Grains & Rice"},
         {"name": "Whole Wheat Atta & Maida", "qty_kg": round(total_portions * 0.06, 1), "category": "Flour", "stock_status": "In Stock"},
         {"name": "Rajma & Lentils (Dal)", "qty_kg": round(total_portions * 0.05, 1), "category": "Pulses", "stock_status": "In Stock"},
-        {"name": "Fresh Paneer (Dairy)", "qty_kg": round(total_portions * 0.04, 1), "category": "Dairy", "stock_status": "Restocked Today"},
+        {"name": "Fresh Paneer (Dairy)", "qty_kg": round(total_portions * 0.04, 1), "category": "Dairy"},
         {"name": "Cooking Oil & Pure Ghee", "qty_kg": round(total_portions * 0.025, 1), "category": "Oils & Fats", "stock_status": "In Stock"},
         {"name": "Potatoes, Onions & Tomatoes", "qty_kg": round(total_portions * 0.12, 1), "category": "Fresh Produce", "stock_status": "In Stock"},
         {"name": "Spices & Garam Masala Mix", "qty_kg": round(total_portions * 0.015, 1), "category": "Spices", "stock_status": "In Stock"}
