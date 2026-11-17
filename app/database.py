@@ -141,7 +141,7 @@ def init_db():
         temperature_c REAL NOT NULL DEFAULT 24.0,
         rainfall_mm REAL NOT NULL DEFAULT 0.0,
         closing_window_mins INTEGER NOT NULL DEFAULT 90,
-        active_canteen_name TEXT NOT NULL DEFAULT 'Graphic Era Central Canteen'
+        active_canteen_name TEXT NOT NULL DEFAULT 'Main Canteen'
     );
     """)
 
@@ -188,9 +188,13 @@ def init_db():
         now = datetime.now()
         cursor.execute("""
             INSERT INTO contextual_settings (id, simulated_date, simulated_time, day_of_week, is_holiday, is_exam_day, temperature_c, rainfall_mm, closing_window_mins, active_canteen_name)
-            VALUES (1, ?, '18:45', 2, 0, 1, 26.5, 0.0, 90, 'Graphic Era Central Canteen')
+            VALUES (1, ?, '18:45', 2, 0, 0, 26.5, 0.0, 90, 'Main Canteen')
         """, (now.strftime("%Y-%m-%d"),))
         conn.commit()
+
+    # Keep academic-calendar settings out of the operational app state.
+    cursor.execute("UPDATE contextual_settings SET is_exam_day = 0, active_canteen_name = 'Main Canteen' WHERE id = 1")
+    conn.commit()
 
     conn.close()
 
