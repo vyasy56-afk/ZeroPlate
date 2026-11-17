@@ -158,8 +158,8 @@ async function claimNgoDonation(donationId, itemName) {
 }
 
 // NGO Handover PIN Verification
-async function verifyNgoPickup(donationId, expectedPinHint) {
-    const enteredPin = prompt(`Enter Canteen Verification PIN (Staff Hint: ${expectedPinHint}):`);
+async function verifyNgoPickup(donationId) {
+    const enteredPin = prompt("Enter the 4-digit collection PIN provided by canteen staff:");
     if (!enteredPin) return;
 
     try {
