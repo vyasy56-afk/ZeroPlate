@@ -1,170 +1,70 @@
+{% set current_path = request.path %}
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}ZeroPlate{% endblock %} | AI Demand Forecasting & Surplus Redistribution</title>
-    <!-- Tailwind CSS -->
+    <meta name="theme-color" content="#f5f7f5">
+    <meta name="description" content="ZeroPlate food demand planning, kitchen operations and surplus recovery.">
+    <title>{% block title %}Overview{% endblock %} | ZeroPlate</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    borderRadius: {
-                        '3xl': '1.75rem',
-                        '4xl': '2.25rem',
-                        '5xl': '3rem',
-                    },
-                    colors: {
-                        brand: {
-                            neon: '#00f5a0',
-                            cyan: '#00d9f5',
-                            purple: '#8b5cf6',
-                            rose: '#f43f5e',
-                            amber: '#fbbf24'
-                        }
-                    }
-                }
-            }
+            theme: { extend: { colors: { brand: { DEFAULT: '#2f6b4f', dark: '#24543d', soft: '#eaf2ed' } } } }
         }
     </script>
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Custom Modern Stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% block extra_head %}{% endblock %}
 </head>
-<body class="min-h-screen flex flex-col antialiased selection:bg-[#00f5a0] selection:text-black">
-
-    <!-- Ambient Aurora Gradient Mesh Blobs -->
-    <div class="aurora-bg">
-        <div class="aurora-blob aurora-blob-1"></div>
-        <div class="aurora-blob aurora-blob-2"></div>
-        <div class="aurora-blob aurora-blob-3"></div>
-    </div>
-
-    <!-- Top Floating Academic Badge -->
-    <div class="relative z-50 pt-3 px-4">
-        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2 px-4 py-1.5 rounded-full hyper-glass-pill text-[11px] text-slate-300">
-            <div class="flex items-center space-x-2">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#00f5a0]/15 text-[#00f5a0] border border-[#00f5a0]/30 shadow-[0_0_12px_rgba(0,245,160,0.3)]">
-                    BCA [AI & DS] · 2026
+<body class="min-h-screen flex flex-col antialiased">
+    <header class="app-header">
+        <div class="app-header-inner">
+            <a href="/" class="app-brand" aria-label="ZeroPlate overview">
+                <span class="brand-mark"><i data-lucide="utensils" class="w-5 h-5"></i></span>
+                <span class="brand-copy">
+                    <span class="brand-name">ZeroPlate</span>
+                    <span class="brand-caption">Food operations</span>
                 </span>
-                <span class="text-slate-300 font-medium">Graphic Era (Deemed to be University) · Dept. of Computer Applications</span>
-                <span class="hidden md:inline text-white/20">|</span>
-                <span class="hidden md:inline text-slate-400">Yogesh Vyas (<strong class="text-white font-mono">2106389</strong>)</span>
-                <span class="hidden md:inline text-white/20">|</span>
-                <span class="hidden md:inline text-slate-400">Guide: <strong class="text-slate-200">Ms. Shivani Sharma</strong></span>
-            </div>
-            <div class="flex items-center space-x-2">
-                <a href="/simulation" class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition">
-                    <span class="w-2 h-2 rounded-full bg-[#00f5a0] animate-pulse shadow-[0_0_8px_#00f5a0]"></span>
-                    <span class="font-mono font-bold text-xs">{{ settings.simulated_time if settings else '19:45' }}</span>
-                    <span class="text-slate-400 text-[10px]">({{ 'Exam Week' if settings and settings.is_exam_day else 'Regular' }})</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Floating Glass Capsule Header (macOS / Dynamic Island Aesthetic) -->
-    <header class="sticky top-2 z-40 px-4 pt-2">
-        <div class="max-w-6xl mx-auto px-6 py-3 rounded-full hyper-glass border border-white/15 backdrop-blur-2xl flex items-center justify-between shadow-[0_10px_35px_-5px_rgba(0,0,0,0.5)]">
-            <!-- Brand Logo & Capsule Badge -->
-            <a href="/" class="flex items-center space-x-3 group">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#00f5a0] via-[#00d9f5] to-[#8b5cf6] flex items-center justify-center text-slate-950 font-black shadow-[0_0_20px_rgba(0,245,160,0.5)] group-hover:scale-105 transition transform">
-                    <i data-lucide="utensils" class="w-5 h-5 stroke-[2.5]"></i>
-                </div>
-                <div>
-                    <div class="flex items-center space-x-1.5">
-                        <span class="text-xl font-black tracking-tight text-white font-heading">Zero<span class="text-gradient-aurora">Plate</span></span>
-                        <span class="px-2 py-0.5 rounded-full text-[9px] font-black uppercase bg-[#00f5a0]/15 text-[#00f5a0] border border-[#00f5a0]/30 shadow-[0_0_10px_rgba(0,245,160,0.2)]">AI 2.0</span>
-                    </div>
-                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest block">Prevention Before Cure</span>
-                </div>
             </a>
-
-            <!-- Navigation Pills -->
-            <nav class="hidden lg:flex items-center space-x-1 bg-black/40 p-1.5 rounded-full border border-white/10">
-                <a href="/forecast" class="px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center space-x-1.5 {% if request.path == '/forecast' %}bg-[#00f5a0]/20 text-[#00f5a0] border border-[#00f5a0]/40 shadow-[0_0_15px_rgba(0,245,160,0.3)]{% else %}text-slate-300 hover:text-white hover:bg-white/5{% endif %}">
-                    <i data-lucide="line-chart" class="w-3.5 h-3.5 text-[#00f5a0]"></i>
-                    <span>1. Forecast</span>
-                </a>
-                <a href="/production" class="px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center space-x-1.5 {% if request.path == '/production' %}bg-[#00f5a0]/20 text-[#00f5a0] border border-[#00f5a0]/40 shadow-[0_0_15px_rgba(0,245,160,0.3)]{% else %}text-slate-300 hover:text-white hover:bg-white/5{% endif %}">
-                    <i data-lucide="chef-hat" class="w-3.5 h-3.5 text-[#00d9f5]"></i>
-                    <span>2. Kitchen Plan</span>
-                </a>
-                <a href="/marketplace" class="px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center space-x-1.5 {% if request.path.startswith('/marketplace') %}bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-[0_0_15px_rgba(245,158,11,0.3)]{% else %}text-slate-300 hover:text-white hover:bg-white/5{% endif %}">
-                    <i data-lucide="shopping-bag" class="w-3.5 h-3.5 text-amber-400"></i>
-                    <span>3. Surplus Market</span>
-                    <span class="ml-1 px-1.5 py-0.2 rounded-full text-[8px] font-black bg-amber-500/30 text-amber-300 border border-amber-500/50">55% OFF</span>
-                </a>
-                <a href="/ngo" class="px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center space-x-1.5 {% if request.path.startswith('/ngo') %}bg-blue-500/20 text-blue-300 border border-blue-500/40 shadow-[0_0_15px_rgba(59,130,246,0.3)]{% else %}text-slate-300 hover:text-white hover:bg-white/5{% endif %}">
-                    <i data-lucide="heart-handshake" class="w-3.5 h-3.5 text-blue-400"></i>
-                    <span>4. NGO Rescue</span>
-                </a>
-                <a href="/composting" class="px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center space-x-1.5 {% if request.path.startswith('/composting') %}bg-[#00f5a0]/20 text-[#00f5a0] border border-[#00f5a0]/40 shadow-[0_0_15px_rgba(0,245,160,0.3)]{% else %}text-slate-300 hover:text-white hover:bg-white/5{% endif %}">
-                    <i data-lucide="sprout" class="w-3.5 h-3.5 text-[#00f5a0]"></i>
-                    <span>5. Compost</span>
-                </a>
-                <a href="/analytics" class="px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center space-x-1.5 {% if request.path == '/analytics' %}bg-purple-500/20 text-purple-300 border border-purple-500/40 shadow-[0_0_15px_rgba(139,92,246,0.3)]{% else %}text-slate-300 hover:text-white hover:bg-white/5{% endif %}">
-                    <i data-lucide="pie-chart" class="w-3.5 h-3.5 text-purple-400"></i>
-                    <span>6. Analytics</span>
-                </a>
+            <nav class="app-nav" aria-label="Main navigation">
+                <a href="/" class="app-nav-link {% if current_path == '/' %}is-active{% endif %}">Overview</a>
+                <a href="/forecast" class="app-nav-link {% if current_path == '/forecast' %}is-active{% endif %}">Forecast</a>
+                <a href="/production" class="app-nav-link {% if current_path == '/production' %}is-active{% endif %}">Kitchen plan</a>
+                <a href="/marketplace" class="app-nav-link {% if current_path.startswith('/marketplace') %}is-active{% endif %}">Surplus market</a>
+                <a href="/ngo" class="app-nav-link {% if current_path.startswith('/ngo') %}is-active{% endif %}">Donations</a>
+                <a href="/composting" class="app-nav-link {% if current_path.startswith('/composting') %}is-active{% endif %}">Compost</a>
+                <a href="/analytics" class="app-nav-link {% if current_path == '/analytics' %}is-active{% endif %}">Analytics</a>
             </nav>
-
-            <!-- Right Action Pill -->
-            <a href="/simulation" class="btn-glass-primary px-4 py-2 text-xs uppercase tracking-wider flex items-center space-x-1.5">
-                <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
-                <span>Simulate</span>
-            </a>
-        </div>
-
-        <!-- Mobile sub-navigation bar -->
-        <div class="lg:hidden mt-2 max-w-6xl mx-auto px-4 py-2 rounded-full hyper-glass-pill flex items-center space-x-2 overflow-x-auto text-xs whitespace-nowrap">
-            <a href="/forecast" class="px-3 py-1 rounded-full bg-white/5 text-slate-300">1. Forecast</a>
-            <a href="/production" class="px-3 py-1 rounded-full bg-white/5 text-slate-300">2. Kitchen Plan</a>
-            <a href="/marketplace" class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-bold border border-amber-500/40">3. Market (55% off)</a>
-            <a href="/ngo" class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300">4. NGO</a>
-            <a href="/composting" class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300">5. Compost</a>
-            <a href="/analytics" class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300">6. Analytics</a>
+            <div class="app-header-actions">
+                <div class="app-clock" title="Current simulation context">
+                    <span class="status-dot"></span>
+                    <span class="clock-time">{{ settings.simulated_time if settings else '19:45' }}</span>
+                    <span class="clock-context">{{ 'Exam period' if settings and settings.is_exam_day else 'Regular day' }}</span>
+                </div>
+                <a href="/simulation" class="app-sim-link {% if current_path == '/simulation' %}is-active{% endif %}">
+                    <i data-lucide="sliders-horizontal" class="w-4 h-4"></i><span>Simulation</span>
+                </a>
+            </div>
         </div>
     </header>
-
-    <!-- Page Content Container -->
-    <main class="relative z-10 flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="app-main flex-grow">
         {% block content %}{% endblock %}
     </main>
-
-    <!-- Floating Footer Capsule -->
-    <footer class="relative z-10 max-w-6xl mx-auto w-full px-4 mb-8">
-        <div class="p-6 rounded-[2rem] hyper-glass flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-            <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-[#00f5a0] to-[#00d9f5] flex items-center justify-center text-slate-950 font-black text-xs shadow-[0_0_15px_rgba(0,245,160,0.4)]">
-                    ZP
-                </div>
-                <div>
-                    <p class="font-bold text-white text-sm">ZeroPlate · AI Demand Forecasting & Surplus Redistribution</p>
-                    <p class="text-slate-400 text-[11px]">Graphic Era (Deemed to be University) · Dept. of Computer Applications</p>
-                </div>
-            </div>
-            <div class="text-right space-y-0.5">
-                <p>Candidate: <strong class="text-white">Yogesh Vyas</strong> · Roll: <strong class="text-[#00f5a0] font-mono">2106389</strong> (BCA AI & DS)</p>
-                <p class="text-slate-500">Supervised by: <strong class="text-slate-300">Ms. Shivani Sharma</strong> (Assistant Professor)</p>
-            </div>
-        </div>
+    <footer class="app-footer">
+        <span class="footer-brand">ZeroPlate</span>
+        <span>Food demand · Kitchen planning · Surplus recovery</span>
     </footer>
-
-    <!-- Toast Notification Anchor -->
     <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-2 pointer-events-none"></div>
-
-    <!-- Scripts -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
+        if (window.lucide) lucide.createIcons();
+        if (window.Chart) {
+            Chart.defaults.color = '#647168';
+            Chart.defaults.borderColor = 'rgba(31, 45, 37, 0.10)';
+            Chart.defaults.font.family = 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        }
     </script>
     {% block extra_scripts %}{% endblock %}
 </body>
