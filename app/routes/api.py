@@ -72,7 +72,7 @@ def claim_marketplace_item():
     data = request.get_json() or {}
     listing_id = data.get("listing_id")
     student_name = data.get("student_name", "Student").strip()
-    student_roll = data.get("student_roll", "GEU/2026/001").strip()
+    student_roll = data.get("student_roll", "STU-001").strip()
     qty = int(data.get("quantity", 1))
 
     if not listing_id or not student_name or not student_roll:
