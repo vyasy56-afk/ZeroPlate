@@ -20,7 +20,7 @@
         <div class="metric-card">
             <span class="metric-label">Estimated food waste avoided</span>
             <strong class="metric-value">{{ summary.waste_avoided_kg }} kg</strong>
-            <span class="metric-hint">{{ summary.waste_reduction_pct }}% less leftover food than the comparison estimate</span>
+            <span class="metric-hint">{% if summary.waste_reduction_pct >= 0 %}{{ summary.waste_reduction_pct }}% less leftover food than the comparison estimate{% else %}{{ (summary.waste_reduction_pct * -1)|round(1) }}% more leftover food than the comparison estimate{% endif %}</span>
         </div>
         <div class="metric-card">
             <span class="metric-label">Estimated preparation cost avoided</span>
@@ -28,9 +28,9 @@
             <span class="metric-hint">Based on the preparation-cost estimate</span>
         </div>
         <div class="metric-card">
-            <span class="metric-label">Revenue from discounted meals</span>
+            <span class="metric-label">Meal reservation value</span>
             <strong class="metric-value">₹{{ summary.marketplace_revenue }}</strong>
-            <span class="metric-hint">Completed and active reservations, excluding cancellations</span>
+            <span class="metric-hint">Based on recorded reservations; payments are not processed here</span>
         </div>
         <div class="metric-card">
             <span class="metric-label">Meals redistributed</span>
