@@ -21,7 +21,8 @@ def test_routes():
     resp = client.get("/")
     assert resp.status_code == 200
     assert b"ZeroPlate" in resp.data
-    assert b"Graphic Era" in resp.data
+    assert b"Operations overview" in resp.data
+    assert b"Graphic Era" not in resp.data
 
     # 2. Module 1: Forecast
     resp = client.get("/forecast")
