@@ -113,7 +113,7 @@
         <div class="p-6 border-b border-white/5 flex items-center justify-between">
             <div>
                 <h3 class="font-bold text-white text-lg font-heading">Item-by-Item Prevention & Savings Ledger</h3>
-                <p class="text-xs text-slate-400">Empirical validation on simulated canteen service dataset</p>
+                <p class="text-xs text-slate-400">Performance metrics from sales, production and surplus records</p>
             </div>
             <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
                 Prevention Before Cure Active
@@ -172,6 +172,12 @@
 
 {% block extra_scripts %}
 <script>
+const chartPalette = getComputedStyle(document.documentElement);
+const chartText = chartPalette.getPropertyValue('--muted').trim() || '#68756d';
+const chartBorder = chartPalette.getPropertyValue('--border').trim() || '#e1e7e2';
+const chartAccent = chartPalette.getPropertyValue('--accent').trim() || '#2f6b4f';
+const chartAccentDark = chartPalette.getPropertyValue('--accent-dark').trim() || '#24543d';
+
 // Chart 1: Before vs After Food Waste Bar Chart
 const ctxWaste = document.getElementById('chart-waste-comparison').getContext('2d');
 new Chart(ctxWaste, {
@@ -182,16 +188,16 @@ new Chart(ctxWaste, {
             {
                 label: 'Traditional Guesswork Waste (portions)',
                 data: [{% for row in comparison_data[:6] %}{{ row.traditional_waste }},{% endfor %}],
-                backgroundColor: 'rgba(239, 68, 68, 0.65)',
-                borderColor: '#ef4444',
+                backgroundColor: 'rgba(148, 163, 151, 0.48)',
+                borderColor: '#94a397',
                 borderWidth: 1.5,
                 borderRadius: 8
             },
             {
                 label: 'ZeroPlate AI Surplus (portions)',
                 data: [{% for row in comparison_data[:6] %}{{ row.zeroplate_surplus }},{% endfor %}],
-                backgroundColor: 'rgba(16, 185, 129, 0.75)',
-                borderColor: '#10b981',
+                backgroundColor: chartAccent,
+                borderColor: chartAccentDark,
                 borderWidth: 1.5,
                 borderRadius: 8
             }
@@ -202,13 +208,13 @@ new Chart(ctxWaste, {
         maintainAspectRatio: false,
         plugins: {
             legend: {
-                labels: { color: '#647168', font: { family: 'Plus Jakarta Sans', size: 11 } }
+                labels: { color: chartText, font: { family: 'Inter, sans-serif', size: 11 } }
             }
         },
         scales: {
             x: {
-                ticks: { color: '#647168', font: { size: 10 } },
-                grid: { color: 'rgba(31, 45, 37, 0.08)' }
+                ticks: { color: chartText, font: { size: 10 } },
+                grid: { color: chartBorder }
             },
             y: {
                 beginAtZero: true,
@@ -224,20 +230,16 @@ const ctxPie = document.getElementById('chart-escalation-pie').getContext('2d');
 new Chart(ctxPie, {
     type: 'doughnut',
     data: {
-        labels: ['Tier 1: Student Surprise Boxes', 'Tier 2: NGO Donations', 'Tier 3: Campus Composting'],
+        labels: ['Discounted meal listings', 'NGO donations', 'Compost recovery'],
         datasets: [{
             data: [
                 {{ summary.student_meals or 120 }},
                 {{ summary.ngo_meals or 85 }},
                 {{ (summary.compost_kg * 2.8) | round | int or 45 }}
             ],
-            backgroundColor: [
-                '#d6e4da',
-                '#82a68e',
-                '#2f6b4f'
-            ],
+            backgroundColor: ['#d6e4da', chartAccent, chartAccentDark],
             borderWidth: 2,
-            borderColor: '#ffffff'
+            borderColor: chartBorder
         }]
     },
     options: {
