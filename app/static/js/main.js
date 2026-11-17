@@ -112,7 +112,7 @@ async function claimSurpriseBox(listingId, title, price) {
             body: JSON.stringify({
                 listing_id: listingId,
                 student_name: studentName,
-                student_id_roll: studentRoll,
+                student_roll: studentRoll,
                 quantity: 1
             })
         });
