@@ -297,3 +297,24 @@ pre {
     .app-main { max-width: none; padding: 0; }
     .glass-card, .hyper-glass { box-shadow: none !important; break-inside: avoid; }
 }
+
+.app-module-card {
+    display: block;
+    height: 100%;
+    text-decoration: none !important;
+}
+.app-module-card:hover {
+    transform: translateY(-2px) !important;
+    border-color: #c5d5c9 !important;
+    box-shadow: 0 6px 16px rgba(25,45,32,.075) !important;
+}
+.module-icon {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: var(--accent);
+    background: var(--accent-soft);
+}
