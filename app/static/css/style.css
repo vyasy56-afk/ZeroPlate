@@ -470,3 +470,25 @@ pre {
 .btn-glass-primary, .btn-glass-secondary, .btn-glow-emerald {
     border-radius: 10px !important;
 }
+
+
+/* Additional utility-class surfaces used inside cards also follow dark mode. */
+:root[data-theme="dark"] [class~="bg-white"],
+:root[data-theme="dark"] [class~="bg-slate-50"],
+:root[data-theme="dark"] [class~="bg-slate-100"],
+:root[data-theme="dark"] [class~="bg-gray-50"],
+:root[data-theme="dark"] [class~="bg-gray-100"] {
+    background-color: var(--surface-soft) !important;
+}
+:root[data-theme="dark"] [class~="text-slate-900"],
+:root[data-theme="dark"] [class~="text-slate-800"],
+:root[data-theme="dark"] [class~="text-gray-900"],
+:root[data-theme="dark"] [class~="text-gray-800"] {
+    color: var(--text) !important;
+}
+:root[data-theme="dark"] [class~="border-slate-100"],
+:root[data-theme="dark"] [class~="border-slate-200"],
+:root[data-theme="dark"] [class~="border-gray-100"],
+:root[data-theme="dark"] [class~="border-gray-200"] {
+    border-color: var(--border) !important;
+}
