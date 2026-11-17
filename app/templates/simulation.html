@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Simulation & Demo Control Panel{% endblock %}
+{% block title %}Simulation controls{% endblock %}
 
 {% block content %}
 <div class="space-y-8">
@@ -8,12 +8,12 @@
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
             <div class="flex items-center space-x-2.5">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">Demo Console</span>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-amber-500/10 text-amber-300 border border-amber-500/30">Time controls</span>
                 <span class="text-xs text-slate-400 uppercase tracking-widest font-mono">Temporal State Machine & Trigger Engine</span>
             </div>
-            <h1 class="text-3xl sm:text-4xl font-black text-white font-heading mt-1">Simulation & Demo Controller</h1>
+            <h1 class="text-3xl sm:text-4xl font-black text-white font-heading mt-1">Simulation controls</h1>
             <p class="text-xs sm:text-sm text-slate-400 mt-1">
-                Fast-forward the simulation clock to test and demonstrate each phase of the 3-tier surplus escalation pipeline during viva.
+                Move the simulation clock to review each stage of the surplus recovery process.
             </p>
         </div>
         <div class="flex items-center space-x-2">
@@ -25,7 +25,7 @@
 
     <!-- Quick Time-Warp Scenarios Grid -->
     <div>
-        <h3 class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-3 font-bold">One-Click Demonstration Scenarios</h3>
+        <h3 class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-3 font-bold">Quick scenarios</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <!-- Scenario 1: Morning -->
             <button onclick="setSimulationClock('08:30', 1, 'mild')" class="glass-card p-5 text-left space-y-2 group hover:border-emerald-500/50">
@@ -85,7 +85,7 @@
 
     <!-- Manual Controls Form -->
     <div class="glass-card p-6 space-y-4">
-        <h3 class="font-bold text-white text-base font-heading border-b border-white/5 pb-3">Custom Environmental Simulation Controls</h3>
+        <h3 class="font-bold text-white text-base font-heading border-b border-white/5 pb-3">Simulation settings</h3>
         <form id="custom-sim-form" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
             <div>
                 <label class="block font-semibold text-slate-300 mb-1">Simulated Clock Time</label>
@@ -93,7 +93,7 @@
             </div>
 
             <div>
-                <label class="block font-semibold text-slate-300 mb-1">Academic Context</label>
+                <label class="block font-semibold text-slate-300 mb-1">Calendar context</label>
                 <select id="sim-exam" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-medium focus:border-emerald-500 focus:outline-none">
                     <option value="1" {% if settings.is_exam_day %}selected{% endif %}>Exam Session (Boosts Coffee/Snacks, Lowers Thali)</option>
                     <option value="0" {% if not settings.is_exam_day %}selected{% endif %}>Regular Semester Days</option>
@@ -127,11 +127,11 @@
         </form>
     </div>
 
-    <!-- Live Escalation Engine Pseudocode Reference (From Section 5.3) -->
+    <!-- Recovery workflow -->
     <div class="glass-card p-6 font-mono text-xs space-y-3 bg-[#050811] border border-emerald-500/20">
         <div class="flex items-center justify-between text-slate-400 border-b border-white/5 pb-2">
-            <span class="font-bold text-emerald-400 uppercase font-sans">Section 5.3 Surplus Redistribution Logic</span>
-            <span class="text-[11px] text-slate-500 font-mono">Implemented in app/escalation_engine.py</span>
+            <span class="font-bold text-emerald-400 uppercase font-sans">Surplus recovery rules</span>
+            <span class="text-[11px] text-slate-500 font-mono">Automatic workflow</span>
         </div>
         <pre class="overflow-x-auto text-emerald-300/90 leading-relaxed">
 Input: predicted_qty, actual_sold, time_remaining, threshold begin
