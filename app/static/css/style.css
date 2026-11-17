@@ -727,3 +727,6 @@ pre {
     .panel-heading { flex-direction: column; }
     .data-table th, .data-table td { padding: 11px 12px; }
 }
+
+.text-primary { color: var(--text) !important; }
+.text-secondary { color: var(--muted) !important; }
