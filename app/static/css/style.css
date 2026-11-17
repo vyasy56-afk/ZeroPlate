@@ -345,8 +345,8 @@ pre {
     --text: #e8eee9;
     --muted: #a3afa6;
     --muted-soft: #87958b;
-    --accent: #6c9c7b;
-    --accent-dark: #557f63;
+    --accent: #82ad8f;
+    --accent-dark: #47785b;
     --accent-soft: #2d3d32;
     --shadow: 0 3px 14px rgba(0, 0, 0, 0.16);
 }
@@ -491,4 +491,17 @@ pre {
 :root[data-theme="dark"] [class~="border-gray-100"],
 :root[data-theme="dark"] [class~="border-gray-200"] {
     border-color: var(--border) !important;
+}
+
+
+:root[data-theme="dark"] .btn-glass-primary,
+:root[data-theme="dark"] .btn-glow-emerald {
+    color: #ffffff !important;
+    background: var(--accent-dark) !important;
+    border-color: var(--accent-dark) !important;
+}
+:root[data-theme="dark"] .btn-glass-primary:hover,
+:root[data-theme="dark"] .btn-glow-emerald:hover {
+    background: #365e46 !important;
+    border-color: #365e46 !important;
 }
