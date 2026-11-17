@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Module 4 · NGO Donation Coordination{% endblock %}
+{% block title %}Community donations{% endblock %}
 
 {% block content %}
 <div class="space-y-8">
@@ -11,10 +11,10 @@
         <div class="relative z-10 max-w-3xl space-y-3">
             <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-bold bg-blue-500/15 text-blue-300 border border-blue-500/30">
                 <i data-lucide="heart" class="w-3.5 h-3.5 text-blue-400"></i>
-                <span>Module 4 · Surplus Escalation Tier 2</span>
+                <span>Surplus recovery · Tier 2</span>
             </div>
             <h1 class="text-3xl sm:text-5xl font-black text-white font-heading tracking-tight">
-                NGO Food <span class="gradient-text-cyan">Rescue Dispatches</span>
+                Community <span class="gradient-text-cyan">food donations</span>
             </h1>
             <p class="text-xs sm:text-sm text-blue-100/80 max-w-xl font-normal leading-relaxed">
                 Automated escalation of unsold meal portions at canteen closing to verified local NGOs, ensuring edible food reaches vulnerable communities before shelf-life expiry.
@@ -62,7 +62,7 @@
         <div class="p-6 border-b border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
                 <h3 class="font-bold text-white text-lg font-heading">Closing Time Escalation Batches</h3>
-                <p class="text-xs text-slate-400">Escalated automatically at closing time from Graphic Era Central Canteen</p>
+                <p class="text-xs text-slate-400">Escalated automatically at closing time from the main canteen</p>
             </div>
             <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-500/15 text-blue-300 border border-blue-500/30">
                 {{ donations | length }} Total Dispatches
