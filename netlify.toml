@@ -1,0 +1,10 @@
+# ZeroPlate is a Flask application, so Netlify serves it through a proxy to Render.
+# Deploy the same GitHub repository to Render using the included render.yaml first.
+[build]
+  publish = "netlify"
+
+[[redirects]]
+  from = "/*"
+  to = "https://zeroplate.onrender.com/:splat"
+  status = 200
+  force = true
