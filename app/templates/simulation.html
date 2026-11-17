@@ -86,7 +86,7 @@
     <!-- Manual Controls Form -->
     <div class="glass-card p-6 space-y-4">
         <h3 class="font-bold text-white text-base font-heading border-b border-white/5 pb-3">Simulation settings</h3>
-        <form id="custom-sim-form" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+        <form id="custom-sim-form" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
             <div>
                 <label class="block font-semibold text-slate-300 mb-1">Simulated Clock Time</label>
                 <input type="time" id="sim-clock" value="{{ settings.simulated_time }}" class="w-full px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900 text-white font-mono font-bold focus:border-emerald-500 focus:outline-none">
@@ -110,7 +110,7 @@
                 </select>
             </div>
 
-            <div class="sm:col-span-2 lg:col-span-4 pt-1">
+            <div class="sm:col-span-2 lg:col-span-3 pt-1">
                 <button type="submit" class="w-full py-3 px-4 rounded-xl btn-glow-emerald font-bold text-xs uppercase tracking-wider flex items-center justify-center space-x-2">
                     <i data-lucide="play" class="w-4 h-4 text-slate-950"></i>
                     <span>Apply demo settings and run recovery</span>
