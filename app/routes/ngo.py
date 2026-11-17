@@ -17,21 +17,28 @@ def index():
 
     # Active and pending donations
     donations = conn.execute("""
-        SELECT nd.*, n.name as ngo_name, n.phone as ngo_phone, n.contact_person
+        SELECT
+            nd.id,
+            nd.item_name,
+            nd.portions,
+            nd.pickup_window_deadline,
+            nd.status,
+            nd.collected_at,
+            n.name AS ngo_name
         FROM ngo_donations nd
         LEFT JOIN ngos n ON nd.ngo_id = n.id
-        ORDER BY 
-            CASE nd.status 
-                WHEN 'PENDING_CLAIM' THEN 1 
-                WHEN 'CLAIMED' THEN 2 
-                WHEN 'COLLECTED' THEN 3 
-                ELSE 4 
+        ORDER BY
+            CASE nd.status
+                WHEN 'PENDING_CLAIM' THEN 1
+                WHEN 'CLAIMED' THEN 2
+                WHEN 'COLLECTED' THEN 3
+                ELSE 4
             END,
             nd.id DESC
     """).fetchall()
 
-    # List verified NGOs
-    ngos = conn.execute("SELECT * FROM ngos WHERE verified = 1").fetchall()
+    # Partner directory fields needed by the page only.
+    ngos = conn.execute("SELECT id, name, address FROM ngos WHERE verified = 1").fetchall()
 
     conn.close()
 
