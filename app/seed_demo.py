@@ -121,7 +121,7 @@ def seed_operational_day(sim_date="2026-11-16", sim_time="19:45"):
     conn = get_db_connection()
     cursor = conn.cursor()
     active_mk = cursor.execute("SELECT * FROM marketplace_items WHERE status = 'ACTIVE' LIMIT 2").fetchall()
-    student_names = [("Aman Sharma", "GEU/2024/BCADS/042"), ("Sneha Verma", "GEU/2023/BTECH/118")]
+    student_names = [("Aman Sharma", "STU-2042"), ("Sneha Verma", "STU-3118")]
     for idx, mk in enumerate(active_mk):
         if idx < len(student_names):
             name, roll = student_names[idx]
@@ -140,7 +140,7 @@ def seed_operational_day(sim_date="2026-11-16", sim_time="19:45"):
     cursor.execute("SELECT COUNT(*) FROM composting_logs")
     if cursor.fetchone()[0] < 3:
         past_compost = [
-            ("Chole Bhature (Trim & Prep)", 4.2, "KITCHEN_SCRAPS", "Graphic Era Campus Bio-Compost Facility / Green Digester Unit 2", 1.89, 10.5, "14:15", "CMP-20261116-001"),
+            ("Chole Bhature (Trim & Prep)", 4.2, "KITCHEN_SCRAPS", "Main Compost Facility / Green Digester Unit 2", 1.89, 10.5, "14:15", "CMP-20261116-001"),
             ("Mixed Salad & Vegetable Peelings", 6.8, "KITCHEN_SCRAPS", "Graphic Era Campus Bio-Compost Facility / Green Digester Unit 2", 3.06, 17.0, "15:30", "CMP-20261116-002")
         ]
         cursor.executemany("""
