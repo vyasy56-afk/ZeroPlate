@@ -1,10 +1,6 @@
 """
-ZeroPlate: Dashboard & Planning Routes
-Covers:
-- Landing Page (Synopsis alignment, author info, prevention-before-cure loop)
-- Module 1: Demand Prediction Dashboard (Contextual regression, live interactive simulator)
-- Module 2: Inventory & Production Planning (Kitchen cooking portions, morning prep checklist)
-- Simulation Controller: Advance time and trigger real-time escalation
+ZeroPlate: Main application pages
+Provides the operations overview, demand planning, kitchen preparation and internal demo controls
 """
 
 from flask import Blueprint, render_template
@@ -43,10 +39,8 @@ def index():
 def forecast():
     """
     Module 1: Demand Prediction Dashboard
-    - Item-level regression predictions using Random Forest and Gradient Boosting
-    - RMSE model evaluation comparison against naive baseline
-    - Feature importance breakdown
-    - Contextual inputs: Weather, exams, holidays, trends
+    - Item-level serving estimates using recent sales and operating conditions
+    - A simple customer-facing demand planning form
     """
     conn = get_db_connection()
     settings = conn.execute("SELECT * FROM contextual_settings WHERE id = 1").fetchone()
@@ -90,12 +84,12 @@ def production():
     total_portions = sum(p["recommended_cook_qty"] for p in plans)
     ingredients = [
         {"name": "Basmati Rice", "qty_kg": round(total_portions * 0.08, 1), "category": "Grains & Rice"},
-        {"name": "Whole Wheat Atta & Maida", "qty_kg": round(total_portions * 0.06, 1), "category": "Flour", "stock_status": "In Stock"},
-        {"name": "Rajma & Lentils (Dal)", "qty_kg": round(total_portions * 0.05, 1), "category": "Pulses", "stock_status": "In Stock"},
+        {"name": "Whole Wheat Atta & Maida", "qty_kg": round(total_portions * 0.06, 1), "category": "Flour"},
+        {"name": "Rajma & Lentils (Dal)", "qty_kg": round(total_portions * 0.05, 1), "category": "Pulses"},
         {"name": "Fresh Paneer (Dairy)", "qty_kg": round(total_portions * 0.04, 1), "category": "Dairy"},
-        {"name": "Cooking Oil & Pure Ghee", "qty_kg": round(total_portions * 0.025, 1), "category": "Oils & Fats", "stock_status": "In Stock"},
-        {"name": "Potatoes, Onions & Tomatoes", "qty_kg": round(total_portions * 0.12, 1), "category": "Fresh Produce", "stock_status": "In Stock"},
-        {"name": "Spices & Garam Masala Mix", "qty_kg": round(total_portions * 0.015, 1), "category": "Spices", "stock_status": "In Stock"}
+        {"name": "Cooking Oil & Pure Ghee", "qty_kg": round(total_portions * 0.025, 1), "category": "Oils & Fats"},
+        {"name": "Potatoes, Onions & Tomatoes", "qty_kg": round(total_portions * 0.12, 1), "category": "Fresh Produce"},
+        {"name": "Spices & Garam Masala Mix", "qty_kg": round(total_portions * 0.015, 1), "category": "Spices"}
     ]
 
     conn.close()
