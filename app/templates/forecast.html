@@ -15,16 +15,16 @@
                 Demand <span class="text-gradient-aurora">Forecasting</span> Dashboard
             </h1>
             <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
-                Estimate item-level demand using recent sales trends, calendar conditions and local weather.
+                Estimate item-level demand using recent sales patterns, day of week and local weather conditions.
             </p>
         </div>
         <div class="flex items-center space-x-3">
             <div class="hyper-glass-pill px-5 py-2.5 flex items-center space-x-3 border border-white/15 shadow-lg">
                 <div class="w-2.5 h-2.5 rounded-full bg-[#00f5a0] shadow-[0_0_10px_#00f5a0] animate-pulse"></div>
                 <div>
-                    <span class="text-[9px] text-slate-400 block uppercase font-mono tracking-wider">Current conditions</span>
+                    <span class="text-[9px] text-slate-400 block uppercase font-mono tracking-wider">Weather inputs</span>
                     <span class="text-xs font-bold text-white">
-                        {{ 'Exam Week Active 📚' if settings.is_exam_day else 'Regular Semester' }} · {{ settings.temperature_c }}°C, {{ 'Rain 🌧️' if settings.rainfall_mm > 0 else 'Clear ☀️' }}
+                        {{ settings.temperature_c }}°C · {{ 'Rainfall recorded' if settings.rainfall_mm > 0 else 'No rainfall recorded' }}
                     </span>
                 </div>
             </div>
@@ -129,7 +129,7 @@
                 {% endfor %}
             </div>
             <p class="text-[11px] text-slate-400 pt-3 border-t border-white/10 leading-relaxed">
-                Notice how recent sales trends, exam days, and weather dynamically drive customer demand in the university canteen.
+                Recent sales patterns, day of week and weather help explain changes in predicted demand.
             </p>
         </div>
 
@@ -137,8 +137,8 @@
         <div class="lg:col-span-7 hyper-glass p-7 rounded-[2rem] space-y-5">
             <div class="flex items-center justify-between border-b border-white/10 pb-3">
                 <div>
-                    <h3 class="font-bold text-white text-base font-heading">Interactive ML Prediction Console</h3>
-                    <p class="text-xs text-slate-400">Test live inference under custom contextual scenarios.</p>
+                    <h3 class="font-bold text-white text-base font-heading">Demand prediction</h3>
+                    <p class="text-xs text-slate-400">Test a menu item against different sales and weather conditions.</p>
                 </div>
                 <span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase bg-purple-500/15 text-purple-300 border border-purple-500/30">
                     Live REST API
@@ -160,24 +160,16 @@
                     <select id="play-dow" class="w-full px-4 py-3 rounded-2xl border border-white/10 bg-black/40 text-white font-medium focus:border-[#00f5a0] focus:outline-none transition">
                         <option value="0">Monday</option>
                         <option value="1">Tuesday</option>
-                        <option value="2" selected>Wednesday (Mid-week peak)</option>
+                        <option value="2" selected>Wednesday</option>
                         <option value="3">Thursday</option>
                         <option value="4">Friday</option>
-                        <option value="5">Saturday (Half day)</option>
-                        <option value="6">Sunday (Low mess footfall)</option>
+                        <option value="5">Saturday</option>
+                        <option value="6">Sunday</option>
                     </select>
                 </div>
 
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1.5">Calendar context</label>
-                    <select id="play-exam" class="w-full px-4 py-3 rounded-2xl border border-white/10 bg-black/40 text-white font-medium focus:border-[#00f5a0] focus:outline-none transition">
-                        <option value="1" selected>Exam period / midterms</option>
-                        <option value="0">Regular day</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block font-semibold text-slate-300 mb-1.5">Dehradun Weather Context</label>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Weather scenario</label>
                     <select id="play-weather" class="w-full px-4 py-3 rounded-2xl border border-white/10 bg-black/40 text-white font-medium focus:border-[#00f5a0] focus:outline-none transition">
                         <option value="mild" selected>Pleasant Mild (24°C, Clear)</option>
                         <option value="rain">Monsoon Rain (20°C, 25mm Rain)</option>
@@ -317,7 +309,6 @@ document.getElementById("playground-form").addEventListener("submit", async func
     e.preventDefault();
     const itemId = document.getElementById("play-item").value;
     const dow = document.getElementById("play-dow").value;
-    const exam = document.getElementById("play-exam").value;
     const promo = document.getElementById("play-promo").value;
     const trend = document.getElementById("play-trend").value;
     const weather = document.getElementById("play-weather").value;
@@ -335,7 +326,7 @@ document.getElementById("playground-form").addEventListener("submit", async func
             body: JSON.stringify({
                 item_id: itemId,
                 day_of_week: dow,
-                is_exam_day: exam,
+                is_exam_day: 0,
                 is_promoted: promo,
                 trend_7d: trend,
                 trend_14d: trend,
