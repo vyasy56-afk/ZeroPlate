@@ -15,13 +15,63 @@ if BASE_DIR not in sys.path:
 from app.config import Config
 from app.database import init_db
 
+
+def _seed_demo_data_when_requested(app):
+    """Populate a fresh demo database when explicitly enabled (e.g. Vercel demo).
+
+    Vercel's /tmp filesystem is ephemeral and instance-local. This restores a
+    useful demo dataset whenever a fresh serverless instance starts; it does
+    not provide cross-instance or durable persistence for owner edits.
+    """
+    if os.environ.get("ZERO_PLATE_AUTO_SEED_DEMO") != "1":
+        return
+
+    from app.database import get_db_connection
+
+    conn = get_db_connection()
+    try:
+        settings = conn.execute(
+            "SELECT simulated_date FROM contextual_settings WHERE id = 1"
+        ).fetchone()
+        if not settings:
+            app.logger.warning("Demo seed skipped: operating date is not configured.")
+            return
+
+        demo_date = settings["simulated_date"]
+        existing = conn.execute(
+            "SELECT COUNT(*) AS total FROM daily_plans WHERE date = ?",
+            (demo_date,),
+        ).fetchone()["total"]
+    finally:
+        conn.close()
+
+    if existing:
+        app.logger.info(
+            "Demo seed skipped: %s plan(s) already exist for %s.",
+            existing,
+            demo_date,
+        )
+        return
+
+    try:
+        from app.seed_demo import seed_operational_day
+
+        seeded = seed_operational_day(sim_date=demo_date)
+        if seeded:
+            app.logger.info("ZeroPlate demo data seeded for %s.", demo_date)
+    except Exception:
+        # Keep the application available even if optional demo seeding fails.
+        app.logger.exception("ZeroPlate demo data could not be seeded.")
+
+
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
-    # Initialize SQLite database on startup
+    # Initialize the operational database on startup.
     with app.app_context():
         init_db()
+        _seed_demo_data_when_requested(app)
 
     # Register blueprints
     from app.routes.dashboard import dashboard_bp
