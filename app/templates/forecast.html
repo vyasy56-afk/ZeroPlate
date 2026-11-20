@@ -49,7 +49,7 @@
                 <label for="play-item" class="field-label">Menu item</label>
                 <select id="play-item" class="field-control" required>
                     {% for item in menu_items %}
-                    <option value="{{ item.id }}">{{ item.image_emoji }} {{ item.name }} · {{ item.meal_type }}</option>
+                    <option value="{{ item.id }}" data-base-demand="{{ item.base_demand }}">{{ item.image_emoji }} {{ item.name }} · {{ item.meal_type }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -87,7 +87,7 @@
 
             <div class="form-field">
                 <label for="play-trend" class="field-label">Average servings sold per day recently</label>
-                <input type="number" id="play-trend" value="120" min="1" max="1000" class="field-control" required>
+                <input type="number" id="play-trend" value="{{ menu_items[0].base_demand if menu_items else 100 }}" min="1" max="10000" class="field-control" required>
                 <span class="field-help">120 is an example. Replace it with the recent daily average for the selected dish.</span>
             </div>
 
@@ -173,6 +173,13 @@
 
 {% block extra_scripts %}
 <script>
+const menuItemSelect = document.getElementById("play-item");
+menuItemSelect.addEventListener("change", function() {
+    const selected = this.options[this.selectedIndex];
+    const average = selected ? selected.dataset.baseDemand : "";
+    if (average) document.getElementById("play-trend").value = average;
+});
+
 document.getElementById("playground-form").addEventListener("submit", async function(e) {
     e.preventDefault();
     const button = document.getElementById("forecast-submit");
