@@ -15,3 +15,5 @@ class Config:
     DATABASE_PATH = os.path.join(BASE_DIR, "data", "zeroplate.db")
     DEBUG = os.environ.get("FLASK_DEBUG", "0") == "1"
     CANTEEN_NAME = "Main Canteen"
+    # Set OWNER_PASSWORD before enabling owner-only menu management.
+    OWNER_PASSWORD = os.environ.get("OWNER_PASSWORD", "")
