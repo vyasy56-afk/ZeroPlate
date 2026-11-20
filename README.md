@@ -179,7 +179,7 @@ zeroplate/
 ## 8. Installation & Quick Start
 
 ### 1. Prerequisites
-Ensure Python 3.10+ is installed on your machine.
+Ensure Python 3.12 or newer is installed on your machine.
 
 ### 2. Install Dependencies
 ```bash
@@ -195,11 +195,12 @@ python data/generate_dataset.py
 python models/train.py
 ```
 
-### 4. Load Mentor Demo Data (Recommended for a Project Walkthrough)\nRun this after installing dependencies and before starting the server:\n\n```bash\npython app/seed_demo.py\n```\n\nThe loader creates a sample operating day using the saved demand model. It adds menu plans, kitchen sales, discounted listings, sample reservations, donation records in different stages, and compost batches. It does not delete existing orders or other dates. If the selected date already has plans, it leaves the database unchanged. To use a different date, run `python app/seed_demo.py --date YYYY-MM-DD`.\n\nThe demo names, IDs, reservations, PINs and quantities are illustrative records for presentation only; they are not real customer transactions. The loader prints the demo PIN needed to demonstrate a claimed donation.\n\n### 5. Run Automated Test Suite
+### 4. Load Mentor Demo Data (Recommended for a Project Walkthrough)\nRun this after installing dependencies and before starting the server:\n\n```bash\npython app/seed_demo.py\n```\n\nThe loader creates a sample operating day using the saved demand model. It adds menu plans, kitchen sales, discounted listings, sample reservations, donation records in different stages, and compost batches. It does not delete existing orders or other dates. If the selected date already has plans, it leaves the database unchanged. To use a different date, run `python app/seed_demo.py --date YYYY-MM-DD`.\n\nThe demo names, IDs, reservations, PINs and quantities are illustrative records for presentation only; they are not real customer transactions. The loader prints the demo PIN needed to demonstrate a claimed donation. Run `python tests/test_seed_demo.py` to check that the loader creates the sample records and safely skips a second run.\n\n### 5. Run Automated Test Suite
 ```bash
 python tests/test_models.py
 python tests/test_pipeline.py
 python tests/test_api.py
+python tests/test_seed_demo.py
 ```
 
 ### 6. Launch the ZeroPlate Platform
