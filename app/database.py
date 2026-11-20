@@ -42,7 +42,9 @@ def init_db():
         base_price REAL NOT NULL,
         prep_cost REAL NOT NULL,
         shelf_life_hours INTEGER NOT NULL DEFAULT 6,
-        image_emoji TEXT DEFAULT '🍲'
+        image_emoji TEXT DEFAULT '🍲',
+        base_demand INTEGER NOT NULL DEFAULT 100,
+        is_active INTEGER NOT NULL DEFAULT 1
     );
 
     CREATE TABLE IF NOT EXISTS daily_plans (
@@ -145,6 +147,16 @@ def init_db():
     );
     """)
 
+    conn.commit()
+
+    # Backwards-compatible migration for existing menu databases.
+    menu_columns = {
+        row["name"] for row in cursor.execute("PRAGMA table_info(menu_items)").fetchall()
+    }
+    if "base_demand" not in menu_columns:
+        cursor.execute("ALTER TABLE menu_items ADD COLUMN base_demand INTEGER NOT NULL DEFAULT 100")
+    if "is_active" not in menu_columns:
+        cursor.execute("ALTER TABLE menu_items ADD COLUMN is_active INTEGER NOT NULL DEFAULT 1")
     conn.commit()
 
     # Seed verified NGOs if empty
