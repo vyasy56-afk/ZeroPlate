@@ -25,7 +25,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20261117-slate-theme">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20261120-owner-menu">
     {% block extra_head %}{% endblock %}
 </head>
 <body class="min-h-screen flex flex-col antialiased">
@@ -46,6 +46,7 @@
                 <a href="/ngo" class="app-nav-link {% if current_path.startswith('/ngo') %}is-active{% endif %}">Donations</a>
                 <a href="/composting" class="app-nav-link {% if current_path.startswith('/composting') %}is-active{% endif %}">Compost</a>
                 <a href="/analytics" class="app-nav-link {% if current_path == '/analytics' %}is-active{% endif %}">Analytics</a>
+                <a href="/owner" class="app-nav-link {% if current_path.startswith('/owner') %}is-active{% endif %}">Owner</a>
             </nav>
             <div class="app-header-actions">
                 <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
@@ -63,7 +64,7 @@
         <span>Food demand · Kitchen planning · Surplus recovery</span>
     </footer>
     <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-2 pointer-events-none"></div>
-    <script src="{{ url_for('static', filename='js/main.js') }}?v=20261117-slate-theme"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}?v=20261120-owner-menu"></script>
     <script>
         if (window.lucide) lucide.createIcons();
         if (window.Chart) {
