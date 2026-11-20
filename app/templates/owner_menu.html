@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}Menu management{% endblock %}
+
+{% block content %}
+<div class="page-stack">
+    <header class="page-header">
+        <div>
+            <p class="page-eyebrow">Owner workspace</p>
+            <h1 class="page-title">Menu management</h1>
+            <p class="page-description">Add dishes, update their prices and expected daily sales, then add them to today's demand plan.</p>
+        </div>
+        <form method="POST" action="{{ url_for('owner.logout') }}">
+            <button type="submit" class="btn-secondary">
+                <i data-lucide="log-out" class="w-4 h-4"></i>
+                Sign out
+            </button>
+        </form>
+    </header>
+
+    {% if notice %}
+    <div class="owner-message owner-message-success" role="status">
+        {% if notice == 'added' %}Dish added to the menu.
+        {% elif notice == 'updated' %}Dish details updated.
+        {% elif notice == 'activated' %}Dish is active and available for planning.
+        {% elif notice == 'deactivated' %}Dish hidden from new customer forecasts. Existing records are kept.
+        {% elif notice == 'planned' %}Demand forecast created and dish added to today's kitchen plan.
+        {% elif notice == 'already-planned' %}This dish is already on today's plan.
+        {% endif %}
+    </div>
+    {% endif %}
+    {% if error %}
+    <div class="owner-message owner-message-error" role="alert">{{ error }}</div>
+    {% endif %}
+
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="metric-card">
+            <span class="metric-label">Total dishes</span>
+            <strong class="metric-value">{{ menu_items|length }}</strong>
+            <span class="metric-hint">Saved in your menu catalogue</span>
+        </div>
+        <div class="metric-card">
+            <span class="metric-label">Active dishes</span>
+            <strong class="metric-value">{{ active_count }}</strong>
+            <span class="metric-hint">Available for customer forecasts</span>
+        </div>
+        <div class="metric-card">
+            <span class="metric-label">Planning date</span>
+            <strong class="metric-value owner-date">{{ today }}</strong>
+            <span class="metric-hint">Current operating date</span>
+        </div>
+    </section>
+
+    <section class="panel-card">
+        <div class="panel-heading">
+            <div>
+                <h2 class="panel-title">Add a new dish</h2>
+                <p class="panel-description">Enter the menu details and the recent average servings sold. ZeroPlate uses that average as an input to its demand estimate.</p>
+            </div>
+        </div>
+        <form method="POST" action="{{ url_for('owner.add_dish') }}" class="owner-dish-form">
+            <div class="form-field">
+                <label class="field-label" for="new-name">Dish name</label>
+                <input class="field-control" id="new-name" name="name" maxlength="80" placeholder="e.g. Veg Pulao" required>
+            </div>
+            <div class="form-field">
+                <label class="field-label" for="new-category">Category</label>
+                <input class="field-control" id="new-category" name="category" maxlength="60" placeholder="e.g. Rice Specialties" required>
+            </div>
+            <div class="form-field">
+                <label class="field-label" for="new-meal">Meal type</label>
+                <select class="field-control" id="new-meal" name="meal_type" required>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Lunch" selected>Lunch</option>
+                    <option value="Snacks">Snacks</option>
+                    <option value="Dinner">Dinner</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label class="field-label" for="new-price">Selling price (₹)</label>
+                <input class="field-control" id="new-price" name="base_price" type="number" min="0.01" max="100000" step="0.01" placeholder="80" required>
+            </div>
+            <div class="form-field">
+                <label class="field-label" for="new-cost">Preparation cost (₹)</label>
+                <input class="field-control" id="new-cost" name="prep_cost" type="number" min="0" max="100000" step="0.01" placeholder="35" required>
+            </div>
+            <div class="form-field">
+                <label class="field-label" for="new-demand">Average servings per day</label>
+                <input class="field-control" id="new-demand" name="base_demand" type="number" min="1" max="10000" value="100" required>
+            </div>
+            <div class="form-field">
+                <label class="field-label" for="new-shelf">Shelf life (hours)</label>
+                <input class="field-control" id="new-shelf" name="shelf_life_hours" type="number" min="1" max="72" value="6" required>
+            </div>
+            <div class="form-field">
+                <label class="field-label" for="new-emoji">Food icon</label>
+                <input class="field-control" id="new-emoji" name="image_emoji" maxlength="8" value="🍲" required>
+            </div>
+            <div class="owner-form-submit">
+                <button type="submit" class="btn-primary w-full">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                    Add dish
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="page-stack">
+        <div class="panel-heading owner-list-heading">
+            <div>
+                <h2 class="panel-title">Your dishes</h2>
+                <p class="panel-description">Edit a dish, hide it from new forecasts or add it to today's kitchen plan.</p>
+            </div>
+        </div>
+
+        {% for item in menu_items %}
+        <article class="panel-card owner-dish-card">
+            <div class="owner-dish-top">
+                <div class="owner-dish-name">
+                    <span class="owner-dish-emoji">{{ item.image_emoji }}</span>
+                    <div>
+                        <h3>{{ item.name }}</h3>
+                        <p>{{ item.category }} · {{ item.meal_type }}</p>
+                    </div>
+                </div>
+                <span class="status-chip {{ 'owner-chip-inactive' if not item.is_active else '' }}">{{ 'Active' if item.is_active else 'Hidden' }}</span>
+            </div>
+
+            <div class="owner-dish-facts">
+                <span><small>Selling price</small><strong>₹{{ '%.2f'|format(item.base_price) }}</strong></span>
+                <span><small>Prep. cost</small><strong>₹{{ '%.2f'|format(item.prep_cost) }}</strong></span>
+                <span><small>Recent average</small><strong>{{ item.base_demand }} servings/day</strong></span>
+                <span><small>Shelf life</small><strong>{{ item.shelf_life_hours }} hours</strong></span>
+            </div>
+
+            <details class="owner-edit-details">
+                <summary>Edit dish details</summary>
+                <form method="POST" action="{{ url_for('owner.update_dish', item_id=item.id) }}" class="owner-dish-form mt-4">
+                    <div class="form-field">
+                        <label class="field-label" for="name-{{ item.id }}">Dish name</label>
+                        <input class="field-control" id="name-{{ item.id }}" name="name" value="{{ item.name }}" maxlength="80" required>
+                    </div>
+                    <div class="form-field">
+                        <label class="field-label" for="category-{{ item.id }}">Category</label>
+                        <input class="field-control" id="category-{{ item.id }}" name="category" value="{{ item.category }}" maxlength="60" required>
+                    </div>
+                    <div class="form-field">
+                        <label class="field-label" for="meal-{{ item.id }}">Meal type</label>
+                        <select class="field-control" id="meal-{{ item.id }}" name="meal_type">
+                            {% for meal in ['Breakfast', 'Lunch', 'Snacks', 'Dinner'] %}
+                            <option value="{{ meal }}" {% if item.meal_type == meal %}selected{% endif %}>{{ meal }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label class="field-label" for="price-{{ item.id }}">Selling price (₹)</label>
+                        <input class="field-control" id="price-{{ item.id }}" name="base_price" type="number" min="0.01" step="0.01" value="{{ item.base_price }}" required>
+                    </div>
+                    <div class="form-field">
+                        <label class="field-label" for="cost-{{ item.id }}">Preparation cost (₹)</label>
+                        <input class="field-control" id="cost-{{ item.id }}" name="prep_cost" type="number" min="0" step="0.01" value="{{ item.prep_cost }}" required>
+                    </div>
+                    <div class="form-field">
+                        <label class="field-label" for="demand-{{ item.id }}">Average servings/day</label>
+                        <input class="field-control" id="demand-{{ item.id }}" name="base_demand" type="number" min="1" max="10000" value="{{ item.base_demand }}" required>
+                    </div>
+                    <div class="form-field">
+                        <label class="field-label" for="shelf-{{ item.id }}">Shelf life (hours)</label>
+                        <input class="field-control" id="shelf-{{ item.id }}" name="shelf_life_hours" type="number" min="1" max="72" value="{{ item.shelf_life_hours }}" required>
+                    </div>
+                    <div class="form-field">
+                        <label class="field-label" for="emoji-{{ item.id }}">Food icon</label>
+                        <input class="field-control" id="emoji-{{ item.id }}" name="image_emoji" maxlength="8" value="{{ item.image_emoji }}" required>
+                    </div>
+                    <div class="owner-form-submit">
+                        <button type="submit" class="btn-primary w-full">Save changes</button>
+                    </div>
+                </form>
+            </details>
+
+            <div class="owner-dish-actions">
+                {% if item.is_active and item.id not in planned_ids %}
+                <form method="POST" action="{{ url_for('owner.add_to_today_plan', item_id=item.id) }}">
+                    <button type="submit" class="btn-primary btn-small">
+                        <i data-lucide="calendar-plus" class="w-4 h-4"></i>
+                        Add to today's plan
+                    </button>
+                </form>
+                {% elif item.id in planned_ids %}
+                <span class="status-chip">Already on today's plan</span>
+                {% else %}
+                <span class="field-help">Activate this dish to add it to a future plan.</span>
+                {% endif %}
+
+                <form method="POST" action="{{ url_for('owner.toggle_dish', item_id=item.id) }}">
+                    <button type="submit" class="btn-secondary btn-small">{{ 'Hide dish' if item.is_active else 'Activate dish' }}</button>
+                </form>
+            </div>
+        </article>
+        {% else %}
+        <section class="panel-card">
+            <div class="empty-state">
+                <i data-lucide="utensils" class="w-8 h-8"></i>
+                <h3>No dishes have been added yet</h3>
+                <p>Use the form above to create your first menu item.</p>
+            </div>
+        </section>
+        {% endfor %}
+    </section>
+
+    <p class="helper-note">The recent average servings value is used as an input to the demand model for a new forecast. Update it when you have better sales records. Hiding a dish prevents it appearing in new customer forecasts but does not delete its previous plans or sales history.</p>
+</div>
+{% endblock %}
