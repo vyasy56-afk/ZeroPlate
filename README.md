@@ -115,7 +115,7 @@ end
 
 ## 6. Technology Stack (Chapter 4)
 
-- **Backend:** Python 3.13, Flask 3.1
+- **Backend:** Python 3.12 or newer, Flask 3.x
 - **Machine Learning & Data Science:** Scikit-learn (RandomForestRegressor, GradientBoostingRegressor), Pandas, NumPy, Joblib
 - **Database:** SQLite (local zero-configuration embedded DB) + `schema_mysql.sql` (production MySQL schema)
 - **Frontend:** HTML5, Modern CSS, Tailwind CSS (CDN), Chart.js (Interactive visual charts), Lucide Icons
@@ -186,7 +186,7 @@ Ensure Python 3.10+ is installed on your machine.
 pip install -r requirements.txt
 ```
 
-### 3. Generate Historical Data & Train ML Models (Optional - Already Pre-trained)
+### 3. Generate Historical Data & Train ML Models (Optional - Models Are Already Included)
 ```bash
 # Generate 2,400 records of canteen sales history
 python data/generate_dataset.py
@@ -195,14 +195,14 @@ python data/generate_dataset.py
 python models/train.py
 ```
 
-### 4. Run Automated Test Suite
+### 4. Load Mentor Demo Data (Recommended for a Project Walkthrough)\nRun this after installing dependencies and before starting the server:\n\n```bash\npython app/seed_demo.py\n```\n\nThe loader creates a sample operating day using the saved demand model. It adds menu plans, kitchen sales, discounted listings, sample reservations, donation records in different stages, and compost batches. It does not delete existing orders or other dates. If the selected date already has plans, it leaves the database unchanged. To use a different date, run `python app/seed_demo.py --date YYYY-MM-DD`.\n\nThe demo names, IDs, reservations, PINs and quantities are illustrative records for presentation only; they are not real customer transactions. The loader prints the demo PIN needed to demonstrate a claimed donation.\n\n### 5. Run Automated Test Suite
 ```bash
 python tests/test_models.py
 python tests/test_pipeline.py
 python tests/test_api.py
 ```
 
-### 5. Launch the ZeroPlate Platform
+### 6. Launch the ZeroPlate Platform
 ```bash
 python run.py
 ```
@@ -212,14 +212,16 @@ Open your web browser and navigate to:
 
 ---
 
-## 9. Demonstration & Evaluation Guide
+## 9. Mentor Demonstration Guide
 
-To demonstrate the full capability during project viva / defense:
-1. Open **`/`** to review the academic synopsis alignment and the 5-step operational loop.
-2. Open **`/forecast`** to show the RMSE model comparison scoreboard ($12.53$ vs $40.44$). Use the **Interactive ML Prediction Playground** to show how weather, exam schedules, and day of week dynamically influence demand.
-3. Open **`/production`** to show how AI predictions become morning kitchen prep targets and raw ingredient weights.
-4. Open **`/simulation`** to demonstrate the temporal state machine:
-   - Click **"3. Closing Window (19:15)"** &rarr; Notice how items with surplus are instantly pushed to the **Student Marketplace** (`/marketplace`) as 55% discounted surprise boxes!
-   - Click **"4. Closing Time (20:45)"** &rarr; Notice how unsold marketplace meals escalate to **NGO Donation Dispatches** (`/ngo`) with a 60-min timer and PIN verification!
-5. Open **`/composting`** to inspect the bio-compost logs and click **"View Campus Diversion Certificate"**.
-6. Open **`/analytics`** to view the comprehensive before-vs-after ledger and Chart.js impact graphs.
+After loading the mentor demo data and launching the app, use this simple walkthrough:
+
+1. **Overview (`/`):** Introduce the food-planning and recovery workflow. Point out the menu plan, active discounted listings, donations and compost records.
+2. **Demand planning (`/forecast`):** Show the predicted servings for each menu item. Change the menu item, day, weather and recent sales value in the estimate form, then click **Estimate servings**.
+3. **Kitchen plan (`/production`):** Compare suggested preparation with prepared, sold and remaining servings. Explain that ingredient quantities are estimates, not live stock readings.
+4. **Discounted meals (`/marketplace`):** Show the active discounted meal offers, original prices, reduced prices, remaining quantities and collection deadlines. The demo loader adds sample reservations so analytics has activity to display.
+5. **Community donations (`/ngo`):** Show the pending, assigned and collected examples. To demonstrate collection verification for the sample claimed donation, use the PIN printed by the seed script in the terminal.
+6. **Compost tracking (`/composting`):** Show the sample compost batches and the estimated compost and emissions figures.
+7. **Operations analytics (`/analytics`):** Explain prepared versus sold servings, reservation value, recovered meals, compost quantity and the estimated comparison figures.
+
+The mentor demo data is illustrative. Explain that the sample names, IDs, quantities, reservations and recovery records are provided to make the project screens demonstrable; they are not live transactions from a real canteen.
