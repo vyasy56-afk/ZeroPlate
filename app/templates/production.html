@@ -83,7 +83,11 @@
                         <td>{{ p.closing_time }}</td>
                         <td><span class="status-chip">{{ p.status.replace('_', ' ').title() }}</span></td>
                         <td class="text-right">
-                            {% if p.status == 'IN_SERVICE' %}
+                            {% if p.status == 'PLANNED' %}
+                            <button onclick="updatePrepStatus({{ p.id }}, 'COOKING', {{ p.recommended_cook_qty }})" class="btn-primary btn-small">Start preparation</button>
+                            {% elif p.status == 'COOKING' %}
+                            <button onclick="updatePrepStatus({{ p.id }}, 'IN_SERVICE')" class="btn-primary btn-small">Start service</button>
+                            {% elif p.status == 'IN_SERVICE' %}
                             <button onclick="updatePrepStatus({{ p.id }}, 'CLOSED')" class="btn-secondary btn-small">Close service</button>
                             {% elif p.status == 'SURPLUS_DETECTED' %}
                             <a href="/marketplace" class="btn-secondary btn-small">View listings</a>
