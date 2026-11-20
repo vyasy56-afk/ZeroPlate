@@ -44,7 +44,7 @@ def forecast():
     """
     conn = get_db_connection()
     settings = conn.execute("SELECT * FROM contextual_settings WHERE id = 1").fetchone()
-    menu_items = conn.execute("SELECT * FROM menu_items").fetchall()
+    menu_items = conn.execute("SELECT * FROM menu_items WHERE is_active = 1 ORDER BY name").fetchall()
     
     daily_plans = conn.execute("""
         SELECT dp.*, mi.name as item_name, mi.category, mi.meal_type, mi.base_price, mi.image_emoji
