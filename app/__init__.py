@@ -30,6 +30,7 @@ def create_app(config_class=Config):
     from app.routes.composting import composting_bp
     from app.routes.analytics import analytics_bp
     from app.routes.api import api_bp
+    from app.routes.owner import owner_bp
 
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(marketplace_bp)
@@ -37,6 +38,7 @@ def create_app(config_class=Config):
     app.register_blueprint(composting_bp)
     app.register_blueprint(analytics_bp)
     app.register_blueprint(api_bp)
+    app.register_blueprint(owner_bp)
 
     @app.context_processor
     def inject_global_vars():
