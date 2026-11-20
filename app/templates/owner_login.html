@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Owner access{% endblock %}
+
+{% block content %}
+<div class="owner-login-wrap">
+    <section class="panel-card owner-login-card">
+        <div class="owner-login-icon"><i data-lucide="store" class="w-6 h-6"></i></div>
+        <p class="page-eyebrow mt-4">Owner workspace</p>
+        <h1 class="page-title">Sign in to manage your menu</h1>
+        <p class="page-description">Add dishes, update prices and place items on today's forecast plan.</p>
+
+        {% if error %}
+        <div class="owner-message owner-message-error" role="alert">{{ error }}</div>
+        {% endif %}
+
+        {% if password_configured %}
+        <form method="POST" class="mt-5 space-y-4">
+            <div class="form-field">
+                <label for="owner-password" class="field-label">Owner password</label>
+                <input id="owner-password" name="password" type="password" class="field-control" required autocomplete="current-password" placeholder="Enter owner password">
+            </div>
+            <button type="submit" class="btn-primary w-full">Continue to menu management</button>
+        </form>
+        {% else %}
+        <div class="owner-message owner-message-warning mt-5">
+            Owner access has not been configured on this installation. Set the <code>OWNER_PASSWORD</code> environment variable, restart ZeroPlate, and refresh this page.
+        </div>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}
