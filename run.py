@@ -22,6 +22,7 @@ if __name__ == "__main__":
     print("  Food demand planning and surplus recovery")
     print("=" * 65)
     print(f"  * Server running at: http://127.0.0.1:{port}/")
+    print(f"  * Owner menu:   http://127.0.0.1:{port}/owner")
     print(f"  * Forecast:    http://127.0.0.1:{port}/forecast")
     print(f"  * Kitchen plan:  http://127.0.0.1:{port}/production")
     print(f"  * Surplus market: http://127.0.0.1:{port}/marketplace")
