@@ -209,12 +209,13 @@ Before starting the server, set an owner password in the same PowerShell termina
 
 ```powershell
 $env:OWNER_PASSWORD = "Choose-A-Strong-Private-Password"
+$env:SECRET_KEY = [guid]::NewGuid().ToString("N")
 python run.py
 ```
 
 Open `http://127.0.0.1:5000/owner`, sign in with that password, and use **Menu Management** to add dishes, edit prices and recent average servings, hide or activate dishes, and add a dish to today's demand plan. Adding a dish to today's plan runs the saved demand model and creates its kitchen-plan row.
 
-For Vercel, add `OWNER_PASSWORD` as an Environment Variable for the Production environment, then redeploy. Do not put the password in source code or commit it to GitHub. Owner access remains disabled until this variable is configured.
+For Vercel, add both `OWNER_PASSWORD` and a stable, randomly generated `SECRET_KEY` as Environment Variables for the Production environment, then redeploy. Do not put either value in source code or commit them to GitHub. Owner access remains disabled until `OWNER_PASSWORD` is configured.\n\n**Database note:** Local SQLite data persists in your project folder. The current Vercel configuration uses SQLite under `/tmp`, which is temporary serverless storage. Do not use the hosted owner page for real menu changes until the app is connected to a persistent database (for example, managed PostgreSQL or Turso). The local owner workspace is suitable for development and mentor demonstrations.
 
 ### 7. Launch the ZeroPlate Platform
 ```bash
