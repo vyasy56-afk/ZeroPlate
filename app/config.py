@@ -17,3 +17,6 @@ class Config:
     CANTEEN_NAME = "Main Canteen"
     # Set OWNER_PASSWORD before enabling owner-only menu management.
     OWNER_PASSWORD = os.environ.get("OWNER_PASSWORD", "")
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = "Lax"
+    SESSION_COOKIE_SECURE = bool(os.environ.get("VERCEL"))
