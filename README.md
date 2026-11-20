@@ -203,7 +203,20 @@ python tests/test_api.py
 python tests/test_seed_demo.py
 ```
 
-### 6. Launch the ZeroPlate Platform
+### 6. Configure Owner Menu Management (Recommended)
+
+Before starting the server, set an owner password in the same PowerShell terminal:
+
+```powershell
+$env:OWNER_PASSWORD = "Choose-A-Strong-Private-Password"
+python run.py
+```
+
+Open `http://127.0.0.1:5000/owner`, sign in with that password, and use **Menu Management** to add dishes, edit prices and recent average servings, hide or activate dishes, and add a dish to today's demand plan. Adding a dish to today's plan runs the saved demand model and creates its kitchen-plan row.
+
+For Vercel, add `OWNER_PASSWORD` as an Environment Variable for the Production environment, then redeploy. Do not put the password in source code or commit it to GitHub. Owner access remains disabled until this variable is configured.
+
+### 7. Launch the ZeroPlate Platform
 ```bash
 python run.py
 ```
