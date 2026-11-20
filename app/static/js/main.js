@@ -185,15 +185,19 @@ async function verifyNgoPickup(donationId) {
 }
 
 // Kitchen Production Status Update
-async function updatePrepStatus(planId, newStatus) {
+async function updatePrepStatus(planId, newStatus, actualPreparedQty = null) {
     try {
+        const payload = {
+            plan_id: planId,
+            status: newStatus
+        };
+        if (actualPreparedQty !== null) {
+            payload.actual_prepared_qty = Number(actualPreparedQty);
+        }
         const response = await fetch("/api/production/update-status", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                plan_id: planId,
-                status: newStatus
-            })
+            body: JSON.stringify(payload)
         });
 
         const data = await response.json();
